@@ -1,0 +1,234 @@
+{
+  "categories": [
+    { "id": 1, "name": "Céréales et dérivés" },
+    { "id": 2, "name": "Fruits" },
+    { "id": 3, "name": "Légumes" },
+    { "id": 4, "name": "Produits laitiers" },
+    { "id": 5, "name": "Viandes et substituts" },
+    { "id": 6, "name": "Noix et graines" },
+    { "id": 7, "name": "Boissons" }
+  ],
+  "aliments": [
+    {
+      "id": 101,
+      "name": "Pain blanc",
+      "categoryId": 1,
+      "calories": 265,
+      "proteines_g": 9,
+      "glucides_g": 49,
+      "lipides_g": 3.2,
+      "fibres_g": 2.7,
+      "vitamines": ["B1", "B3"]
+    },
+    {
+      "id": 102,
+      "name": "Pain complet",
+      "categoryId": 1,
+      "calories": 247,
+      "proteines_g": 13,
+      "glucides_g": 41,
+      "lipides_g": 4.2,
+      "fibres_g": 6.5,
+      "vitamines": ["B1", "B3", "B6"]
+    },
+    {
+      "id": 103,
+      "name": "Riz blanc cuit",
+      "categoryId": 1,
+      "calories": 130,
+      "proteines_g": 2.7,
+      "glucides_g": 28,
+      "lipides_g": 0.3,
+      "fibres_g": 0.4,
+      "vitamines": ["B1", "B3"]
+    },
+
+    {
+      "id": 201,
+      "name": "Pomme",
+      "categoryId": 2,
+      "calories": 52,
+      "proteines_g": 0.3,
+      "glucides_g": 14,
+      "lipides_g": 0.2,
+      "fibres_g": 2.4,
+      "vitamines": ["C"]
+    },
+    {
+      "id": 202,
+      "name": "Banane",
+      "categoryId": 2,
+      "calories": 89,
+      "proteines_g": 1.1,
+      "glucides_g": 23,
+      "lipides_g": 0.3,
+      "fibres_g": 2.6,
+      "vitamines": ["C", "B6"]
+    },
+    {
+      "id": 203,
+      "name": "Orange",
+      "categoryId": 2,
+      "calories": 47,
+      "proteines_g": 0.9,
+      "glucides_g": 12,
+      "lipides_g": 0.1,
+      "fibres_g": 2.4,
+      "vitamines": ["C", "A"]
+    },
+
+    {
+      "id": 301,
+      "name": "Carotte",
+      "categoryId": 3,
+      "calories": 41,
+      "proteines_g": 0.9,
+      "glucides_g": 10,
+      "lipides_g": 0.2,
+      "fibres_g": 2.8,
+      "vitamines": ["A", "C", "K"]
+    },
+    {
+      "id": 302,
+      "name": "Brocoli",
+      "categoryId": 3,
+      "calories": 55,
+      "proteines_g": 3.7,
+      "glucides_g": 11,
+      "lipides_g": 0.6,
+      "fibres_g": 3.3,
+      "vitamines": ["C", "K", "A"]
+    },
+    {
+      "id": 303,
+      "name": "Tomate",
+      "categoryId": 3,
+      "calories": 18,
+      "proteines_g": 0.9,
+      "glucides_g": 3.9,
+      "lipides_g": 0.2,
+      "fibres_g": 1.2,
+      "vitamines": ["C", "A"]
+    },
+
+    {
+      "id": 401,
+      "name": "Lait entier",
+      "categoryId": 4,
+      "calories": 64,
+      "proteines_g": 3.3,
+      "glucides_g": 4.8,
+      "lipides_g": 3.7,
+      "fibres_g": 0,
+      "vitamines": ["B12", "A"]
+    },
+    {
+      "id": 402,
+      "name": "Fromage cheddar",
+      "categoryId": 4,
+      "calories": 402,
+      "proteines_g": 25,
+      "glucides_g": 1.3,
+      "lipides_g": 33,
+      "fibres_g": 0,
+      "vitamines": ["A", "B12"]
+    },
+    {
+      "id": 403,
+      "name": "Yaourt nature",
+      "categoryId": 4,
+      "calories": 61,
+      "proteines_g": 3.5,
+      "glucides_g": 4.7,
+      "lipides_g": 3.3,
+      "fibres_g": 0,
+      "vitamines": ["B12"]
+    },
+
+    {
+      "id": 501,
+      "name": "Œuf entier",
+      "categoryId": 5,
+      "calories": 155,
+      "proteines_g": 13,
+      "glucides_g": 1.1,
+      "lipides_g": 11,
+      "fibres_g": 0,
+      "vitamines": ["A", "B12", "D"]
+    },
+    {
+      "id": 502,
+      "name": "Poulet cuit",
+      "categoryId": 5,
+      "calories": 239,
+      "proteines_g": 27.3,
+      "glucides_g": 0,
+      "lipides_g": 14,
+      "fibres_g": 0,
+      "vitamines": ["B3", "B6"]
+    },
+
+    {
+      "id": 601,
+      "name": "Amandes",
+      "categoryId": 6,
+      "calories": 579,
+      "proteines_g": 21.2,
+      "glucides_g": 22,
+      "lipides_g": 50,
+      "fibres_g": 12.5,
+      "vitamines": ["E", "B2"]
+    },
+    {
+      "id": 602,
+      "name": "Noix de cajou",
+      "categoryId": 6,
+      "calories": 553,
+      "proteines_g": 18,
+      "glucides_g": 30,
+      "lipides_g": 44,
+      "fibres_g": 3.3,
+      "vitamines": ["E", "K"]
+    },
+
+    {
+      "id": 701,
+      "name": "Eau",
+      "categoryId": 7,
+      "calories": 0,
+      "proteines_g": 0,
+      "glucides_g": 0,
+      "lipides_g": 0,
+      "fibres_g": 0,
+      "vitamines": []
+    },
+    {
+      "id": 702,
+      "name": "Jus d’orange",
+      "categoryId": 7,
+      "calories": 45,
+      "proteines_g": 0.7,
+      "glucides_g": 10,
+      "lipides_g": 0.2,
+      "fibres_g": 0.2,
+      "vitamines": ["C", "A"]
+    },
+
+    {
+      "id": 801,
+      "name": "Beurre",
+      "categoryId": 4,
+      "calories": 717,
+      "proteines_g": 0.9,
+      "glucides_g": 0.1,
+      "lipides_g": 81,
+      "fibres_g": 0,
+      "vitamines": ["A", "E"]
+    }
+  ],
+  "consommation_journaliere": [
+    { "alimentId": 101, "quantite_g": 100 },
+    { "alimentId": 201, "quantite_g": 150 },
+    { "alimentId": 301, "quantite_g": 100 }
+  ]
+}
