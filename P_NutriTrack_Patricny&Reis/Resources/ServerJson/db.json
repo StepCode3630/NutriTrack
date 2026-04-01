@@ -1,283 +1,282 @@
 {
-  "categories": [
+  "Categories": [
     {
-      "id": 1,
-      "name": "Céréales et dérivés"
+      "CategoryId": 1,
+      "Name": "Céréales et dérivés"
     },
     {
-      "id": 2,
-      "name": "Fruits"
+      "CategoryId": 2,
+      "Name": "Fruits"
     },
     {
-      "id": 3,
-      "name": "Légumes"
+      "CategoryId": 3,
+      "Name": "Légumes"
     },
     {
-      "id": 4,
-      "name": "Produits laitiers"
+      "CategoryId": 4,
+      "Name": "Produits laitiers"
     },
     {
-      "id": 5,
-      "name": "Viandes et substituts"
+      "CategoryId": 5,
+      "Name": "Viandes et substituts"
     },
     {
-      "id": 6,
-      "name": "Noix et graines"
+      "CategoryId": 6,
+      "Name": "Noix et graines"
     },
     {
-      "id": 7,
-      "name": "Boissons"
+      "CategoryId": 7,
+      "Name": "Boissons"
     }
   ],
-  "aliments": [
+  "Aliments": [
     {
-      "id": 101,
-      "name": "Pain blanc",
-      "categoryId": 1,
-      "calories": 265,
-      "proteines_g": 9,
-      "glucides_g": 49,
-      "lipides_g": 3.2,
-      "fibres_g": 2.7,
-      "vitamines": [ "B1", "B3" ],
-      "mineraux": [ "Calcium", "Fer" ]
+      "AlimentId": 101,
+      "Name": "Pain blanc",
+      "CategoryFk": 1,
+      "Calories": 265,
+      "Proteines_g": 9,
+      "Glucides_g": 49,
+      "Lipides_g": 3.2,
+      "Fibres_g": 2.7,
+      "Vitamines": [ "B1", "B3" ],
+      "Mineraux": [ "Calcium", "Fer" ]
     },
     {
-      "id": 102,
-      "name": "Pain complet",
-      "categoryId": 1,
-      "calories": 247,
-      "proteines_g": 13,
-      "glucides_g": 41,
-      "lipides_g": 4.2,
-      "fibres_g": 6.5,
-      "vitamines": [ "B1", "B3", "B6" ],
-      "mineraux": [ "Calcium", "Fer", "Magnésium" ]
+      "AlimentId": 102,
+      "Name": "Pain complet",
+      "CategoryFk": 1,
+      "Calories": 247,
+      "Proteines_g": 13,
+      "Glucides_g": 41,
+      "Lipides_g": 4.2,
+      "Fibres_g": 6.5,
+      "Vitamines": [ "B1", "B3", "B6" ],
+      "Mineraux": [ "Calcium", "Fer", "Magnésium" ]
     },
     {
-      "id": 103,
-      "name": "Riz blanc cuit",
-      "categoryId": 1,
-      "calories": 130,
-      "proteines_g": 2.7,
-      "glucides_g": 28,
-      "lipides_g": 0.3,
-      "fibres_g": 0.4,
-      "vitamines": [ "B1", "B3" ],
-      "mineraux": [ "Fer", "Magnésium" ]
-    },
-
-    {
-      "id": 201,
-      "name": "Pomme",
-      "categoryId": 2,
-      "calories": 52,
-      "proteines_g": 0.3,
-      "glucides_g": 14,
-      "lipides_g": 0.2,
-      "fibres_g": 2.4,
-      "vitamines": [ "C" ],
-      "mineraux": [ "Potassium" ]
+      "AlimentId": 103,
+      "Name": "Riz blanc cuit",
+      "CategoryFk": 1,
+      "Calories": 130,
+      "Proteines_g": 2.7,
+      "Glucides_g": 28,
+      "Lipides_g": 0.3,
+      "Fibres_g": 0.4,
+      "Vitamines": [ "B1", "B3" ],
+      "Mineraux": [ "Fer", "Magnésium" ]
     },
     {
-      "id": 202,
-      "name": "Banane",
-      "categoryId": 2,
-      "calories": 89,
-      "proteines_g": 1.1,
-      "glucides_g": 23,
-      "lipides_g": 0.3,
-      "fibres_g": 2.6,
-      "vitamines": [ "C", "B6" ],
-      "mineraux": [ "Potassium", "Magnésium" ]
-    },
-    {
-      "id": 203,
-      "name": "Orange",
-      "categoryId": 2,
-      "calories": 47,
-      "proteines_g": 0.9,
-      "glucides_g": 12,
-      "lipides_g": 0.1,
-      "fibres_g": 2.4,
-      "vitamines": [ "C", "A" ],
-      "mineraux": [ "Calcium", "Potassium" ]
+      "AlimentId": 104,
+      "Name": "Flocons d'avoine",
+      "CategoryFk": 1,
+      "Calories": 389,
+      "Proteines_g": 16.9,
+      "Glucides_g": 66.3,
+      "Lipides_g": 6.9,
+      "Fibres_g": 10.6,
+      "Vitamines": [ "B1", "B5", "B6" ],
+      "Mineraux": [ "Fer", "Magnésium", "Phosphore", "Zinc" ]
     },
 
     {
-      "id": 301,
-      "name": "Carotte",
-      "categoryId": 3,
-      "calories": 41,
-      "proteines_g": 0.9,
-      "glucides_g": 10,
-      "lipides_g": 0.2,
-      "fibres_g": 2.8,
-      "vitamines": [ "A", "C", "K" ],
-      "mineraux": [ "Potassium", "Calcium" ]
+      "AlimentId": 201,
+      "Name": "Pomme",
+      "CategoryFk": 2,
+      "Calories": 52,
+      "Proteines_g": 0.3,
+      "Glucides_g": 14,
+      "Lipides_g": 0.2,
+      "Fibres_g": 2.4,
+      "Vitamines": [ "C" ],
+      "Mineraux": [ "Potassium" ]
     },
     {
-      "id": 303,
-      "name": "Tomate",
-      "categoryId": 3,
-      "calories": 18,
-      "proteines_g": 0.9,
-      "glucides_g": 3.9,
-      "lipides_g": 0.2,
-      "fibres_g": 1.2,
-      "vitamines": [ "C", "A" ],
-      "mineraux": [ "Potassium", "Magnésium" ]
-    },
-
-    {
-      "id": 401,
-      "name": "Lait entier",
-      "categoryId": 4,
-      "calories": 64,
-      "proteines_g": 3.3,
-      "glucides_g": 4.8,
-      "lipides_g": 3.7,
-      "fibres_g": 0,
-      "vitamines": [ "B12", "A" ],
-      "mineraux": [ "Calcium", "Phosphore", "Potassium" ]
+      "AlimentId": 202,
+      "Name": "Banane",
+      "CategoryFk": 2,
+      "Calories": 89,
+      "Proteines_g": 1.1,
+      "Glucides_g": 23,
+      "Lipides_g": 0.3,
+      "Fibres_g": 2.6,
+      "Vitamines": [ "C", "B6" ],
+      "Mineraux": [ "Potassium", "Magnésium" ]
     },
     {
-      "id": 402,
-      "name": "Gruyère",
-      "categoryId": 4,
-      "calories": 423,
-      "proteines_g": 27.2,
-      "glucides_g": 1.4,
-      "lipides_g": 33.4,
-      "fibres_g": 0,
-      "vitamines": [ "A", "B12", "K2" ],
-      "mineraux": [ "Calcium", "Phosphore", "Zinc" ]
-    },
-    {
-      "id": 403,
-      "name": "Yaourt nature",
-      "categoryId": 4,
-      "calories": 61,
-      "proteines_g": 3.5,
-      "glucides_g": 4.7,
-      "lipides_g": 3.3,
-      "fibres_g": 0,
-      "vitamines": [ "B12" ],
-      "mineraux": [ "Calcium", "Potassium" ]
+      "AlimentId": 203,
+      "Name": "Orange",
+      "CategoryFk": 2,
+      "Calories": 47,
+      "Proteines_g": 0.9,
+      "Glucides_g": 12,
+      "Lipides_g": 0.1,
+      "Fibres_g": 2.4,
+      "Vitamines": [ "C", "A" ],
+      "Mineraux": [ "Calcium", "Potassium" ]
     },
 
     {
-      "id": 501,
-      "name": "Œuf entier",
-      "categoryId": 5,
-      "calories": 155,
-      "proteines_g": 13,
-      "glucides_g": 1.1,
-      "lipides_g": 11,
-      "fibres_g": 0,
-      "vitamines": [ "A", "B12", "D" ],
-      "mineraux": [ "Calcium", "Phosphore", "Sélénium" ]
+      "AlimentId": 301,
+      "Name": "Carotte",
+      "CategoryFk": 3,
+      "Calories": 41,
+      "Proteines_g": 0.9,
+      "Glucides_g": 10,
+      "Lipides_g": 0.2,
+      "Fibres_g": 2.8,
+      "Vitamines": [ "A", "C", "K" ],
+      "Mineraux": [ "Potassium", "Calcium" ]
     },
     {
-      "id": 502,
-      "name": "Poulet cuit",
-      "categoryId": 5,
-      "calories": 239,
-      "proteines_g": 27.3,
-      "glucides_g": 0,
-      "lipides_g": 14,
-      "fibres_g": 0,
-      "vitamines": [ "B3", "B6" ],
-      "mineraux": [ "Phosphore", "Potassium", "Zinc" ]
-    },
-
-    {
-      "id": 601,
-      "name": "Amandes",
-      "categoryId": 6,
-      "calories": 579,
-      "proteines_g": 21.2,
-      "glucides_g": 22,
-      "lipides_g": 50,
-      "fibres_g": 12.5,
-      "vitamines": [ "E", "B2" ],
-      "mineraux": [ "Calcium", "Magnésium", "Potassium" ]
-    },
-    {
-      "id": 602,
-      "name": "Noix de cajou",
-      "categoryId": 6,
-      "calories": 553,
-      "proteines_g": 18,
-      "glucides_g": 30,
-      "lipides_g": 44,
-      "fibres_g": 3.3,
-      "vitamines": [ "E", "K" ],
-      "mineraux": [ "Magnesium", "Zinc", "Iron" ]
+      "AlimentId": 303,
+      "Name": "Tomate",
+      "CategoryFk": 3,
+      "Calories": 18,
+      "Proteines_g": 0.9,
+      "Glucides_g": 3.9,
+      "Lipides_g": 0.2,
+      "Fibres_g": 1.2,
+      "Vitamines": [ "C", "A" ],
+      "Mineraux": [ "Potassium", "Magnésium" ]
     },
 
     {
-      "id": 701,
-      "name": "Eau",
-      "categoryId": 7,
-      "calories": 0,
-      "proteines_g": 0,
-      "glucides_g": 0,
-      "lipides_g": 0,
-      "fibres_g": 0,
-      "vitamines": [],
-      "mineraux": []
+      "AlimentId": 401,
+      "Name": "Lait entier",
+      "CategoryFk": 4,
+      "Calories": 64,
+      "Proteines_g": 3.3,
+      "Glucides_g": 4.8,
+      "Lipides_g": 3.7,
+      "Fibres_g": 0,
+      "Vitamines": [ "B12", "A" ],
+      "Mineraux": [ "Calcium", "Phosphore", "Potassium" ]
     },
     {
-      "id": 702,
-      "name": "Jus d’orange",
-      "categoryId": 7,
-      "calories": 45,
-      "proteines_g": 0.7,
-      "glucides_g": 10,
-      "lipides_g": 0.2,
-      "fibres_g": 0.2,
-      "vitamines": [ "C", "A" ],
-      "mineraux": [ "Potassium", "Calcium" ]
+      "AlimentId": 402,
+      "Name": "Gruyère",
+      "CategoryFk": 4,
+      "Calories": 423,
+      "Proteines_g": 27.2,
+      "Glucides_g": 1.4,
+      "Lipides_g": 33.4,
+      "Fibres_g": 0,
+      "Vitamines": [ "A", "B12", "K2" ],
+      "Mineraux": [ "Calcium", "Phosphore", "Zinc" ]
+    },
+    {
+      "AlimentId": 403,
+      "Name": "Yaourt nature",
+      "CategoryFk": 4,
+      "Calories": 61,
+      "Proteines_g": 3.5,
+      "Glucides_g": 4.7,
+      "Lipides_g": 3.3,
+      "Fibres_g": 0,
+      "Vitamines": [ "B12" ],
+      "Mineraux": [ "Calcium", "Potassium" ]
+    },
+    {
+      "AlimentId": 801,
+      "Name": "Beurre",
+      "CategoryFk": 4,
+      "Calories": 717,
+      "Proteines_g": 0.9,
+      "Glucides_g": 0.1,
+      "Lipides_g": 81,
+      "Fibres_g": 0,
+      "Vitamines": [ "A", "E" ],
+      "Mineraux": [ "Calcium", "Phosphore" ]
     },
 
     {
-      "id": 801,
-      "name": "Beurre",
-      "categoryId": 4,
-      "calories": 717,
-      "proteines_g": 0.9,
-      "glucides_g": 0.1,
-      "lipides_g": 81,
-      "fibres_g": 0,
-      "vitamines": [ "A", "E" ],
-      "mineraux": [ "Calcium", "Phosphore" ]
+      "AlimentId": 501,
+      "Name": "Œuf entier",
+      "CategoryFk": 5,
+      "Calories": 155,
+      "Proteines_g": 13,
+      "Glucides_g": 1.1,
+      "Lipides_g": 11,
+      "Fibres_g": 0,
+      "Vitamines": [ "A", "B12", "D" ],
+      "Mineraux": [ "Calcium", "Phosphore", "Sélénium" ]
     },
     {
-      "id": 104,
-      "name": "Flocons d'avoine",
-      "categoryId": 1,
-      "calories": 389,
-      "proteines_g": 16.9,
-      "glucides_g": 66.3,
-      "lipides_g": 6.9,
-      "fibres_g": 10.6,
-      "vitamines": [ "B1", "B5", "B6" ],
-      "mineraux": [ "Fer", "Magnésium", "Phosphore", "Zinc" ]
+      "AlimentId": 502,
+      "Name": "Poulet cuit",
+      "CategoryFk": 5,
+      "Calories": 239,
+      "Proteines_g": 27.3,
+      "Glucides_g": 0,
+      "Lipides_g": 14,
+      "Fibres_g": 0,
+      "Vitamines": [ "B3", "B6" ],
+      "Mineraux": [ "Phosphore", "Potassium", "Zinc" ]
+    },
+
+    {
+      "AlimentId": 601,
+      "Name": "Amandes",
+      "CategoryFk": 6,
+      "Calories": 579,
+      "Proteines_g": 21.2,
+      "Glucides_g": 22,
+      "Lipides_g": 50,
+      "Fibres_g": 12.5,
+      "Vitamines": [ "E", "B2" ],
+      "Mineraux": [ "Calcium", "Magnésium", "Potassium" ]
+    },
+    {
+      "AlimentId": 602,
+      "Name": "Noix de cajou",
+      "CategoryFk": 6,
+      "Calories": 553,
+      "Proteines_g": 18,
+      "Glucides_g": 30,
+      "Lipides_g": 44,
+      "Fibres_g": 3.3,
+      "Vitamines": [ "E", "K" ],
+      "Mineraux": [ "Magnésium", "Zinc", "Fer" ]
+    },
+
+    {
+      "AlimentId": 701,
+      "Name": "Eau",
+      "CategoryFk": 7,
+      "Calories": 0,
+      "Proteines_g": 0,
+      "Glucides_g": 0,
+      "Lipides_g": 0,
+      "Fibres_g": 0,
+      "Vitamines": [],
+      "Mineraux": []
+    },
+    {
+      "AlimentId": 702,
+      "Name": "Jus d’orange",
+      "CategoryFk": 7,
+      "Calories": 45,
+      "Proteines_g": 0.7,
+      "Glucides_g": 10,
+      "Lipides_g": 0.2,
+      "Fibres_g": 0.2,
+      "Vitamines": [ "C", "A" ],
+      "Mineraux": [ "Potassium", "Calcium" ]
     }
   ],
-  "consommation_journaliere": [
+  "Consommation_journaliere": [
     {
-      "alimentId": 101,
-      "quantite_g": 100
+      "AlimentId": 101,
+      "Quantite_g": 100
     },
     {
-      "alimentId": 201,
-      "quantite_g": 150
+      "AlimentId": 201,
+      "Quantite_g": 150
     },
     {
-      "alimentId": 301,
-      "quantite_g": 100
+      "AlimentId": 301,
+      "Quantite_g": 100
     }
   ]
 }
