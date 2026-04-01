@@ -4,5 +4,16 @@
   "branch": "master",
   "me": "StepCode3630",
   "journalStartDate": "2026-03-20T12:00:00.000Z",
-  "exceptions": []
+  "exceptions": [
+    {
+      "id": "42742f26-afd4-468e-971d-3a7d04891c9a",
+      "type": "commitless",
+      "name": "doc: création du modèle mcd/mld de l'app",
+      "description": "",
+      "date": "2026-04-01T14:11:00.000Z",
+      "duration": 60,
+      "status": "DONE",
+      "author": "StepCode3630"
+    }
+  ]
 }
