@@ -26,6 +26,7 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
         public double Lipides_g { get; set; }
         public double Fibres_g { get; set; }
         public List<string> Vitamines { get; set; }
+        public List<string> Mineraux { get; set; }
     }
 
     public class Consommation
