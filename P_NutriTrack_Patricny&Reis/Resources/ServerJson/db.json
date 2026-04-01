@@ -1,12 +1,33 @@
 {
   "categories": [
-    { "id": 1, "name": "Céréales et dérivés" },
-    { "id": 2, "name": "Fruits" },
-    { "id": 3, "name": "Légumes" },
-    { "id": 4, "name": "Produits laitiers" },
-    { "id": 5, "name": "Viandes et substituts" },
-    { "id": 6, "name": "Noix et graines" },
-    { "id": 7, "name": "Boissons" }
+    {
+      "id": 1,
+      "name": "Céréales et dérivés"
+    },
+    {
+      "id": 2,
+      "name": "Fruits"
+    },
+    {
+      "id": 3,
+      "name": "Légumes"
+    },
+    {
+      "id": 4,
+      "name": "Produits laitiers"
+    },
+    {
+      "id": 5,
+      "name": "Viandes et substituts"
+    },
+    {
+      "id": 6,
+      "name": "Noix et graines"
+    },
+    {
+      "id": 7,
+      "name": "Boissons"
+    }
   ],
   "aliments": [
     {
@@ -18,7 +39,8 @@
       "glucides_g": 49,
       "lipides_g": 3.2,
       "fibres_g": 2.7,
-      "vitamines": ["B1", "B3"]
+      "vitamines": [ "B1", "B3" ],
+      "mineraux": [ "Calcium", "Fer" ]
     },
     {
       "id": 102,
@@ -29,7 +51,8 @@
       "glucides_g": 41,
       "lipides_g": 4.2,
       "fibres_g": 6.5,
-      "vitamines": ["B1", "B3", "B6"]
+      "vitamines": [ "B1", "B3", "B6" ],
+      "mineraux": [ "Calcium", "Fer", "Magnésium" ]
     },
     {
       "id": 103,
@@ -40,7 +63,8 @@
       "glucides_g": 28,
       "lipides_g": 0.3,
       "fibres_g": 0.4,
-      "vitamines": ["B1", "B3"]
+      "vitamines": [ "B1", "B3" ],
+      "mineraux": [ "Fer", "Magnésium" ]
     },
 
     {
@@ -52,7 +76,8 @@
       "glucides_g": 14,
       "lipides_g": 0.2,
       "fibres_g": 2.4,
-      "vitamines": ["C"]
+      "vitamines": [ "C" ],
+      "mineraux": [ "Potassium" ]
     },
     {
       "id": 202,
@@ -63,7 +88,8 @@
       "glucides_g": 23,
       "lipides_g": 0.3,
       "fibres_g": 2.6,
-      "vitamines": ["C", "B6"]
+      "vitamines": [ "C", "B6" ],
+      "mineraux": [ "Potassium", "Magnésium" ]
     },
     {
       "id": 203,
@@ -74,7 +100,8 @@
       "glucides_g": 12,
       "lipides_g": 0.1,
       "fibres_g": 2.4,
-      "vitamines": ["C", "A"]
+      "vitamines": [ "C", "A" ],
+      "mineraux": [ "Calcium", "Potassium" ]
     },
 
     {
@@ -86,18 +113,8 @@
       "glucides_g": 10,
       "lipides_g": 0.2,
       "fibres_g": 2.8,
-      "vitamines": ["A", "C", "K"]
-    },
-    {
-      "id": 302,
-      "name": "Brocoli",
-      "categoryId": 3,
-      "calories": 55,
-      "proteines_g": 3.7,
-      "glucides_g": 11,
-      "lipides_g": 0.6,
-      "fibres_g": 3.3,
-      "vitamines": ["C", "K", "A"]
+      "vitamines": [ "A", "C", "K" ],
+      "mineraux": [ "Potassium", "Calcium" ]
     },
     {
       "id": 303,
@@ -108,7 +125,8 @@
       "glucides_g": 3.9,
       "lipides_g": 0.2,
       "fibres_g": 1.2,
-      "vitamines": ["C", "A"]
+      "vitamines": [ "C", "A" ],
+      "mineraux": [ "Potassium", "Magnésium" ]
     },
 
     {
@@ -120,18 +138,20 @@
       "glucides_g": 4.8,
       "lipides_g": 3.7,
       "fibres_g": 0,
-      "vitamines": ["B12", "A"]
+      "vitamines": [ "B12", "A" ],
+      "mineraux": [ "Calcium", "Phosphore", "Potassium" ]
     },
     {
       "id": 402,
-      "name": "Fromage cheddar",
+      "name": "Gruyère",
       "categoryId": 4,
-      "calories": 402,
-      "proteines_g": 25,
-      "glucides_g": 1.3,
-      "lipides_g": 33,
+      "calories": 423,
+      "proteines_g": 27.2,
+      "glucides_g": 1.4,
+      "lipides_g": 33.4,
       "fibres_g": 0,
-      "vitamines": ["A", "B12"]
+      "vitamines": [ "A", "B12", "K2" ],
+      "mineraux": [ "Calcium", "Phosphore", "Zinc" ]
     },
     {
       "id": 403,
@@ -142,7 +162,8 @@
       "glucides_g": 4.7,
       "lipides_g": 3.3,
       "fibres_g": 0,
-      "vitamines": ["B12"]
+      "vitamines": [ "B12" ],
+      "mineraux": [ "Calcium", "Potassium" ]
     },
 
     {
@@ -154,7 +175,8 @@
       "glucides_g": 1.1,
       "lipides_g": 11,
       "fibres_g": 0,
-      "vitamines": ["A", "B12", "D"]
+      "vitamines": [ "A", "B12", "D" ],
+      "mineraux": [ "Calcium", "Phosphore", "Sélénium" ]
     },
     {
       "id": 502,
@@ -165,7 +187,8 @@
       "glucides_g": 0,
       "lipides_g": 14,
       "fibres_g": 0,
-      "vitamines": ["B3", "B6"]
+      "vitamines": [ "B3", "B6" ],
+      "mineraux": [ "Phosphore", "Potassium", "Zinc" ]
     },
 
     {
@@ -177,7 +200,8 @@
       "glucides_g": 22,
       "lipides_g": 50,
       "fibres_g": 12.5,
-      "vitamines": ["E", "B2"]
+      "vitamines": [ "E", "B2" ],
+      "mineraux": [ "Calcium", "Magnésium", "Potassium" ]
     },
     {
       "id": 602,
@@ -188,7 +212,8 @@
       "glucides_g": 30,
       "lipides_g": 44,
       "fibres_g": 3.3,
-      "vitamines": ["E", "K"]
+      "vitamines": [ "E", "K" ],
+      "mineraux": [ "Magnesium", "Zinc", "Iron" ]
     },
 
     {
@@ -200,7 +225,8 @@
       "glucides_g": 0,
       "lipides_g": 0,
       "fibres_g": 0,
-      "vitamines": []
+      "vitamines": [],
+      "mineraux": []
     },
     {
       "id": 702,
@@ -211,7 +237,8 @@
       "glucides_g": 10,
       "lipides_g": 0.2,
       "fibres_g": 0.2,
-      "vitamines": ["C", "A"]
+      "vitamines": [ "C", "A" ],
+      "mineraux": [ "Potassium", "Calcium" ]
     },
 
     {
@@ -223,12 +250,34 @@
       "glucides_g": 0.1,
       "lipides_g": 81,
       "fibres_g": 0,
-      "vitamines": ["A", "E"]
+      "vitamines": [ "A", "E" ],
+      "mineraux": [ "Calcium", "Phosphore" ]
+    },
+    {
+      "id": 104,
+      "name": "Flocons d'avoine",
+      "categoryId": 1,
+      "calories": 389,
+      "proteines_g": 16.9,
+      "glucides_g": 66.3,
+      "lipides_g": 6.9,
+      "fibres_g": 10.6,
+      "vitamines": [ "B1", "B5", "B6" ],
+      "mineraux": [ "Fer", "Magnésium", "Phosphore", "Zinc" ]
     }
   ],
   "consommation_journaliere": [
-    { "alimentId": 101, "quantite_g": 100 },
-    { "alimentId": 201, "quantite_g": 150 },
-    { "alimentId": 301, "quantite_g": 100 }
+    {
+      "alimentId": 101,
+      "quantite_g": 100
+    },
+    {
+      "alimentId": 201,
+      "quantite_g": 150
+    },
+    {
+      "alimentId": 301,
+      "quantite_g": 100
+    }
   ]
 }
