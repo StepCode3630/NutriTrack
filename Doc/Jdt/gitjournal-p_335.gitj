@@ -14,6 +14,16 @@
       "duration": 60,
       "status": "DONE",
       "author": "StepCode3630"
+    },
+    {
+      "id": "f643bb18-fb8b-4df1-8449-c9b5e6619944",
+      "type": "commitless",
+      "name": "chore: rappel du code et du journal",
+      "description": "",
+      "date": "2026-04-22T11:50:00.000Z",
+      "duration": 40,
+      "status": "DONE",
+      "author": "StepCode3630"
     }
   ]
 }
