@@ -29,8 +29,8 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
 
         // Navigation (optionnel mais utile)
         public Category Category { get; set; }
-        public List<AlimentMinerau> Mineraux { get; set; }
-        public List<AlimentVitamine> Vitamines { get; set; }
+        public List<string> Mineraux { get; set; }
+        public List<string> Vitamines { get; set; }
     }
 
     // ---------------- MINERAU ----------------
