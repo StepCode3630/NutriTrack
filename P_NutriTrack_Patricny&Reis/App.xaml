@@ -5,10 +5,17 @@
              x:Class="P_NutriTrack_Patricny_Reis.App">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+            <!-- coulaurs generales-->
+            <Color x:Key="CouleurFond">#7A8DA3</Color>
+            <Color x:Key="CouleurCarte">#CFE0F0</Color>
+            <Color x:Key="CouleurBouton">#5A6B80</Color>
+            <Color x:Key="CouleurTexte">#1F2A37</Color>
+            <Color x:Key="CouleurTexteClair">#FFFFFF</Color>
+            
+            <!-- style des page de l app -->
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{StaticResource CouleurFond}"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
