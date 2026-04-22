@@ -4,7 +4,7 @@ namespace P_NutriTrack_Patricny_Reis.Views;
 public partial class AlimentListPage : ContentPage
 {
     private DataService dataService;
-    private List<Aliment> aliments;
+    private List<Aliment> aliments = null!;
     // category recu de categoryPage
     private Category categorie;
     // constructeur reçoit la catégorie à afficher
@@ -13,19 +13,17 @@ public partial class AlimentListPage : ContentPage
         InitializeComponent();
         categorie = categorieRecue;
         dataService = new DataService();
-        // met le nom de la catégorie comme titre
+        // met le nom de la catégorie en titre
         TitreLabel.Text = categorieRecue.Name;
     }
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        // charge les donnees
-        NutriData donnees = await dataService.LoadAsync();
-        // filtrer :garde que les aliments de la catégorie choisie
-        aliments = donnees.Aliments
-                          .Where(aliment => aliment.CategoryFk == categorie.CategoryId)
-                          .ToList();
-        // afficher la liste
+        // charge les données
+        await dataService.LoadData();
+        // récup directement les aliments de cette catégorie
+        aliments = dataService.GetAlimentsById(categorie.CategoryId);
+        // afficher liste
         AlimentListView.ItemsSource = aliments;
     }
     private async void OnAddClicked(object sender, EventArgs eventArgs)

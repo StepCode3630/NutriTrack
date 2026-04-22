@@ -6,22 +6,21 @@
 
     <VerticalStackLayout Padding="20" Spacing="10">
 
-        <!-- Titre dynamique = nom de la catégorie -->
+        <!-- titre = nom catégorie -->
         <Label x:Name="TitreLabel"
                Text="Aliments"
                FontSize="24"
                FontAttributes="Bold"/>
 
-        <!-- Bouton pour ajouter un aliment -->
+        <!-- btn ajout que un msg pour l instant -->
         <Button Text="+ Ajouter un aliment"
                 Clicked="OnAddClicked"/>
 
-        <!-- Liste des aliments -->
+        <!-- Liste aliment -->
         <ListView x:Name="AlimentListView"
                   HeightRequest="500">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <!-- TextCell avec nom en haut, calories en dessous -->
                     <TextCell Text="{Binding Name}"
                               Detail="{Binding Calories, StringFormat='Calories : {0} Kcal'}"/>
                 </DataTemplate>

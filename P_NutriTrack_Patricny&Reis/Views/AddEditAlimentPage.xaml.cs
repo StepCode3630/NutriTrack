@@ -8,7 +8,6 @@ public partial class AddEditAlimentPage : ContentPage
     private Category categorie;
     // aliment à modifier  devient null si c est un ajout
     private Aliment alimentAModifier;
-
     // constructeur pour add aliment / pas d'aliment qui existe deja
     public AddEditAlimentPage(Category categorieRecue)
     {
@@ -18,7 +17,6 @@ public partial class AddEditAlimentPage : ContentPage
         alimentAModifier = null;
         TitreLabel.Text = "Ajouter un aliment";
     }
-
     // constructeur pour modif aliment existant
     public AddEditAlimentPage(Category categorieRecue, Aliment alimentRecu)
     {
@@ -27,7 +25,6 @@ public partial class AddEditAlimentPage : ContentPage
         dataService = new DataService();
         alimentAModifier = alimentRecu;
         TitreLabel.Text = "Modifier un aliment";
-
         // pré-remplir form avec valeurs de l aliment
         NomEntry.Text = alimentRecu.Name;
         CaloriesEntry.Text = alimentRecu.Calories.ToString();
@@ -36,7 +33,6 @@ public partial class AddEditAlimentPage : ContentPage
         LipidesEntry.Text = alimentRecu.Lipides_g.ToString();
         FibresEntry.Text = alimentRecu.Fibres_g.ToString();
     }
-
     private async void OnSaveClicked(object sender, EventArgs eventArgs)
     {
         // vérifie que nom n est pas vide
@@ -45,21 +41,18 @@ public partial class AddEditAlimentPage : ContentPage
             await DisplayAlert("Erreur", "Le nom est obligatoire", "OK");
             return;
         }
-
         // charger les données
-        NutriData donnees = await dataService.LoadAsync();
-
+        await dataService.LoadData();
+        List<Aliment> tousLesAliments = dataService.GetAliments();
         if (alimentAModifier == null)
         {
             // pour quand on ajoute
             Aliment nouvelAliment = new Aliment();
-
             // calculer new Id unique
-            if (donnees.Aliments.Count == 0)
+            if (tousLesAliments.Count == 0)
                 nouvelAliment.AlimentId = 1;
             else
-                nouvelAliment.AlimentId = donnees.Aliments.Max(aliment => aliment.AlimentId) + 1;
-
+                nouvelAliment.AlimentId = tousLesAliments.Max(aliment => aliment.AlimentId) + 1;
             // remplir valeurs avec ce qui a été saisi
             nouvelAliment.Name = NomEntry.Text;
             nouvelAliment.Calories = ConvertirEnInt(CaloriesEntry.Text);
@@ -68,27 +61,26 @@ public partial class AddEditAlimentPage : ContentPage
             nouvelAliment.Lipides_g = ConvertirEnDouble(LipidesEntry.Text);
             nouvelAliment.Fibres_g = ConvertirEnDouble(FibresEntry.Text);
             nouvelAliment.CategoryFk = categorie.CategoryId;
-
-            donnees.Aliments.Add(nouvelAliment);
+            dataService.addAliment(nouvelAliment);
         }
         else
         {
             // pour les modif
-            alimentAModifier.Name = NomEntry.Text;
-            alimentAModifier.Calories = ConvertirEnInt(CaloriesEntry.Text);
-            alimentAModifier.Proteines_g = ConvertirEnDouble(ProteinesEntry.Text);
-            alimentAModifier.Glucides_g = ConvertirEnDouble(GlucidesEntry.Text);
-            alimentAModifier.Lipides_g = ConvertirEnDouble(LipidesEntry.Text);
-            alimentAModifier.Fibres_g = ConvertirEnDouble(FibresEntry.Text);
+            Aliment alimentModifie = new Aliment();
+            alimentModifie.AlimentId = alimentAModifier.AlimentId;
+            alimentModifie.Name = NomEntry.Text;
+            alimentModifie.Calories = ConvertirEnInt(CaloriesEntry.Text);
+            alimentModifie.Proteines_g = ConvertirEnDouble(ProteinesEntry.Text);
+            alimentModifie.Glucides_g = ConvertirEnDouble(GlucidesEntry.Text);
+            alimentModifie.Lipides_g = ConvertirEnDouble(LipidesEntry.Text);
+            alimentModifie.Fibres_g = ConvertirEnDouble(FibresEntry.Text);
+            dataService.updateAliment(alimentModifie);
         }
-
         // sauvegarde dans le JSON
-        await dataService.SaveAsync();
-
+        // A FAIRE PLUS TARD activer quand SaveData sera dispo dans DataService
         // retour page d'avant
         await Navigation.PopAsync();
     }
-
     // méthode pour convertir le texte en nbr
     private int ConvertirEnInt(string texte)
     {
@@ -96,7 +88,6 @@ public partial class AddEditAlimentPage : ContentPage
             return resultat;
         return 0;
     }
-
     private double ConvertirEnDouble(string texte)
     {
         if (double.TryParse(texte, out double resultat))

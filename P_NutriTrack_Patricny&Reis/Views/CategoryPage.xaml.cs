@@ -1,13 +1,12 @@
 // using permet d'utiliser des classes définies ailleurs dans le projet
 using P_NutriTrack_Patricny_Reis.DataModels;
 using P_NutriTrack_Patricny_Reis.Services;
-
+// adresse de la classe dans le projet
 namespace P_NutriTrack_Patricny_Reis.Views;
 public partial class CategoryPage : ContentPage
 {
-    // variables privées
     private DataService dataService;
-    private List<Category> categories;
+    private List<Category> categories = null!;
     public CategoryPage()
     {
         InitializeComponent();
@@ -16,26 +15,10 @@ public partial class CategoryPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        NutriData donnees = await dataService.LoadAsync();
-        categories = donnees.Categories;
-        CategoryListView.ItemsSource = categories;
-    }
-    private async void OnAddClicked(object sender, EventArgs eventArgs)
-    {
-        string nomCategorie = await DisplayPromptAsync(
-            "Nouvelle catégorie",
-            "Entrez le nom :");
-        if (string.IsNullOrWhiteSpace(nomCategorie))
-            return;
-        Category nouvelleCategorie = new Category();
-        nouvelleCategorie.Name = nomCategorie;
-        if (categories.Count == 0)
-            nouvelleCategorie.CategoryId = 1;
-        else
-            nouvelleCategorie.CategoryId = categories.Max(categorie => categorie.CategoryId) + 1;
-        categories.Add(nouvelleCategorie);
-        await dataService.SaveAsync();
-        CategoryListView.ItemsSource = null;
+        // charge les données depuis le JSON
+        await dataService.LoadData();
+        // récup la liste des catégories
+        categories = dataService.GetCategories();
         CategoryListView.ItemsSource = categories;
     }
     // appel quand on clique sur une catégorie dans liste
