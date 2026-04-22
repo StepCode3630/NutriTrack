@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="P_NutriTrack_Patricny_Reis.Views.AddEditAlimentPage"
+             Title="FoodTrack">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- titre dynamique permet de : ajouter ou modifier -->
+            <Label x:Name="TitreLabel"
+                   Text="Ajouter un aliment"
+                   FontSize="24"
+                   FontAttributes="Bold"/>
+
+            <!-- nom -->
+            <Label Text="Nom"/>
+            <Entry x:Name="NomEntry"
+                   Placeholder="Ex. tomate"/>
+            <!-- Calories -->
+            <Label Text="Calories"/>
+            <Entry x:Name="CaloriesEntry"
+                   Placeholder="0"
+                   Keyboard="Numeric"/>
+
+            <!-- protéines -->
+            <Label Text="Protéines (g)"/>
+            <Entry x:Name="ProteinesEntry"
+                   Placeholder="0"
+                   Keyboard="Numeric"/>
+
+            <!-- glucides -->
+            <Label Text="Glucides (g)"/>
+            <Entry x:Name="GlucidesEntry"
+                   Placeholder="0"
+                   Keyboard="Numeric"/>
+
+            <!-- Lipides -->
+            <Label Text="Lipides (g)"/>
+            <Entry x:Name="LipidesEntry"
+                   Placeholder="0"
+                   Keyboard="Numeric"/>
+
+            <!-- fibres -->
+            <Label Text="Fibres (g)"/>
+            <Entry x:Name="FibresEntry"
+                   Placeholder="0"
+                   Keyboard="Numeric"/>
+
+            <!-- btn enregistrer -->
+            <Button Text="Enregistrer"
+                    Clicked="OnSaveClicked"
+                    Margin="0,20,0,0"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

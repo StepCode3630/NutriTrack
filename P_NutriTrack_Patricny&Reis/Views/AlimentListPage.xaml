@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="P_NutriTrack_Patricny_Reis.Views.AlimentListPage"
+             Title="FoodTrack">
+
+    <VerticalStackLayout Padding="20" Spacing="10">
+
+        <!-- Titre dynamique = nom de la catégorie -->
+        <Label x:Name="TitreLabel"
+               Text="Aliments"
+               FontSize="24"
+               FontAttributes="Bold"/>
+
+        <!-- Bouton pour ajouter un aliment -->
+        <Button Text="+ Ajouter un aliment"
+                Clicked="OnAddClicked"/>
+
+        <!-- Liste des aliments -->
+        <ListView x:Name="AlimentListView"
+                  HeightRequest="500">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <!-- TextCell avec nom en haut, calories en dessous -->
+                    <TextCell Text="{Binding Name}"
+                              Detail="{Binding Calories, StringFormat='Calories : {0} Kcal'}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </VerticalStackLayout>
+
+</ContentPage>

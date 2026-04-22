@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="P_NutriTrack_Patricny_Reis.Views.CategoryPage"
+             Title="FoodTrack">
+
+    <!-- empilé verticalement avec espace entre chaque élément -->
+    <VerticalStackLayout Padding="20" Spacing="10">
+
+        <!-- titre page -->
+        <Label Text="Catégories" 
+               FontSize="24" 
+               FontAttributes="Bold"/>
+
+        <!-- Bouton qui appelle la méthode OnAddClicked du code-behind -->
+        <Button Text="+ Ajouter une catégorie"
+                Clicked="OnAddClicked"/>
+
+        <!-- Liste des categories -->
+        <!-- x:Name permet d accéder à la ListView depuis le code-behind -->
+        <!-- ItemTapped appelle OnCategoryTapped quand on clique sur une categorie -->
+        <ListView x:Name="CategoryListView"
+                  HeightRequest="500"
+                  ItemTapped="OnCategoryTapped">
+
+            <!-- modele de chaque ligne de la liste -->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <!-- fffiche Name de chaque objet Category -->
+                    <TextCell Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </VerticalStackLayout>
+
+</ContentPage>
