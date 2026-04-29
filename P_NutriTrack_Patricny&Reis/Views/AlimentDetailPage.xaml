@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          x:Class="P_NutriTrack_Patricny_Reis.Views.AlimentDetailPage"
+             Title="FoodTrack"
+             BackgroundColor="{StaticResource CouleurFond}">
+
+    <Grid RowDefinitions="Auto, *, Auto" Padding="20,15">
+
+        <!-- en tête -->
+        <VerticalStackLayout Grid.Row="0" Spacing="3" Margin="0,5,0,30">
+            <Label Text="FoodTrack"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
+            <Label Text="Détail de l'aliment"
+                   FontSize="13"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+
+        <!-- contenu -->
+        <VerticalStackLayout Grid.Row="1" Spacing="10">
+
+            <!-- nom aliment sans icone -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="15" Margin="0,0,0,20">
+                <Label Text=""
+                       FontSize="40"
+                       VerticalOptions="Center"/>
+                <Label x:Name="NomLabel"
+                       Text="Nom aliment"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <!-- pour 100g info -->
+            <Label Text="Valeurs pour 100g"
+                   FontSize="11"
+                   TextColor="White"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,5"/>
+
+            <!-- calories -->
+            <Border Stroke="Transparent"
+                    BackgroundColor="{StaticResource CouleurCarte}"
+                    StrokeShape="RoundRectangle 20"
+                    HeightRequest="36"
+                    Padding="20,0">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="calories"
+                           FontSize="13"
+                           TextColor="{StaticResource CouleurTexte}"
+                           VerticalOptions="Center"/>
+                    <Label Grid.Column="1"
+                           x:Name="CaloriesLabel"
+                           Text="0"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource CouleurTexte}"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- proteines -->
+            <Border Stroke="Transparent"
+                    BackgroundColor="{StaticResource CouleurCarte}"
+                    StrokeShape="RoundRectangle 20"
+                    HeightRequest="36"
+                    Padding="20,0">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="proteines"
+                           FontSize="13"
+                           TextColor="{StaticResource CouleurTexte}"
+                           VerticalOptions="Center"/>
+                    <Label Grid.Column="1"
+                           x:Name="ProteinesLabel"
+                           Text="0"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource CouleurTexte}"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- glucides -->
+            <Border Stroke="Transparent"
+                    BackgroundColor="{StaticResource CouleurCarte}"
+                    StrokeShape="RoundRectangle 20"
+                    HeightRequest="36"
+                    Padding="20,0">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="glucides"
+                           FontSize="13"
+                           TextColor="{StaticResource CouleurTexte}"
+                           VerticalOptions="Center"/>
+                    <Label Grid.Column="1"
+                           x:Name="GlucidesLabel"
+                           Text="0"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource CouleurTexte}"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- lipides -->
+            <Border Stroke="Transparent"
+                    BackgroundColor="{StaticResource CouleurCarte}"
+                    StrokeShape="RoundRectangle 20"
+                    HeightRequest="36"
+                    Padding="20,0">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="lipides"
+                           FontSize="13"
+                           TextColor="{StaticResource CouleurTexte}"
+                           VerticalOptions="Center"/>
+                    <Label Grid.Column="1"
+                           x:Name="LipidesLabel"
+                           Text="0"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource CouleurTexte}"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- fibres -->
+            <Border Stroke="Transparent"
+                    BackgroundColor="{StaticResource CouleurCarte}"
+                    StrokeShape="RoundRectangle 20"
+                    HeightRequest="36"
+                    Padding="20,0">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="fibres"
+                           FontSize="13"
+                           TextColor="{StaticResource CouleurTexte}"
+                           VerticalOptions="Center"/>
+                    <Label Grid.Column="1"
+                           x:Name="FibresLabel"
+                           Text="0"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource CouleurTexte}"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+        </VerticalStackLayout>
+
+        <!-- btn bas pour supprimer + modif -->
+        <Grid Grid.Row="2" ColumnDefinitions="Auto, *" ColumnSpacing="10" Margin="0,20,0,5">
+
+            <!-- btn supprimer -->
+            <Button Grid.Column="0"
+                    Text="🗑"
+                    BackgroundColor="{StaticResource CouleurCarte}"
+                    TextColor="{StaticResource CouleurTexte}"
+                    FontSize="16"
+                    CornerRadius="22"
+                    HeightRequest="48"
+                    WidthRequest="60"
+                    Clicked="OnDeleteClicked"/>
+
+            <!-- btn modif -->
+            <Button Grid.Column="1"
+                    Text="Modifier ✏"
+                    BackgroundColor="#4A5A70"
+                    TextColor="White"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    CornerRadius="22"
+                    HeightRequest="48"
+                    Clicked="OnEditClicked"/>
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>
