@@ -4,29 +4,78 @@
              x:Class="P_NutriTrack_Patricny_Reis.Views.AlimentListPage"
              Title="FoodTrack">
 
-    <VerticalStackLayout Padding="20" Spacing="10">
+    <Grid RowDefinitions="Auto, Auto, *, Auto" Padding="20" RowSpacing="15">
 
-        <!-- titre = nom catégorie -->
-        <Label x:Name="TitreLabel"
-               Text="Aliments"
+        <!-- Titre FoodTrack -->
+        <Label Grid.Row="0"
+               Text="FoodTrack"
                FontSize="24"
-               FontAttributes="Bold"/>
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"/>
 
-        <!-- btn ajout que un msg pour l instant -->
-        <Button Text="+ Ajouter un aliment"
+        <!-- Nom de la catégorie -->
+        <Label Grid.Row="1"
+               x:Name="TitreLabel"
+               Text="Aliments"
+               FontSize="20"
+               TextColor="White"
+               HorizontalOptions="Center"/>
+
+        <!-- Liste des aliments -->
+        <CollectionView Grid.Row="2"
+                        x:Name="AlimentListView">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <!-- carte aliment -->
+                    <Border Stroke="Transparent"
+                            BackgroundColor="{StaticResource CouleurCarte}"
+                            Margin="0,5"
+                            Padding="15"
+                            StrokeShape="RoundRectangle 20">
+                        <Grid ColumnDefinitions="*, Auto, Auto" ColumnSpacing="10">
+
+                            <!-- infos aliment -->
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="{Binding Name}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource CouleurTexte}"/>
+                                <Label Text="{Binding Calories, StringFormat='Calories : {0} Kcal'}"
+                                       FontSize="12"
+                                       TextColor="{StaticResource CouleurTexte}"/>
+                            </VerticalStackLayout>
+
+                            <!-- btn Modifier -->
+                            <Button Grid.Column="1"
+                                    Text="✏"
+                                    BackgroundColor="Transparent"
+                                    TextColor="{StaticResource CouleurTexte}"
+                                    Clicked="OnEditClicked"
+                                    CommandParameter="{Binding .}"/>
+
+                            <!-- Bouton Supprimer -->
+                            <Button Grid.Column="2"
+                                    Text="🗑"
+                                    BackgroundColor="Transparent"
+                                    TextColor="{StaticResource CouleurTexte}"
+                                    Clicked="OnDeleteClicked"
+                                    CommandParameter="{Binding .}"/>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Bouton ajouter en bas -->
+        <Button Grid.Row="3"
+                Text="+ Ajouter un aliment"
+                BackgroundColor="{StaticResource CouleurBouton}"
+                TextColor="White"
+                CornerRadius="20"
                 Clicked="OnAddClicked"/>
 
-        <!-- Liste aliment -->
-        <ListView x:Name="AlimentListView"
-                  HeightRequest="500">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding Name}"
-                              Detail="{Binding Calories, StringFormat='Calories : {0} Kcal'}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
-    </VerticalStackLayout>
+    </Grid>
 
 </ContentPage>

@@ -22,10 +22,14 @@ public partial class CategoryPage : ContentPage
         CategoryListView.ItemsSource = categories;
     }
     // appel quand on clique sur une catégorie dans liste
-    private async void OnCategoryTapped(object sender, ItemTappedEventArgs eventArgs)
+    private async void OnCategorySelected(object sender, SelectionChangedEventArgs eventArgs)
     {
-        // récup la categorie cliquée
-        Category categorieSelectionnee = (Category)eventArgs.Item;
+        // récup la catégorie cliquée
+        Category categorieSelectionnee = (Category)eventArgs.CurrentSelection.FirstOrDefault();
+        if (categorieSelectionnee == null)
+            return;
+        // déselectionne pour pouvoir recliquer dessus qund on revient dessus
+        CategoryListView.SelectedItem = null;
         // ouvre AlimentListPage en lui donnant la catégorie
         await Navigation.PushAsync(new AlimentListPage(categorieSelectionnee));
     }

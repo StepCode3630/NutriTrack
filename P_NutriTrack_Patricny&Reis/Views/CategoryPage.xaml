@@ -4,23 +4,42 @@
              x:Class="P_NutriTrack_Patricny_Reis.Views.CategoryPage"
              Title="FoodTrack">
 
-    <VerticalStackLayout Padding="20" Spacing="10">
+    <VerticalStackLayout Padding="20" Spacing="20">
 
-        <!-- titre page -->
-        <Label Text="Catégories" 
-               FontSize="24" 
-               FontAttributes="Bold"/>
+        <!-- titre -->
+        <Label Text="FoodTrack"
+               FontSize="28"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"/>
 
-        <!-- liste des catégories clic pour voir aliments -->
-        <ListView x:Name="CategoryListView"
-                  HeightRequest="500"
-                  ItemTapped="OnCategoryTapped">
-            <ListView.ItemTemplate>
+        <!-- sous-titre -->
+        <Label Text="Catégories"
+               FontSize="18"
+               TextColor="White"
+               HorizontalOptions="Center"/>
+
+        <!-- liste catégories dans des carte -->
+        <CollectionView x:Name="CategoryListView"
+                        SelectionMode="Single"
+                        SelectionChanged="OnCategorySelected">
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}"/>
+                    <!-- carte cliquable par catégorie -->
+                    <Border Stroke="Transparent"
+                            BackgroundColor="{StaticResource CouleurCarte}"
+                            Margin="0,5"
+                            Padding="15"
+                            StrokeShape="RoundRectangle 20">
+                        <Label Text="{Binding Name}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource CouleurTexte}"
+                               HorizontalOptions="Center"/>
+                    </Border>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
     </VerticalStackLayout>
 
