@@ -90,4 +90,18 @@ public partial class AlimentListPage : ContentPage
         aliments = dataService.GetAlimentsById(categorie.CategoryId);
         AlimentListView.ItemsSource = aliments;
     }
+    // quand on clique sur un aliment de la liste
+    private async void OnAlimentSelected(object sender, SelectionChangedEventArgs eventArgs)
+    {
+        // récup l'aliment cliqué
+        Aliment alimentSelectionne = (Aliment)eventArgs.CurrentSelection.FirstOrDefault();
+        if (alimentSelectionne == null)
+            return;
+
+        // déselectionne pour pouvoir recliquer au retour
+        AlimentListView.SelectedItem = null;
+
+        // ouvre la page détail
+        await Navigation.PushAsync(new AlimentDetailPage(categorie, alimentSelectionne));
+    }
 }
