@@ -12,15 +12,35 @@ namespace P_NutriTrack_Patricny_Reis.Services
     public class DataService
     {
         private NutriData _data;
-    
+
         public async Task LoadData()
         {
-            using var stream = await FileSystem.OpenAppPackageFileAsync("db.json");
-            using var reader = new StreamReader(stream);
+            var path = Path.Combine(FileSystem.AppDataDirectory, "db.json");
 
-            string json = await reader.ReadToEndAsync();
+            if (!File.Exists(path))
+            {
+                using var stream = await FileSystem.OpenAppPackageFileAsync("db.json");
+                using var reader = new StreamReader(stream);
+                var json = await reader.ReadToEndAsync();
 
-            _data = JsonSerializer.Deserialize<NutriData>(json);
+                await File.WriteAllTextAsync(path, json);
+            }
+
+            var finalJson = await File.ReadAllTextAsync(path);
+
+            _data = JsonSerializer.Deserialize<NutriData>(finalJson);
+        }
+
+        private async Task SaveData()
+        {
+            var path = Path.Combine(FileSystem.AppDataDirectory, "db.json");
+
+            var json = JsonSerializer.Serialize(_data, new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
+
+            await File.WriteAllTextAsync(path, json);
         }
 
         public List<Category> GetCategories()
@@ -37,13 +57,15 @@ namespace P_NutriTrack_Patricny_Reis.Services
         {
             return _data.Aliments.Where(a => a.CategoryFk == id).ToList();
         }
-        public void addAliment(Aliment a)
+        public async Task addAliment(Aliment a)
         {
             // Ajoute un nouvel aliment
             _data.Aliments.Add(a);
+
+            await SaveData();
         }
 
-        public void removeAliment(int id)
+        public async Task removeAliment(int id)
         {
             // Cherche l'aliment correspondant
             var aliment = _data.Aliments.FirstOrDefault(a => a.AlimentId == id);
@@ -51,9 +73,13 @@ namespace P_NutriTrack_Patricny_Reis.Services
             //Supprime l'aliment si il existe sinon rien
             if (aliment != null)
                 _data.Aliments.Remove(aliment);
+
+            await SaveData();
+
+
         }
 
-        public void updateAliment(Aliment alimentUpdated)
+        public async Task updateAliment(Aliment alimentUpdated)
         {
             // Cherche l'aliment correspondant
             var aliment = _data.Aliments.FirstOrDefault(a => a.AlimentId == alimentUpdated.AlimentId);
@@ -70,6 +96,9 @@ namespace P_NutriTrack_Patricny_Reis.Services
                 aliment.Vitamines = alimentUpdated.Vitamines;
                 aliment.Mineraux = alimentUpdated.Mineraux;
             }
+
+            await SaveData();
+
         }
     }
 
