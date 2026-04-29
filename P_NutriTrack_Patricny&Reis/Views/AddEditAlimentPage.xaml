@@ -2,57 +2,201 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="P_NutriTrack_Patricny_Reis.Views.AddEditAlimentPage"
-             Title="FoodTrack">
+             Title="FoodTrack"
+             BackgroundColor="{StaticResource CouleurFond}">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+    <Grid RowDefinitions="Auto, *, Auto" Padding="20,15">
 
-            <!-- titre dynamique permet de : ajouter ou modifier -->
+        <!-- enTête -->
+        <VerticalStackLayout Grid.Row="0" Spacing="3" Margin="0,5,0,20">
+            <Label Text="FoodTrack"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
             <Label x:Name="TitreLabel"
                    Text="Ajouter un aliment"
-                   FontSize="24"
-                   FontAttributes="Bold"/>
-
-            <!-- nom -->
-            <Label Text="Nom"/>
-            <Entry x:Name="NomEntry"
-                   Placeholder="Ex. tomate"/>
-            <!-- Calories -->
-            <Label Text="Calories"/>
-            <Entry x:Name="CaloriesEntry"
-                   Placeholder="0"
-                   Keyboard="Numeric"/>
-
-            <!-- protéines -->
-            <Label Text="Protéines (g)"/>
-            <Entry x:Name="ProteinesEntry"
-                   Placeholder="0"
-                   Keyboard="Numeric"/>
-
-            <!-- glucides -->
-            <Label Text="Glucides (g)"/>
-            <Entry x:Name="GlucidesEntry"
-                   Placeholder="0"
-                   Keyboard="Numeric"/>
-
-            <!-- Lipides -->
-            <Label Text="Lipides (g)"/>
-            <Entry x:Name="LipidesEntry"
-                   Placeholder="0"
-                   Keyboard="Numeric"/>
-
-            <!-- fibres -->
-            <Label Text="Fibres (g)"/>
-            <Entry x:Name="FibresEntry"
-                   Placeholder="0"
-                   Keyboard="Numeric"/>
-
-            <!-- btn enregistrer -->
-            <Button Text="Enregistrer"
-                    Clicked="OnSaveClicked"
-                    Margin="0,20,0,0"/>
-
+                   FontSize="15"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
         </VerticalStackLayout>
-    </ScrollView>
+
+        <!-- formulaire -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="10">
+
+                <!-- Nom -->
+                <Label Text="Nom"
+                       FontSize="12"
+                       TextColor="White"
+                       Margin="10,0,0,0"/>
+                <Border Stroke="Transparent"
+                        BackgroundColor="{StaticResource CouleurCarte}"
+                        StrokeShape="RoundRectangle 25"
+                        HeightRequest="42"
+                        Padding="18,0">
+                    <Entry x:Name="NomEntry"
+                           Placeholder="Ex. tomate"
+                           BackgroundColor="Transparent"
+                           TextColor="{StaticResource CouleurTexte}"
+                           PlaceholderColor="#7A8FA3"
+                           FontAttributes="Bold"
+                           FontSize="14"
+                           VerticalOptions="Center"/>
+                </Border>
+
+                <!-- Macronutriments -->
+                <Label Text="Macronutriments"
+                       FontSize="12"
+                       TextColor="White"
+                       Margin="10,15,0,0"/>
+
+                <!-- calories -->
+                <Grid ColumnDefinitions="*, 110" Margin="10,3" ColumnSpacing="10">
+                    <Label Grid.Column="0"
+                           Text="calories"
+                           FontSize="14"
+                           TextColor="White"
+                           VerticalOptions="Center"/>
+                    <Border Grid.Column="1"
+                            Stroke="Transparent"
+                            BackgroundColor="{StaticResource CouleurCarte}"
+                            StrokeShape="RoundRectangle 20"
+                            HeightRequest="36"
+                            Padding="15,0">
+                        <Entry x:Name="CaloriesEntry"
+                               Placeholder="0"
+                               Keyboard="Numeric"
+                               BackgroundColor="Transparent"
+                               TextColor="{StaticResource CouleurTexte}"
+                               PlaceholderColor="#7A8FA3"
+                               FontAttributes="Bold"
+                               FontSize="14"
+                               HorizontalTextAlignment="Center"
+                               VerticalOptions="Center"/>
+                    </Border>
+                </Grid>
+
+                <!-- prot -->
+                <Grid ColumnDefinitions="*, 110" Margin="10,3" ColumnSpacing="10">
+                    <Label Grid.Column="0"
+                           Text="proteines"
+                           FontSize="14"
+                           TextColor="White"
+                           VerticalOptions="Center"/>
+                    <Border Grid.Column="1"
+                            Stroke="Transparent"
+                            BackgroundColor="{StaticResource CouleurCarte}"
+                            StrokeShape="RoundRectangle 20"
+                            HeightRequest="36"
+                            Padding="15,0">
+                        <Entry x:Name="ProteinesEntry"
+                               Placeholder="0"
+                               Keyboard="Numeric"
+                               BackgroundColor="Transparent"
+                               TextColor="{StaticResource CouleurTexte}"
+                               PlaceholderColor="#7A8FA3"
+                               FontAttributes="Bold"
+                               FontSize="14"
+                               HorizontalTextAlignment="Center"
+                               VerticalOptions="Center"/>
+                    </Border>
+                </Grid>
+
+                <!-- glucide -->
+                <Grid ColumnDefinitions="*, 110" Margin="10,3" ColumnSpacing="10">
+                    <Label Grid.Column="0"
+                           Text="glucides"
+                           FontSize="14"
+                           TextColor="White"
+                           VerticalOptions="Center"/>
+                    <Border Grid.Column="1"
+                            Stroke="Transparent"
+                            BackgroundColor="{StaticResource CouleurCarte}"
+                            StrokeShape="RoundRectangle 20"
+                            HeightRequest="36"
+                            Padding="15,0">
+                        <Entry x:Name="GlucidesEntry"
+                               Placeholder="0"
+                               Keyboard="Numeric"
+                               BackgroundColor="Transparent"
+                               TextColor="{StaticResource CouleurTexte}"
+                               PlaceholderColor="#7A8FA3"
+                               FontAttributes="Bold"
+                               FontSize="14"
+                               HorizontalTextAlignment="Center"
+                               VerticalOptions="Center"/>
+                    </Border>
+                </Grid>
+
+                <!-- lipide -->
+                <Grid ColumnDefinitions="*, 110" Margin="10,3" ColumnSpacing="10">
+                    <Label Grid.Column="0"
+                           Text="lipides"
+                           FontSize="14"
+                           TextColor="White"
+                           VerticalOptions="Center"/>
+                    <Border Grid.Column="1"
+                            Stroke="Transparent"
+                            BackgroundColor="{StaticResource CouleurCarte}"
+                            StrokeShape="RoundRectangle 20"
+                            HeightRequest="36"
+                            Padding="15,0">
+                        <Entry x:Name="LipidesEntry"
+                               Placeholder="0"
+                               Keyboard="Numeric"
+                               BackgroundColor="Transparent"
+                               TextColor="{StaticResource CouleurTexte}"
+                               PlaceholderColor="#7A8FA3"
+                               FontAttributes="Bold"
+                               FontSize="14"
+                               HorizontalTextAlignment="Center"
+                               VerticalOptions="Center"/>
+                    </Border>
+                </Grid>
+
+                <!-- fibres -->
+                <Grid ColumnDefinitions="*, 110" Margin="10,3" ColumnSpacing="10">
+                    <Label Grid.Column="0"
+                           Text="fibres"
+                           FontSize="14"
+                           TextColor="White"
+                           VerticalOptions="Center"/>
+                    <Border Grid.Column="1"
+                            Stroke="Transparent"
+                            BackgroundColor="{StaticResource CouleurCarte}"
+                            StrokeShape="RoundRectangle 20"
+                            HeightRequest="36"
+                            Padding="15,0">
+                        <Entry x:Name="FibresEntry"
+                               Placeholder="0"
+                               Keyboard="Numeric"
+                               BackgroundColor="Transparent"
+                               TextColor="{StaticResource CouleurTexte}"
+                               PlaceholderColor="#7A8FA3"
+                               FontAttributes="Bold"
+                               FontSize="14"
+                               HorizontalTextAlignment="Center"
+                               VerticalOptions="Center"/>
+                    </Border>
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- btn enregistrer foncé -->
+        <Button Grid.Row="2"
+                Text="Enregistrer"
+                BackgroundColor="#4A5A70"
+                TextColor="White"
+                FontSize="14"
+                FontAttributes="Bold"
+                CornerRadius="25"
+                HeightRequest="50"
+                Clicked="OnSaveClicked"
+                Margin="40,20,40,5"/>
+
+    </Grid>
 
 </ContentPage>

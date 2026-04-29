@@ -1,6 +1,30 @@
 using P_NutriTrack_Patricny_Reis.DataModels;
 using P_NutriTrack_Patricny_Reis.Services;
 namespace P_NutriTrack_Patricny_Reis.Views;
+
+/******************************************************************************
+** PROGRAMME  *.cs                                                           **
+**                                                                           **
+** Lieu      : ETML - section informatique                                   **
+** Auteur    : Camille Rais                                                  **
+** Date      : 01.04.2026                                                    **
+**                                                                           **
+** Modifications                                                             **
+**   Auteur  :                                                               **
+**   Version :                                                               **
+**   Date    :                                                               **
+**   Raisons :                                                               **
+**                                                                           **
+**                                                                           **
+******************************************************************************/
+
+/******************************************************************************
+** DESCRIPTION                                                               **
+**                                                                           **     
+**                                                                           **
+**                                                                           **
+******************************************************************************/
+
 public partial class AlimentListPage : ContentPage
 {
     private DataService dataService;
@@ -28,9 +52,8 @@ public partial class AlimentListPage : ContentPage
     }
     private async void OnAddClicked(object sender, EventArgs eventArgs)
     {
-        // affiche juste un message pour l instant
-        // connecter à AddEditAlimentPage quand la page sera la
-        await DisplayAlert("Info", "Page d'ajout à venir", "OK");
+        // ouvre la page d ajout en passant la catégorie actuelle
+        await Navigation.PushAsync(new AddEditAlimentPage(categorie));
     }
 
     // bouton modifier sur une carte aliment
@@ -50,10 +73,11 @@ public partial class AlimentListPage : ContentPage
         Button bouton = (Button)sender;
         Aliment alimentASupprimer = (Aliment)bouton.CommandParameter;
 
-        // demande confirmation
+        // demande confirmation pour supprimer ou non
+        string message = $"Supprimer {alimentASupprimer.Name} ?";
         bool confirmation = await DisplayAlert(
             "Supprimer",
-            $"Supprimer {alimentASupprimer.Name} ?",
+            message,
             "Oui", "Non");
 
         if (!confirmation)

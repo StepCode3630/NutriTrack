@@ -2,65 +2,82 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="P_NutriTrack_Patricny_Reis.Views.AlimentListPage"
-             Title="FoodTrack">
+             Title="FoodTrack"
+            BackgroundColor="{StaticResource CouleurFond}">
 
-    <Grid RowDefinitions="Auto, Auto, *, Auto" Padding="20" RowSpacing="15">
+    <Grid RowDefinitions="Auto, Auto, *, Auto" Padding="20" RowSpacing="12">
+        <!-- couleur du fond pour les pages -->
 
-        <!-- Titre FoodTrack -->
+            <!-- titre -->
         <Label Grid.Row="0"
                Text="FoodTrack"
-               FontSize="24"
+               FontSize="22"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"
+               Margin="0,15,0,0"/>
+
+        <!-- nom catégorie -->
+        <Label Grid.Row="1"
+               x:Name="TitreLabel"
+               Text="Catégorie"
+               FontSize="16"
                FontAttributes="Bold"
                TextColor="White"
                HorizontalOptions="Center"/>
 
-        <!-- Nom de la catégorie -->
-        <Label Grid.Row="1"
-               x:Name="TitreLabel"
-               Text="Aliments"
-               FontSize="20"
-               TextColor="White"
-               HorizontalOptions="Center"/>
-
-        <!-- Liste des aliments -->
+        <!-- liste aliments -->
         <CollectionView Grid.Row="2"
                         x:Name="AlimentListView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <!-- carte aliment -->
                     <Border Stroke="Transparent"
                             BackgroundColor="{StaticResource CouleurCarte}"
-                            Margin="0,5"
-                            Padding="15"
-                            StrokeShape="RoundRectangle 20">
-                        <Grid ColumnDefinitions="*, Auto, Auto" ColumnSpacing="10">
+                            Margin="0,4"
+                            Padding="12"
+                            StrokeShape="RoundRectangle 15">
+                        <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="10">
 
-                            <!-- infos aliment -->
-                            <VerticalStackLayout Grid.Column="0">
+                            <!-- icone -->
+                            <Label Grid.Column="0"
+                                   Text=""
+                                   FontSize="24"
+                                   VerticalOptions="Center"/>
+
+                            <!-- nom et calories -->
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
                                 <Label Text="{Binding Name}"
-                                       FontSize="16"
+                                       FontSize="14"
                                        FontAttributes="Bold"
                                        TextColor="{StaticResource CouleurTexte}"/>
-                                <Label Text="{Binding Calories, StringFormat='Calories : {0} Kcal'}"
-                                       FontSize="12"
-                                       TextColor="{StaticResource CouleurTexte}"/>
+                                <Label Text="{Binding Calories, StringFormat='Calorie: {0} Kcal'}"
+                                       FontSize="11"
+                                       TextColor="{StaticResource CouleurTexteSecondaire}"/>
                             </VerticalStackLayout>
 
-                            <!-- btn Modifier -->
-                            <Button Grid.Column="1"
+                            <!-- bouton modifier -->
+                            <Button Grid.Column="2"
                                     Text="✏"
+                                    FontSize="14"
                                     BackgroundColor="Transparent"
                                     TextColor="{StaticResource CouleurTexte}"
                                     Clicked="OnEditClicked"
-                                    CommandParameter="{Binding .}"/>
+                                    CommandParameter="{Binding .}"
+                                    WidthRequest="35"
+                                    HeightRequest="35"
+                                    Padding="0"/>
 
-                            <!-- Bouton Supprimer -->
-                            <Button Grid.Column="2"
+                            <!-- btn supprimer -->
+                            <Button Grid.Column="3"
                                     Text="🗑"
+                                    FontSize="14"
                                     BackgroundColor="Transparent"
                                     TextColor="{StaticResource CouleurTexte}"
                                     Clicked="OnDeleteClicked"
-                                    CommandParameter="{Binding .}"/>
+                                    CommandParameter="{Binding .}"
+                                    WidthRequest="35"
+                                    HeightRequest="35"
+                                    Padding="0"/>
 
                         </Grid>
                     </Border>
@@ -68,12 +85,15 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- Bouton ajouter en bas -->
+        <!-- btn ajouter -->
         <Button Grid.Row="3"
                 Text="+ Ajouter un aliment"
-                BackgroundColor="{StaticResource CouleurBouton}"
-                TextColor="White"
+                BackgroundColor="{StaticResource CouleurCarte}"
+                TextColor="{StaticResource CouleurTexte}"
+                FontSize="14"
+                FontAttributes="Bold"
                 CornerRadius="20"
+                HeightRequest="48"
                 Clicked="OnAddClicked"/>
 
     </Grid>

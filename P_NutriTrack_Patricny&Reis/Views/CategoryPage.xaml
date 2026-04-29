@@ -1,38 +1,55 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="P_NutriTrack_Patricny_Reis.Views.CategoryPage"
-             Title="FoodTrack">
+             Title="FoodTrack"
+             BackgroundColor="{StaticResource CouleurFond}">
 
-    <VerticalStackLayout Padding="20" Spacing="20">
+    <VerticalStackLayout Padding="20" Spacing="15">
 
-        <!-- titre -->
+        <!-- couleur du fond pour les pages -->
+
+
+            <!-- titre principal -->
         <Label Text="FoodTrack"
-               FontSize="28"
+               FontSize="22"
                FontAttributes="Bold"
                TextColor="White"
-               HorizontalOptions="Center"/>
+               HorizontalOptions="Center"
+               Margin="0,15,0,5"/>
 
-        <!-- sous-titre -->
-        <Label Text="Catégories"
-               FontSize="18"
-               TextColor="White"
-               HorizontalOptions="Center"/>
+        <!-- sous-titre Category list avec flèche -->
+        <Border Stroke="Transparent"
+                BackgroundColor="{StaticResource CouleurCarte}"
+                Padding="15,6"
+                StrokeShape="RoundRectangle 12"
+                HorizontalOptions="Center">
+            <HorizontalStackLayout Spacing="8">
+                <Label Text="Category list"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource CouleurTexte}"/>
+                <Label Text="↓"
+                       FontSize="14"
+                       TextColor="{StaticResource CouleurTexte}"/>
+            </HorizontalStackLayout>
+        </Border>
 
-        <!-- liste catégories dans des carte -->
+        <!-- liste des catégories -->
         <CollectionView x:Name="CategoryListView"
                         SelectionMode="Single"
                         SelectionChanged="OnCategorySelected">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <!-- carte cliquable par catégorie -->
+                    <!-- carte catégorie -->
                     <Border Stroke="Transparent"
                             BackgroundColor="{StaticResource CouleurCarte}"
-                            Margin="0,5"
-                            Padding="15"
-                            StrokeShape="RoundRectangle 20">
+                            Margin="0,4"
+                            Padding="20,12"
+                            StrokeShape="RoundRectangle 15">
                         <Label Text="{Binding Name}"
-                               FontSize="16"
+                               FontSize="15"
                                FontAttributes="Bold"
                                TextColor="{StaticResource CouleurTexte}"
                                HorizontalOptions="Center"/>
