@@ -28,10 +28,8 @@ public partial class CategoryPage : ContentPage
         Category categorieSelectionnee = (Category)eventArgs.CurrentSelection.FirstOrDefault();
         if (categorieSelectionnee == null)
             return;
-
         // déselectionne pour pouvoir recliquer dessus qund on revient dessus
         CategoryListView.SelectedItem = null;
-
         // ouvre AlimentListPage en lui donnant la catégorie
         await Navigation.PushAsync(new AlimentListPage(categorieSelectionnee));
     }
