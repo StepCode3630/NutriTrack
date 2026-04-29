@@ -2,6 +2,31 @@
 using P_NutriTrack_Patricny_Reis.DataModels;
 using P_NutriTrack_Patricny_Reis.Services;
 // adresse de la classe dans le projet
+
+/******************************************************************************
+** PROGRAMME  *.cs                                                           **
+**                                                                           **
+** Lieu      : ETML - section informatique                                   **
+** Auteur    : Camille Rais                                                  **
+** Date      : 01.04.2026                                                    **
+**                                                                           **
+** Modifications                                                             **
+**   Auteur  :                                                               **
+**   Version :                                                               **
+**   Date    :                                                               **
+**   Raisons :                                                               **
+**                                                                           **
+**                                                                           **
+******************************************************************************/
+
+/******************************************************************************
+** DESCRIPTION                                                               **
+**                                                                           **     
+**                                                                           **
+**                                                                           **
+******************************************************************************/
+
+
 namespace P_NutriTrack_Patricny_Reis.Views;
 public partial class CategoryPage : ContentPage
 {
