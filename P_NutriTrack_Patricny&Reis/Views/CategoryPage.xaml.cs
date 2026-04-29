@@ -1,4 +1,4 @@
-// using permet d'utiliser des classes définies ailleurs dans le projet
+ï»¿// using permet d'utiliser des classes dÃ©finies ailleurs dans le projet
 using P_NutriTrack_Patricny_Reis.DataModels;
 using P_NutriTrack_Patricny_Reis.Services;
 // adresse de la classe dans le projet
@@ -40,22 +40,35 @@ public partial class CategoryPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        // charge les données depuis le JSON
+        // charge les donnÃ©es depuis le JSON
         await dataService.LoadData();
-        // récup la liste des catégories
+        // rÃ©cup la liste des catÃ©gories
         categories = dataService.GetCategories();
         CategoryListView.ItemsSource = categories;
     }
-    // appel quand on clique sur une catégorie dans liste
+    // appel quand on clique sur une catÃ©gorie dans liste
     private async void OnCategorySelected(object sender, SelectionChangedEventArgs eventArgs)
     {
-        // récup la catégorie cliquée
+        // rÃ©cup la catÃ©gorie cliquÃ©e
         Category categorieSelectionnee = (Category)eventArgs.CurrentSelection.FirstOrDefault();
         if (categorieSelectionnee == null)
             return;
-        // déselectionne pour pouvoir recliquer dessus qund on revient dessus
+        // dÃ©selectionne pour pouvoir recliquer dessus qund on revient dessus
         CategoryListView.SelectedItem = null;
-        // ouvre AlimentListPage en lui donnant la catégorie
+        // ouvre AlimentListPage en lui donnant la catÃ©gorie
         await Navigation.PushAsync(new AlimentListPage(categorieSelectionnee));
+    }
+
+    // affiche ou cache la liste quand on clique sur "Category list"
+    private void OnToggleListClicked(object sender, TappedEventArgs eventArgs)
+    {
+        // inverse la visibilitÃ© de la liste
+        CategoryListView.IsVisible = !CategoryListView.IsVisible;
+
+        // change la flÃ¨che selon l Ã©tat
+        if (CategoryListView.IsVisible)
+            FlecheLabel.Text = "â†‘";
+        else
+            FlecheLabel.Text = "â†“";
     }
 }

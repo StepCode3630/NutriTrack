@@ -2,20 +2,20 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="P_NutriTrack_Patricny_Reis.Views.AddEditAlimentPage"
-             Title="FoodTrack"
+             IconImageSource="logo_nutri_track.png"
+             Title="NutriTrack"
              BackgroundColor="{StaticResource CouleurFond}">
 
     <Grid RowDefinitions="Auto, *, Auto" Padding="20,15">
 
         <!-- enTête -->
         <VerticalStackLayout Grid.Row="0" Spacing="3" Margin="0,5,0,20">
-            <Label Text="FoodTrack"
+            <Label Text="Ajouter un aliment"
                    FontSize="22"
                    FontAttributes="Bold"
                    TextColor="White"
                    HorizontalOptions="Center"/>
             <Label x:Name="TitreLabel"
-                   Text="Ajouter un aliment"
                    FontSize="15"
                    FontAttributes="Bold"
                    TextColor="White"

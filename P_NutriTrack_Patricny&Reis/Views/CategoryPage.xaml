@@ -1,48 +1,58 @@
 <?xml version="1.0" encoding="utf-8" ?>
-
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="P_NutriTrack_Patricny_Reis.Views.CategoryPage"
-             Title="FoodTrack"
+             Title="NutriTrack"
              BackgroundColor="{StaticResource CouleurFond}">
 
     <VerticalStackLayout Padding="20" Spacing="15">
 
-        <!-- couleur du fond pour les pages -->
+        <!-- titre principal avec logo à gauche -->
+        <HorizontalStackLayout HorizontalOptions="Center" 
+                               Spacing="10" 
+                               Margin="0,15,0,5">
+            <!-- logo de l app -->
+            <Image Source="logo_nutri_track.png"
+                   HeightRequest="35"
+                   WidthRequest="35"
+                   VerticalOptions="Center"/>
+            <!-- titre -->
+            <Label Text="MENU"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   VerticalOptions="Center"/>
+        </HorizontalStackLayout>
 
-
-            <!-- titre principal -->
-        <Label Text="FoodTrack"
-               FontSize="22"
-               FontAttributes="Bold"
-               TextColor="White"
-               HorizontalOptions="Center"
-               Margin="0,15,0,5"/>
-
-        <!-- sous-titre Category list avec flèche -->
-        <Border Stroke="Transparent"
+        <!-- sous-titre déroulant clic pour afficher/cacher la liste -->
+        <Border x:Name="ToggleBorder"
+                Stroke="Transparent"
                 BackgroundColor="{StaticResource CouleurCarte}"
                 Padding="15,6"
                 StrokeShape="RoundRectangle 12"
                 HorizontalOptions="Center">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnToggleListClicked"/>
+            </Border.GestureRecognizers>
             <HorizontalStackLayout Spacing="8">
                 <Label Text="Category list"
                        FontSize="14"
                        FontAttributes="Bold"
                        TextColor="{StaticResource CouleurTexte}"/>
-                <Label Text="↓"
+                <Label x:Name="FlecheLabel"
+                       Text="↓"
                        FontSize="14"
                        TextColor="{StaticResource CouleurTexte}"/>
             </HorizontalStackLayout>
         </Border>
 
-        <!-- liste des catégories -->
+        <!-- liste deroulante catégories qui est cachée au démarrage -->
         <CollectionView x:Name="CategoryListView"
                         SelectionMode="Single"
-                        SelectionChanged="OnCategorySelected">
+                        SelectionChanged="OnCategorySelected"
+                        IsVisible="False">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <!-- carte catégorie -->
                     <Border Stroke="Transparent"
                             BackgroundColor="{StaticResource CouleurCarte}"
                             Margin="0,4"
