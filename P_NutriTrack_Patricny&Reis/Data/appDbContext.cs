@@ -15,5 +15,11 @@ namespace P_NutriTrack_Patricny_Reis.Data
         {
             _databasePath = databasePath;
         }
+        public DbSet<App> App { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite($"Data Source={_databasePath}");
+        }
     }
 }
