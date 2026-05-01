@@ -1,8 +1,4 @@
-﻿// using permet d'utiliser des classes définies ailleurs dans le projet
-using P_NutriTrack_Patricny_Reis.DataModels;
-using P_NutriTrack_Patricny_Reis.Services;
-// adresse de la classe dans le projet
-
+﻿
 /******************************************************************************
 ** PROGRAMME  *.cs                                                           **
 **                                                                           **
@@ -25,50 +21,68 @@ using P_NutriTrack_Patricny_Reis.Services;
 **                                                                           **
 **                                                                           **
 ******************************************************************************/
-
+using P_NutriTrack_Patricny_Reis.DataModels;
+using P_NutriTrack_Patricny_Reis.Services;
 
 namespace P_NutriTrack_Patricny_Reis.Views;
+
 public partial class CategoryPage : ContentPage
 {
     private DataService dataService;
     private List<Category> categories = null!;
+
     public CategoryPage()
     {
         InitializeComponent();
         dataService = new DataService();
     }
+
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        // charge les données depuis le JSON
+
+        // charge données depuis JSON
         await dataService.LoadData();
-        // récup la liste des catégories
         categories = dataService.GetCategories();
+
+        // Liste déroulante avec grille partage même source
         CategoryListView.ItemsSource = categories;
+        CategoryGridView.ItemsSource = categories;
     }
-    // appel quand on clique sur une catégorie dans liste
+
+    // clique  sur une catégorie depuis liste ou depuis grille
     private async void OnCategorySelected(object sender, SelectionChangedEventArgs eventArgs)
     {
-        // récup la catégorie cliquée
-        Category categorieSelectionnee = (Category)eventArgs.CurrentSelection.FirstOrDefault();
-        if (categorieSelectionnee == null)
-            return;
-        // déselectionne pour pouvoir recliquer dessus qund on revient dessus
-        CategoryListView.SelectedItem = null;
-        // ouvre AlimentListPage en lui donnant la catégorie
+        Category? categorieSelectionnee = (Category?)eventArgs.CurrentSelection.FirstOrDefault();
+        if (categorieSelectionnee == null) return;
+
+        // se deselectionne pour qu on puisse cliquer dessus encore après
+        CollectionView source = (CollectionView)sender;
+        source.SelectedItem = null;
+
+        // si liste déroulante ouverte alors se ferme
+        if (CategoryListView.IsVisible)
+        {
+            CategoryListView.IsVisible = false;
+            FlecheLabel.Text = "↓";
+        }
+
+        // Ouvre la page des aliments
         await Navigation.PushAsync(new AlimentListPage(categorieSelectionnee));
     }
 
-    // affiche ou cache la liste quand on clique sur "Category list"
+    // Clic sur Category list cela replie ou déplie la liste
     private void OnToggleListClicked(object sender, TappedEventArgs eventArgs)
     {
-        // inverse la visibilité de la liste
         CategoryListView.IsVisible = !CategoryListView.IsVisible;
+        FlecheLabel.Text = CategoryListView.IsVisible ? "↑" : "↓";
+    }
 
-        // change la flèche selon l état
-        if (CategoryListView.IsVisible)
-            FlecheLabel.Text = "↑";
-        else
-            FlecheLabel.Text = "↓";
+    // Clic sur la carte "Consommation journalière" (action à définir plus tard)
+    private async void OnConsommationClicked(object sender, TappedEventArgs eventArgs)
+    {
+        await DisplayAlert("Consommation journalière",
+                           "Cette fonctionnalité sera bientôt disponible !",
+                           "OK");
     }
 }

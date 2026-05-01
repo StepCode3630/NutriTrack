@@ -5,69 +5,113 @@
              Title="NutriTrack"
              BackgroundColor="{StaticResource CouleurFond}">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <ScrollView>
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, *" Padding="20" RowSpacing="15">
 
-        <!-- titre principal avec logo à gauche -->
-        <HorizontalStackLayout HorizontalOptions="Center" 
-                               Spacing="10" 
-                               Margin="0,15,0,5">
-            <!-- logo de l app -->
-            <Image Source="logo_nutri_track.png"
-                   HeightRequest="35"
-                   WidthRequest="35"
-                   VerticalOptions="Center"/>
             <!-- titre -->
-            <Label Text="MENU"
-                   FontSize="22"
+            <Label Grid.Row="0"
+                   Text="NutriTrack"
+                   FontSize="28"
                    FontAttributes="Bold"
                    TextColor="White"
-                   VerticalOptions="Center"/>
-        </HorizontalStackLayout>
+                   HorizontalOptions="Center"
+                   Margin="0,15,0,10"/>
 
-        <!-- sous-titre déroulant clic pour afficher/cacher la liste -->
-        <Border x:Name="ToggleBorder"
-                Stroke="Transparent"
-                BackgroundColor="{StaticResource CouleurCarte}"
-                Padding="15,6"
-                StrokeShape="RoundRectangle 12"
-                HorizontalOptions="Center">
-            <Border.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnToggleListClicked"/>
-            </Border.GestureRecognizers>
-            <HorizontalStackLayout Spacing="8">
-                <Label Text="Category list"
-                       FontSize="14"
+            <!-- btn qui replie et déplie la liste -->
+            <Border Grid.Row="1"
+                    BackgroundColor="{StaticResource CouleurCarte}"
+                    StrokeShape="RoundRectangle 15"
+                    Stroke="Transparent"
+                    Padding="15,10">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnToggleListClicked"/>
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0"
+                           Text="Category list"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource CouleurTexte}"
+                           VerticalOptions="Center"/>
+                    <Label Grid.Column="1"
+                           x:Name="FlecheLabel"
+                           Text="↓"
+                           FontSize="16"
+                           TextColor="{StaticResource CouleurTexte}"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- liste déroulante cachée par défaut -->
+            <CollectionView Grid.Row="2"
+                            x:Name="CategoryListView"
+                            IsVisible="False"
+                            SelectionMode="Single"
+                            SelectionChanged="OnCategorySelected"
+                            HeightRequest="200">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{StaticResource CouleurCarte}"
+                                StrokeShape="RoundRectangle 10"
+                                Stroke="Transparent"
+                                Margin="0,3"
+                                Padding="12,8">
+                            <Label Text="{Binding Name}"
+                                   FontSize="14"
+                                   TextColor="{StaticResource CouleurTexte}"
+                                   HorizontalOptions="Center"/>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Carte consommation journalière -->
+            <Border Grid.Row="3"
+                    BackgroundColor="{StaticResource CouleurCarte}"
+                    StrokeShape="RoundRectangle 20"
+                    Stroke="Transparent"
+                    Padding="20"
+                    HeightRequest="100">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnConsommationClicked"/>
+                </Border.GestureRecognizers>
+                <Label Text="Consommation journalière"
+                       FontSize="18"
                        FontAttributes="Bold"
-                       TextColor="{StaticResource CouleurTexte}"/>
-                <Label x:Name="FlecheLabel"
-                       Text="↓"
-                       FontSize="14"
-                       TextColor="{StaticResource CouleurTexte}"/>
-            </HorizontalStackLayout>
-        </Border>
+                       TextColor="{StaticResource CouleurTexte}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+            </Border>
 
-        <!-- liste deroulante catégories qui est cachée au démarrage -->
-        <CollectionView x:Name="CategoryListView"
-                        SelectionMode="Single"
-                        SelectionChanged="OnCategorySelected"
-                        IsVisible="False">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border Stroke="Transparent"
-                            BackgroundColor="{StaticResource CouleurCarte}"
-                            Margin="0,4"
-                            Padding="20,12"
-                            StrokeShape="RoundRectangle 15">
-                        <Label Text="{Binding Name}"
-                               FontSize="15"
-                               FontAttributes="Bold"
-                               TextColor="{StaticResource CouleurTexte}"
-                               HorizontalOptions="Center"/>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            <!-- grille des catégories afficher sur page d acceuil : en 2 colonne-->
+            <CollectionView Grid.Row="4"
+                            x:Name="CategoryGridView"
+                            SelectionMode="Single"
+                            SelectionChanged="OnCategorySelected">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="2"
+                                     HorizontalItemSpacing="12"
+                                     VerticalItemSpacing="12"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{StaticResource CouleurCarte}"
+                                StrokeShape="RoundRectangle 20"
+                                Stroke="Transparent"
+                                HeightRequest="120">
+                            <Label Text="{Binding Name}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource CouleurTexte}"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   HorizontalTextAlignment="Center"/>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-    </VerticalStackLayout>
-
+        </Grid>
+    </ScrollView>
 </ContentPage>
