@@ -81,8 +81,6 @@ public partial class CategoryPage : ContentPage
     // Clic sur la carte "Consommation journalière" (action à définir plus tard)
     private async void OnConsommationClicked(object sender, TappedEventArgs eventArgs)
     {
-        await DisplayAlert("Consommation journalière",
-                           "Cette fonctionnalité sera bientôt disponible !",
-                           "OK");
+        await Navigation.PushAsync(new ConsommationJourPage());
     }
 }

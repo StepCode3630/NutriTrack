@@ -29,6 +29,17 @@ namespace P_NutriTrack_Patricny_Reis.Services
             var finalJson = await File.ReadAllTextAsync(path);
 
             _data = JsonSerializer.Deserialize<NutriData>(finalJson);
+
+            if (_data != null)
+            {
+                _data.Categories ??= new List<Category>();
+                _data.Aliments ??= new List<Aliment>();
+                _data.Consommations ??= new List<Consommation>();
+                _data.Mineraux ??= new List<Minerau>();
+                _data.Vitamines ??= new List<Vitamine>();
+                _data.AlimentMineraux ??= new List<AlimentMinerau>();
+                _data.AlimentVitamines ??= new List<AlimentVitamine>();
+            }
         }
 
         private async Task SaveData()
@@ -99,6 +110,57 @@ namespace P_NutriTrack_Patricny_Reis.Services
 
             await SaveData();
 
+        }
+
+        // Bilan CONSO QUOTIDIENNE DE L'UTILISATEUR
+
+        // Recup les conso du jour que aujourd'hui pour le moment
+        public List<Consommation> GetConsommationsDuJour()
+        {
+            DateTime aujourdhui = DateTime.Today;
+            return _data.Consommation_journaliere
+                .Where(c => c.DateConsommation.Date == aujourdhui)
+                .ToList();
+        }
+
+        // add une nouvelle consommation
+        public void addConso(Consommation nouvelleConso)
+        {
+            // Calcul du nouvel ID
+            if (_data..Count == 0)
+                nouvelleConso.ConsommationId = 1;
+            else
+                nouvelleConso.ConsommationId = _data.Consommations.Max(c => c.ConsommationId) + 1;
+
+            _data.Consommations.Add(nouvelleConso);
+        }
+
+        // maj une conso existante on peut modifier la quantité
+        public void updateConso(Consommation consoModifiee)
+        {
+            Consommation? existante = _data.Consommations
+                .FirstOrDefault(c => c.ConsommationId == consoModifiee.ConsommationId);
+
+            if (existante != null)
+            {
+                existante.Quantite_g = consoModifiee.Quantite_g;
+            }
+        }
+
+        // delete une consommation
+        public void removeConso(int consommationId)
+        {
+            Consommation? aSupprimer = _data.Consommations
+                .FirstOrDefault(c => c.ConsommationId == consommationId);
+
+            if (aSupprimer != null)
+                _data.Consommations.Remove(aSupprimer);
+        }
+
+        // Récup un aliment par son ID utile pour afficher les détails dans la liste de conso
+        public Aliment? GetAlimentById(int alimentId)
+        {
+            return _data.Aliments.FirstOrDefault(a => a.AlimentId == alimentId);
         }
     }
 
