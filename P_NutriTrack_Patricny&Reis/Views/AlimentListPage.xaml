@@ -7,9 +7,8 @@
 
     <Grid RowDefinitions="Auto, Auto, *, Auto" Padding="20" RowSpacing="12">
 
-        <!-- titre -->
-        <Label Grid.Row="0"
-               x:Name="TitreLabel"
+            <!-- titre fixe -->
+            <Label Grid.Row="0"
                Text="Catégorie"
                FontSize="22"
                FontAttributes="Bold"
@@ -17,8 +16,8 @@
                HorizontalOptions="Center"
                Margin="0,15,0,0"/>
 
-        <!-- nom catégorie -->
-        <Label Grid.Row="1"
+            <!-- nom de la catégorie qui est selectionnée -->
+            <Label Grid.Row="1"
                x:Name="TitreLabel"
                Text="Catégorie"
                FontSize="16"
