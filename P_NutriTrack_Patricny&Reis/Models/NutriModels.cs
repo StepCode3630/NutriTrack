@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using SQLitePCL;
+using Microsoft.EntityFrameworkCore;
+using System.Runtime.InteropServices;
 
 namespace P_NutriTrack_Patricny_Reis.DataModels
 {
     // ---------------- CATEGORY ----------------
     public class Category
     {
+        [Key]
         public int CategoryId { get; set; }
         public string Name { get; set; }
     }
@@ -16,6 +21,7 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
     // ---------------- ALIMENT ----------------
     public class Aliment
     {
+        [Key]
         public int AlimentId { get; set; }
         public string Name { get; set; }
 
@@ -36,6 +42,7 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
     // ---------------- MINERAU ----------------
     public class Minerau
     {
+        [Key]
         public int MinerauxId { get; set; }
         public string Name { get; set; }
 
@@ -45,6 +52,7 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
     // ---------------- VITAMINE ----------------
     public class Vitamine
     {
+        [Key]
         public int VitaminesId { get; set; }
         public string Name { get; set; }
 
@@ -54,6 +62,7 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
     // ---------------- CONSOMMATION ----------------
     public class Consommation
     {
+        [Key]
         public int ConsommationId { get; set; }
         public double Quantite_g { get; set; }
         public DateTime DateConsommation { get; set; }
