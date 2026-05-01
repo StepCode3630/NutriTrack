@@ -24,6 +24,16 @@
       "duration": 40,
       "status": "DONE",
       "author": "StepCode3630"
+    },
+    {
+      "id": "5d5d0391-db29-467f-a70d-c9a8420ea034",
+      "type": "commitless",
+      "name": "chore:lecture à propose de Sqlite",
+      "description": "",
+      "date": "2026-05-01T13:57:00.000Z",
+      "duration": 20,
+      "status": "DONE",
+      "author": "StepCode3630"
     }
   ]
 }
