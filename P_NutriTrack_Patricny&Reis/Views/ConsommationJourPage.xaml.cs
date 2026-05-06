@@ -22,6 +22,14 @@ namespace P_NutriTrack_Patricny_Reis.Views;
 
 public partial class ConsommationJourPage : ContentPage
 {
+
+    // retour à la page d'accueil
+    private async void OnHomeClicked(object sender, EventArgs eventArgs)
+    {
+        await Navigation.PopToRootAsync();
+    }
+
+
     private DataService dataService;
     // liste affichée à l'écran avec les infos enrichies
     private List<ConsoAffichage> consoAffichees = null!;

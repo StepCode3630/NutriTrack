@@ -5,6 +5,14 @@
              Title="FoodTrack"
              BackgroundColor="{StaticResource CouleurFond}">
 
+    <!-- Pour le logo home qui a ete mis en svg dans les ressources -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="home.svg"
+                     Clicked="OnHomeClicked"
+                     Order="Primary"
+                     Priority="0" />
+    </ContentPage.ToolbarItems>
+
     <Grid RowDefinitions="Auto, *, Auto" Padding="20,15">
 
         <!-- en tête -->

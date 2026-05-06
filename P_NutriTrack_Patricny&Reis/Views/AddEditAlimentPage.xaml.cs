@@ -38,6 +38,12 @@ public partial class AddEditAlimentPage : ContentPage
         TitreLabel.Text = "Ajouter un aliment";
     }
 
+    // retour à la page d'accueil
+    private async void OnHomeClicked(object sender, EventArgs eventArgs)
+    {
+        await Navigation.PopToRootAsync();
+    }
+
     // constructeur pour modification d'un aliment existant
     public AddEditAlimentPage(Category categorieRecue, Aliment alimentRecu)
     {

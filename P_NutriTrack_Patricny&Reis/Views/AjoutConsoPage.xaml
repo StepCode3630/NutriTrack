@@ -5,6 +5,14 @@
              Title="NutriTrack"
              BackgroundColor="{StaticResource CouleurFond}">
 
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="home.svg"
+                     Clicked="OnHomeClicked"
+                     Order="Primary"
+                     Priority="0" />
+    </ContentPage.ToolbarItems>
+
     <Grid RowDefinitions="Auto, Auto, Auto, Auto, *, Auto, Auto"
           Padding="20" RowSpacing="15">
 

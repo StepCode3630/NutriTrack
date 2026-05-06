@@ -22,6 +22,13 @@ namespace P_NutriTrack_Patricny_Reis.Views;
 
 public partial class AjoutConsoPage : ContentPage
 {
+
+    // retour à la page d'accueil
+    private async void OnHomeClicked(object sender, EventArgs eventArgs)
+    {
+        await Navigation.PopToRootAsync();
+    }
+
     private DataService dataService;
     private Aliment alimentChoisi;
 

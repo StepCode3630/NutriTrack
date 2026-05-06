@@ -4,6 +4,7 @@
              x:Class="P_NutriTrack_Patricny_Reis.Views.CategoryPage"
              Title="NutriTrack"
              BackgroundColor="{StaticResource CouleurFond}">
+    
 
     <ScrollView>
         <Grid RowDefinitions="Auto, Auto, Auto, Auto, *" Padding="20" RowSpacing="15">
