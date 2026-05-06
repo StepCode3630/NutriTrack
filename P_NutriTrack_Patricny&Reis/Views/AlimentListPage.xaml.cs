@@ -44,11 +44,11 @@ public partial class AlimentListPage : ContentPage
     {
         base.OnAppearing();
         // charge les données
-        await dataService.LoadData();
+        await dataService.Init();
         // récup directement les aliments de cette catégorie
-        aliments = dataService.GetAlimentsById(categorie.CategoryId);
+        Task<List<Aliment>> aliments = dataService.GetAlimentsById(categorie.CategoryId);
         // afficher liste
-        AlimentListView.ItemsSource = aliments;
+         AlimentListView.ItemsSource = (System.Collections.IEnumerable)aliments;
     }
     private async void OnAddClicked(object sender, EventArgs eventArgs)
     {
@@ -87,8 +87,8 @@ public partial class AlimentListPage : ContentPage
         dataService.removeAliment(alimentASupprimer.AlimentId);
 
         // rafraîchit la liste
-        aliments = dataService.GetAlimentsById(categorie.CategoryId);
-        AlimentListView.ItemsSource = aliments;
+        Task<List<Aliment>> aliments = dataService.GetAlimentsById(categorie.CategoryId);
+        AlimentListView.ItemsSource = (System.Collections.IEnumerable)aliments;
     }
     // quand on clique sur un aliment de la liste
     private async void OnAlimentSelected(object sender, SelectionChangedEventArgs eventArgs)

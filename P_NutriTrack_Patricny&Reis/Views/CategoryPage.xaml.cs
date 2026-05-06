@@ -41,10 +41,10 @@ public partial class CategoryPage : ContentPage
     {
         base.OnAppearing();
         // charge les données depuis le JSON
-        await dataService.LoadData();
+        await dataService.Init();
         // récup la liste des catégories
-        categories = dataService.GetCategories();
-        CategoryListView.ItemsSource = categories;
+        Task<List<Category>> categories = dataService.GetCategories();
+        CategoryListView.ItemsSource = (System.Collections.IEnumerable)categories;
     }
     // appel quand on clique sur une catégorie dans liste
     private async void OnCategorySelected(object sender, SelectionChangedEventArgs eventArgs)
