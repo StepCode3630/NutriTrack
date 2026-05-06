@@ -4,22 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using P_NutriTrack_Patricny_Reis.DataModels;
 
 namespace P_NutriTrack_Patricny_Reis.Data
 {
     public class appDbContext : DbContext
     {
-        private string _databasePath;
+        public DbSet<Aliment> Aliments { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
-        public appDbContext(string databasePath)
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            _databasePath = databasePath;
-        }
-        public DbSet<App> App { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite($"Data Source={_databasePath}");
+            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "nutri.db");
+            options.UseSqlite($"Filename={dbPath}");
         }
     }
 }
