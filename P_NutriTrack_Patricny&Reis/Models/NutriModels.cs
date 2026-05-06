@@ -54,7 +54,6 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
     // ---------------- CONSOMMATION ----------------
     public class Consommation
     {
-        // Renommé : "AlimentId" comme dans le JSON (au lieu de AlimentFk)
         public int AlimentId { get; set; }
         public double Quantite_g { get; set; }
 
