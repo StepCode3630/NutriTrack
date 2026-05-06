@@ -48,12 +48,9 @@ public partial class AddEditAlimentPage : ContentPage
     public AddEditAlimentPage(Category categorieRecue, Aliment alimentRecu)
     {
         InitializeComponent();
-        categorie = categorieRecue;
-        dataService = new DataService();
-        alimentAModifier = alimentRecu;
-        TitreLabel.Text = "Modifier un aliment";
 
-        // pré-remplit le formulaire avec les valeurs actuelles
+
+        // pres-remplit le formulaire avec les valeurs de la bdd
         NomEntry.Text = alimentRecu.Name;
         CaloriesEntry.Text = alimentRecu.Calories.ToString();
         ProteinesEntry.Text = alimentRecu.Proteines_g.ToString();

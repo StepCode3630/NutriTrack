@@ -5,6 +5,15 @@
              Title="NutriTrack"
              BackgroundColor="{StaticResource CouleurFond}">
 
+    <!-- logo dans le header -->
+    <Shell.TitleView>
+        <Image Source="logo_nutri_track.png"
+           HeightRequest="35"
+           Aspect="AspectFit"
+           HorizontalOptions="Start"
+           VerticalOptions="Center"/>
+    </Shell.TitleView>
+
     <!-- Pour le logo home qui a ete mis en svg dans les ressources -->
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="home.svg"

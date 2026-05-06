@@ -6,6 +6,14 @@
              Title="NutriTrack"
              BackgroundColor="{StaticResource CouleurFond}">
 
+    <Shell.TitleView>
+        <Image Source="logo_nutri_track.png"
+           HeightRequest="35"
+           Aspect="AspectFit"
+           HorizontalOptions="Start"
+           VerticalOptions="Center"/>
+    </Shell.TitleView>
+
     <!-- Pour le logo home qui a ete mis en svg dans les ressources -->
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="home.svg"
@@ -45,7 +53,7 @@
                         HeightRequest="42"
                         Padding="18,0">
                     <Entry x:Name="NomEntry"
-                           Placeholder="Ex. tomate"
+                           Placeholder="Entrez un nom..."
                            BackgroundColor="Transparent"
                            TextColor="{StaticResource CouleurTexte}"
                            PlaceholderColor="#7A8FA3"
@@ -189,6 +197,46 @@
                                VerticalOptions="Center"/>
                     </Border>
                 </Grid>
+
+                <!-- zone de saisie de texte pour les vitamines -->
+                <Label Text="Vitamines (séparées par des virgules)"
+                   FontSize="12"
+                   TextColor="White"
+                   Margin="10,15,0,0"/>     
+                <Border Stroke="Transparent"
+                    BackgroundColor="{StaticResource CouleurCarte}"
+                    StrokeShape="RoundRectangle 25"
+                    HeightRequest="42"
+                    Padding="18,0">
+                <Entry x:Name="VitaminesEntry"
+                   Placeholder="Ex. B12, Vitamine C, A"
+                   BackgroundColor="Transparent"
+                   TextColor="{StaticResource CouleurTexte}"
+                   PlaceholderColor="#7A8FA3"
+                   FontAttributes="Bold"
+                   FontSize="14"
+                   VerticalOptions="Center"/>
+                </Border>
+
+                <!-- zone pour saisir les minéraux -->
+                <Label Text="Minéraux (séparés par des virgules)"
+                   FontSize="12"
+                   TextColor="White"
+                   Margin="10,10,0,0"/>
+                <Border Stroke="Transparent"
+                    BackgroundColor="{StaticResource CouleurCarte}"
+                    StrokeShape="RoundRectangle 25"
+                    HeightRequest="42"
+                    Padding="18,0">
+                <Entry x:Name="MinerauxEntry"
+                   Placeholder="Ex. Fer, Calcium, Magnésium"
+                   BackgroundColor="Transparent"
+                   TextColor="{StaticResource CouleurTexte}"
+                   PlaceholderColor="#7A8FA3"
+                   FontAttributes="Bold"
+                   FontSize="14"
+                   VerticalOptions="Center"/>
+                </Border>
 
             </VerticalStackLayout>
         </ScrollView>

@@ -4,7 +4,16 @@
              x:Class="P_NutriTrack_Patricny_Reis.Views.CategoryPage"
              Title="NutriTrack"
              BackgroundColor="{StaticResource CouleurFond}">
-    
+
+    <!-- logo dans le header -->
+    <Shell.TitleView>
+        <Image Source="logo_nutri_track.png"
+           HeightRequest="35"
+           Aspect="AspectFit"
+           HorizontalOptions="Start"
+           VerticalOptions="Center"/>
+    </Shell.TitleView>
+
 
     <ScrollView>
         <Grid RowDefinitions="Auto, Auto, Auto, Auto, *" Padding="20" RowSpacing="15">
@@ -68,7 +77,7 @@
 
             <!-- Carte consommation journalière -->
             <Border Grid.Row="3"
-                    BackgroundColor="{StaticResource CouleurCarte}"
+                    BackgroundColor="WhiteSmoke"
                     StrokeShape="RoundRectangle 20"
                     Stroke="Transparent"
                     Padding="20"
@@ -77,7 +86,7 @@
                     <TapGestureRecognizer Tapped="OnConsommationClicked"/>
                 </Border.GestureRecognizers>
                 <Label Text="Consommation journalière"
-                       FontSize="18"
+                       FontSize="26"
                        FontAttributes="Bold"
                        TextColor="{StaticResource CouleurTexte}"
                        HorizontalOptions="Center"
