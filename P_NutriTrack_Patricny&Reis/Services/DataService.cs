@@ -20,12 +20,12 @@ namespace P_NutriTrack_Patricny_Reis.Services
             await _db.Database.EnsureCreatedAsync();
         }
 
-        public List<Category> GetCategories()
+        public Task<List<Category>> GetCategories()
         {
             return _db.Categories.ToListAsync();
         }
 
-        public List<Aliment> GetAliments()
+        public Task<List<Aliment>> GetAliments()
         {
             return _db.Aliments.ToListAsync(); 
         }
@@ -68,6 +68,10 @@ namespace P_NutriTrack_Patricny_Reis.Services
                 await _db.SaveChangesAsync();
             }
 
+        }
+        public async Task<int> Count()
+        {
+            return await _db.Aliments.CountAsync();
         }
     }
 
