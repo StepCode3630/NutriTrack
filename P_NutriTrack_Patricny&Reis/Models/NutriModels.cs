@@ -62,7 +62,7 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
         [System.Text.Json.Serialization.JsonIgnore]
         public int ConsommationId { get; set; }
 
-        [System.Text.Json.Serialization.JsonIgnore]
+        //[System.Text.Json.Serialization.JsonIgnore]
         public DateTime DateConsommation { get; set; }
 
         [System.Text.Json.Serialization.JsonIgnore]
