@@ -67,17 +67,18 @@ public partial class AddEditAlimentPage : ContentPage
             return;
         }
         // charger les données
-        await dataService.LoadData();
-        List<Aliment> tousLesAliments = dataService.GetAliments();
+        await dataService.Init();
+        Task<List<Aliment>> tousLesAliments = dataService.GetAliments();
         if (alimentAModifier == null)
         {
             // pour quand on ajoute
             Aliment nouvelAliment = new Aliment();
+            int intCountAliment = tousLesAliments.Result.Count();
             // calculer new Id unique
-            if (tousLesAliments.Count == 0)
+            if (intCountAliment == 0)
                 nouvelAliment.AlimentId = 1;
             else
-                nouvelAliment.AlimentId = tousLesAliments.Max(aliment => aliment.AlimentId) + 1;
+                nouvelAliment.AlimentId = tousLesAliments.Result.Max(aliment => aliment.AlimentId) + 1;
             // remplir valeurs avec ce qui a été saisi
             nouvelAliment.Name = NomEntry.Text;
             nouvelAliment.Calories = ConvertirEnInt(CaloriesEntry.Text);

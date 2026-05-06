@@ -45,10 +45,10 @@ public partial class AlimentDetailPage : ContentPage
     {
         base.OnAppearing();
         // recharge données pour avoir les valeurs à jour
-        await dataService.LoadData();
+        await dataService.Init();
         // refind l aliment pour avoir la version maj
-        List<Aliment> tousLesAliments = dataService.GetAliments();
-        Aliment? alimentMaj = tousLesAliments.FirstOrDefault(a => a.AlimentId == aliment.AlimentId);
+        Task<List<Aliment>> tousLesAliments = dataService.GetAliments();
+        Aliment? alimentMaj = tousLesAliments.Result.FirstOrDefault(a => a.AlimentId == aliment.AlimentId);
         if (alimentMaj != null)
         {
             aliment = alimentMaj;
