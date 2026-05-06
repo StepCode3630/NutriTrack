@@ -1,39 +1,34 @@
 /******************************************************************************
-** PROGRAMME  *.cs                                                           **
+** PROGRAMME  AddEditAlimentPage.xaml.cs                                     **
 **                                                                           **
 ** Lieu      : ETML - section informatique                                   **
 ** Auteur    : Camille Rais                                                  **
 ** Date      : 01.04.2026                                                    **
 **                                                                           **
-** Modifications                                                             **
-**   Auteur  :                                                               **
-**   Version :                                                               **
-**   Date    :                                                               **
-**   Raisons :                                                               **
-**                                                                           **
-**                                                                           **
 ******************************************************************************/
 
 /******************************************************************************
 ** DESCRIPTION                                                               **
-**                                                                           **     
 **                                                                           **
+** Page d'ajout ou de modification d'un aliment                              **
+** Selon le constructeur utilisé on est en mode ajout ou édition             **
 **                                                                           **
 ******************************************************************************/
 
 using P_NutriTrack_Patricny_Reis.DataModels;
 using P_NutriTrack_Patricny_Reis.Services;
-namespace P_NutriTrack_Patricny_Reis.Views;
 
+namespace P_NutriTrack_Patricny_Reis.Views;
 
 public partial class AddEditAlimentPage : ContentPage
 {
     private DataService dataService;
-    // choix categorie pour add aliment
+    // catégorie dans laquelle on ajoute / modifie l'aliment
     private Category categorie;
-    // aliment à modifier  devient null si c est un ajout
-    private Aliment alimentAModifier;
-    // constructeur pour add aliment / pas d'aliment qui existe deja
+    // aliment à modifier - reste null si on est en mode ajout
+    private Aliment? alimentAModifier;
+
+    // constructeur pour ajout d'un nouvel aliment
     public AddEditAlimentPage(Category categorieRecue)
     {
         InitializeComponent();
@@ -42,7 +37,8 @@ public partial class AddEditAlimentPage : ContentPage
         alimentAModifier = null;
         TitreLabel.Text = "Ajouter un aliment";
     }
-    // constructeur pour modif aliment existant
+
+    // constructeur pour modification d'un aliment existant
     public AddEditAlimentPage(Category categorieRecue, Aliment alimentRecu)
     {
         InitializeComponent();
@@ -50,7 +46,8 @@ public partial class AddEditAlimentPage : ContentPage
         dataService = new DataService();
         alimentAModifier = alimentRecu;
         TitreLabel.Text = "Modifier un aliment";
-        // pré-remplir form avec valeurs de l aliment
+
+        // pré-remplit le formulaire avec les valeurs actuelles
         NomEntry.Text = alimentRecu.Name;
         CaloriesEntry.Text = alimentRecu.Calories.ToString();
         ProteinesEntry.Text = alimentRecu.Proteines_g.ToString();
@@ -58,27 +55,34 @@ public partial class AddEditAlimentPage : ContentPage
         LipidesEntry.Text = alimentRecu.Lipides_g.ToString();
         FibresEntry.Text = alimentRecu.Fibres_g.ToString();
     }
+
+    // bouton enregistrer : valide et sauvegarde
     private async void OnSaveClicked(object sender, EventArgs eventArgs)
     {
-        // vérifie que nom n est pas vide
+        // vérifie que le nom n'est pas vide
         if (string.IsNullOrWhiteSpace(NomEntry.Text))
         {
             await DisplayAlert("Erreur", "Le nom est obligatoire", "OK");
             return;
         }
-        // charger les données
+
+        // charge les données
         await dataService.LoadData();
         List<Aliment> tousLesAliments = dataService.GetAliments();
+
         if (alimentAModifier == null)
         {
-            // pour quand on ajoute
+            // mode ajout
             Aliment nouvelAliment = new Aliment();
-            // calculer new Id unique
+
+            // calcul d'un nouvel ID unique
             if (tousLesAliments.Count == 0)
                 nouvelAliment.AlimentId = 1;
             else
-                nouvelAliment.AlimentId = tousLesAliments.Max(aliment => aliment.AlimentId) + 1;
-            // remplir valeurs avec ce qui a été saisi
+                nouvelAliment.AlimentId = tousLesAliments
+                    .Max(item => item.AlimentId) + 1;
+
+            // remplit les valeurs avec ce qui a été saisi
             nouvelAliment.Name = NomEntry.Text;
             nouvelAliment.Calories = ConvertirEnInt(CaloriesEntry.Text);
             nouvelAliment.Proteines_g = ConvertirEnDouble(ProteinesEntry.Text);
@@ -86,11 +90,12 @@ public partial class AddEditAlimentPage : ContentPage
             nouvelAliment.Lipides_g = ConvertirEnDouble(LipidesEntry.Text);
             nouvelAliment.Fibres_g = ConvertirEnDouble(FibresEntry.Text);
             nouvelAliment.CategoryFk = categorie.CategoryId;
-            dataService.addAliment(nouvelAliment);
+
+            await dataService.AddAliment(nouvelAliment);
         }
         else
         {
-            // pour les modif
+            // mode modification
             Aliment alimentModifie = new Aliment();
             alimentModifie.AlimentId = alimentAModifier.AlimentId;
             alimentModifie.Name = NomEntry.Text;
@@ -99,20 +104,24 @@ public partial class AddEditAlimentPage : ContentPage
             alimentModifie.Glucides_g = ConvertirEnDouble(GlucidesEntry.Text);
             alimentModifie.Lipides_g = ConvertirEnDouble(LipidesEntry.Text);
             alimentModifie.Fibres_g = ConvertirEnDouble(FibresEntry.Text);
-            dataService.updateAliment(alimentModifie);
+            alimentModifie.CategoryFk = categorie.CategoryId;
+
+            await dataService.UpdateAliment(alimentModifie);
         }
-        // sauvegarde dans le JSON
-        // A FAIRE PLUS TARD activer quand SaveData sera dispo dans DataService
-        // retour page d'avant
+
+        // retour à la page d'avant
         await Navigation.PopAsync();
     }
-    // méthode pour convertir le texte en nbr
+
+    // méthode utilitaire pour convertir un texte en int
     private int ConvertirEnInt(string texte)
     {
         if (int.TryParse(texte, out int resultat))
             return resultat;
         return 0;
     }
+
+    // méthode utilitaire pour convertir un texte en double
     private double ConvertirEnDouble(string texte)
     {
         if (double.TryParse(texte, out double resultat))

@@ -1,3 +1,20 @@
+/******************************************************************************
+** PROGRAMME  ConsommationJourPage.xaml.cs                                   **
+**                                                                           **
+** Lieu      : ETML - section informatique                                   **
+** Auteur    : Camille Rais                                                  **
+** Date      : 01.04.2026                                                    **
+**                                                                           **
+******************************************************************************/
+
+/******************************************************************************
+** DESCRIPTION                                                               **
+**                                                                           **
+** Page qui affiche le bilan journalier de l'utilisateur                     **
+** Liste les aliments consommés et calcule les totaux nutritionnels          **
+**                                                                           **
+******************************************************************************/
+
 using P_NutriTrack_Patricny_Reis.DataModels;
 using P_NutriTrack_Patricny_Reis.Services;
 
@@ -6,7 +23,7 @@ namespace P_NutriTrack_Patricny_Reis.Views;
 public partial class ConsommationJourPage : ContentPage
 {
     private DataService dataService;
-    // Liste affichee à l écran avec info
+    // liste affichée à l'écran avec les infos enrichies
     private List<ConsoAffichage> consoAffichees = null!;
 
     public ConsommationJourPage()
@@ -16,6 +33,7 @@ public partial class ConsommationJourPage : ContentPage
         DateLabel.Text = DateTime.Today.ToString("dddd dd MMMM");
     }
 
+    // refresh les données à chaque retour sur la page
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -23,83 +41,83 @@ public partial class ConsommationJourPage : ContentPage
         AfficherConsommations();
     }
 
+    // construit la liste affichée et calcule les totaux du jour
     private void AfficherConsommations()
     {
         List<Consommation> consoDuJour = dataService.GetConsommationsDuJour();
 
-        // enrichit chaque conso avec les infos de son aliment
         consoAffichees = new List<ConsoAffichage>();
-        double totalCal = 0, totalProt = 0, totalGluc = 0, totalLip = 0;
 
         foreach (Consommation conso in consoDuJour)
         {
-            Aliment? aliment = dataService.GetAlimentById(conso.AlimentFk);
+            Aliment? aliment = dataService.GetAlimentById(conso.AlimentId);
             if (aliment == null) continue;
 
-            // Calcul nutritionnel selon la quantité pour 100g
+            // calcul nutritionnel selon la quantité (valeurs JSON pour 100g)
             double facteur = conso.Quantite_g / 100.0;
-            double cal = aliment.Calories * facteur;
-            double prot = aliment.Proteines_g * facteur;
-            double gluc = aliment.Glucides_g * facteur;
-            double lip = aliment.Lipides_g * facteur;
-
-            totalCal += cal;
-            totalProt += prot;
-            totalGluc += gluc;
-            totalLip += lip;
+            double calories = aliment.Calories * facteur;
 
             consoAffichees.Add(new ConsoAffichage
             {
                 ConsommationId = conso.ConsommationId,
                 NomAliment = aliment.Name,
-                InfoLigne = $"{conso.Quantite_g}g - {cal:F0} Kcal"
+                InfoLigne = $"{conso.Quantite_g}g - {calories:F0} Kcal"
             });
         }
 
         ConsoListView.ItemsSource = consoAffichees;
-        TotalCaloriesLabel.Text = $"{totalCal:F0}";
-        TotalProteinesLabel.Text = $"{totalProt:F1}";
-        TotalGlucidesLabel.Text = $"{totalGluc:F1}";
-        TotalLipidesLabel.Text = $"{totalLip:F1}";
+
+        // récupère le bilan global du jour calculé par le DataService
+        BilanJournalier bilan = dataService.GetBilanDuJour();
+        TotalCaloriesLabel.Text = $"{bilan.TotalCalories:F0}";
+        TotalProteinesLabel.Text = $"{bilan.TotalProteines:F1}";
+        TotalGlucidesLabel.Text = $"{bilan.TotalGlucides:F1}";
+        TotalLipidesLabel.Text = $"{bilan.TotalLipides:F1}";
     }
 
-    private async void OnAddClicked(object sender, EventArgs e)
+    // bouton ajouter une consommation
+    private async void OnAddClicked(object sender, EventArgs eventArgs)
     {
         await Navigation.PushAsync(new SelectionAlimentPage());
     }
 
-    private async void OnEditClicked(object sender, EventArgs e)
+    // bouton modifier une consommation existante
+    private async void OnEditClicked(object sender, EventArgs eventArgs)
     {
         Button bouton = (Button)sender;
         int consoId = (int)bouton.CommandParameter;
 
-        // voit la conso et l'aliment correspondant
+        // retrouve la conso et l'aliment correspondant
         Consommation? conso = dataService.GetConsommationsDuJour()
-            .FirstOrDefault(c => c.ConsommationId == consoId);
+            .FirstOrDefault(item => item.ConsommationId == consoId);
         if (conso == null) return;
 
-        Aliment? aliment = dataService.GetAlimentById(conso.AlimentFk);
+        Aliment? aliment = dataService.GetAlimentById(conso.AlimentId);
         if (aliment == null) return;
 
-        // Ouvre page d'ajout mode édition
+        // ouvre la page d'ajout en mode édition
         await Navigation.PushAsync(new AjoutConsoPage(aliment, conso));
     }
 
-    private async void OnDeleteClicked(object sender, EventArgs e)
+    // bouton supprimer une consommation
+    private async void OnDeleteClicked(object sender, EventArgs eventArgs)
     {
         Button bouton = (Button)sender;
         int consoId = (int)bouton.CommandParameter;
 
-        bool confirm = await DisplayAlert("Supprimer",
-            "Retirer cet aliment de ta journée ?", "Oui", "Non");
-        if (!confirm) return;
+        bool confirmation = await DisplayAlert(
+            "Supprimer",
+            "Retirer cet aliment de ta journée ?",
+            "Oui", "Non");
 
-        dataService.removeConso(consoId);
+        if (!confirmation) return;
+
+        await dataService.RemoveConso(consoId);
         AfficherConsommations();
     }
 }
 
-// classe pour l'affichage
+// classe utilitaire pour l'affichage de la liste
 public class ConsoAffichage
 {
     public int ConsommationId { get; set; }

@@ -1,3 +1,20 @@
+/******************************************************************************
+** PROGRAMME  AjoutConsoPage.xaml.cs                                         **
+**                                                                           **
+** Lieu      : ETML - section informatique                                   **
+** Auteur    : Camille Rais                                                  **
+** Date      : 01.04.2026                                                    **
+**                                                                           **
+******************************************************************************/
+
+/******************************************************************************
+** DESCRIPTION                                                               **
+**                                                                           **
+** Page d'ajout / modification d'une consommation pour la journée            **
+** L'utilisateur saisit une quantité en g et voit le calcul nutritionnel     **
+**                                                                           **
+******************************************************************************/
+
 using P_NutriTrack_Patricny_Reis.DataModels;
 using P_NutriTrack_Patricny_Reis.Services;
 
@@ -6,47 +23,52 @@ namespace P_NutriTrack_Patricny_Reis.Views;
 public partial class AjoutConsoPage : ContentPage
 {
     private DataService dataService;
-    private Aliment aliment;
+    private Aliment alimentChoisi;
+
     // si != null alors on est en mode modification
     private Consommation? consoExistante;
 
-    // Constructeur ADD
-    public AjoutConsoPage(Aliment alimentChoisi)
+    // constructeur pour ajout
+    public AjoutConsoPage(Aliment alimentRecu)
     {
         InitializeComponent();
         dataService = new DataService();
-        aliment = alimentChoisi;
+        alimentChoisi = alimentRecu;
         consoExistante = null;
 
-        NomAlimentLabel.Text = aliment.Name;
+        NomAlimentLabel.Text = alimentChoisi.Name;
     }
 
-    // Constructeur pour UPDATE
-    public AjoutConsoPage(Aliment alimentChoisi, Consommation consoAModifier)
+    // constructeur pour modification
+    public AjoutConsoPage(Aliment alimentRecu, Consommation consoAModifier)
     {
         InitializeComponent();
         dataService = new DataService();
-        aliment = alimentChoisi;
+        alimentChoisi = alimentRecu;
         consoExistante = consoAModifier;
 
-        NomAlimentLabel.Text = aliment.Name;
+        NomAlimentLabel.Text = alimentChoisi.Name;
         QuantiteEntry.Text = consoAModifier.Quantite_g.ToString();
-        // Le TextChanged se déclenche automatiquement et fait les calculs
+        // le TextChanged se déclenche tout seul et fait les calculs
     }
 
-    private void OnQuantiteChanged(object sender, TextChangedEventArgs e)
+    // calcule en temps réel les valeurs nutritionnelles selon la quantité saisie
+    private void OnQuantiteChanged(object sender, TextChangedEventArgs eventArgs)
     {
-        double quantite = ConvertirEnDouble(e.NewTextValue);
+        double quantite = ConvertirEnDouble(eventArgs.NewTextValue);
+        // les valeurs nutritionnelles dans le JSON sont pour 100g
         double facteur = quantite / 100.0;
 
-        CalCalcLabel.Text = $"{aliment.Calories * facteur:F2}";
-        ProtCalcLabel.Text = $"{aliment.Proteines_g * facteur:F2}";
-        GlucCalcLabel.Text = $"{aliment.Glucides_g * facteur:F2}";
+        CalCalcLabel.Text = $"{alimentChoisi.Calories * facteur:F2}";
+        ProtCalcLabel.Text = $"{alimentChoisi.Proteines_g * facteur:F2}";
+        GlucCalcLabel.Text = $"{alimentChoisi.Glucides_g * facteur:F2}";
     }
 
-    private async void OnAjouterClicked(object sender, EventArgs e)
+    // valide et enregistre la consommation
+    private async void OnAjouterClicked(object sender, EventArgs eventArgs)
     {
         double quantite = ConvertirEnDouble(QuantiteEntry.Text);
+
         if (quantite <= 0)
         {
             await DisplayAlert("Erreur", "Saisis une quantité valide", "OK");
@@ -57,36 +79,40 @@ public partial class AjoutConsoPage : ContentPage
 
         if (consoExistante == null)
         {
-            // CREATE
-            Consommation nouvelle = new Consommation
+            // mode ajout
+            Consommation nouvelleConso = new Consommation
             {
-                AlimentFk = aliment.AlimentId,
+                AlimentId = alimentChoisi.AlimentId,
                 Quantite_g = quantite,
                 DateConsommation = DateTime.Now
             };
-            dataService.addConso(nouvelle);
+            await dataService.AddConso(nouvelleConso);
         }
         else
         {
-            // UPDATE
+            // mode modification
             consoExistante.Quantite_g = quantite;
-            dataService.updateConso(consoExistante);
+            await dataService.UpdateConso(consoExistante);
         }
 
-        // retourn direct a la page conso jour
-        if (consoExistante == null)
+        // si on était en mode ajout on saute la page de selection d'aliment
+        // pour revenir directement sur la page conso du jour
+        if (consoExistante == null && Navigation.NavigationStack.Count >= 2)
         {
-            // fais 2x le retour pour aller a la bonne page
-            Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+            Page pageSelection = Navigation.NavigationStack[Navigation.NavigationStack.Count - 2];
+            Navigation.RemovePage(pageSelection);
         }
+
         await Navigation.PopAsync();
     }
 
-    private async void OnAnnulerClicked(object sender, EventArgs e)
+    // bouton annuler
+    private async void OnAnnulerClicked(object sender, EventArgs eventArgs)
     {
         await Navigation.PopAsync();
     }
 
+    // méthode utilitaire pour convertir un texte en nombre
     private double ConvertirEnDouble(string? texte)
     {
         if (double.TryParse(texte, out double resultat))
