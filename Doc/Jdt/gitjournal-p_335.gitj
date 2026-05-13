@@ -46,6 +46,26 @@
       "author": "StepCode3630"
     },
     {
+      "id": "8e709728-194a-4bed-8dea-564f7d4ba472",
+      "type": "commitless",
+      "name": " feat: création du logo",
+      "description": "Avec Gemini et Figma",
+      "date": "2026-04-29T13:58:00.000Z",
+      "duration": 70,
+      "status": "DONE",
+      "author": "StepCode3630"
+    },
+    {
+      "id": "d09d7889-a06a-4956-ad10-564a210e853c",
+      "type": "commitless",
+      "name": "chore: revue du projet avec le prof",
+      "description": "",
+      "date": "2026-04-29T13:58:00.000Z",
+      "duration": 15,
+      "status": "DONE",
+      "author": "StepCode3630"
+    },
+    {
       "id": "a1098c23-3fbe-4bad-bb5d-01fc5e0e3232",
       "type": "commitless",
       "name": "chore: etudie de la db Sqlite",
