@@ -54,14 +54,19 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
     // ---------------- CONSOMMATION ----------------
     public class Consommation
     {
-        public int ConsommationId { get; set; }
+        public int AlimentId { get; set; }
         public double Quantite_g { get; set; }
+
+        // Champs internes utilisés par l'app, pas dans le JSON
+        // [JsonIgnore] = "ne pas chercher cette propriété dans le JSON"
+        [System.Text.Json.Serialization.JsonIgnore]
+        public int ConsommationId { get; set; }
+
+        //[System.Text.Json.Serialization.JsonIgnore]
         public DateTime DateConsommation { get; set; }
 
-        public int AlimentFk { get; set; }
-
-        // Navigation
-        public Aliment Aliment { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore]
+        public Aliment? Aliment { get; set; }
     }
 
     // ---------------- RELATION ALIMENT - MINERAUX ----------------
@@ -90,14 +95,14 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
         public Vitamine Vitamine { get; set; }
     }
 
-    // ---------------- ROOT DATA (pour JSON) ----------------
+    // ---------------- ROOT DATA pour JSON ----------------
     public class NutriData
     {
         public List<Category> Categories { get; set; }
         public List<Aliment> Aliments { get; set; }
         public List<Minerau> Mineraux { get; set; }
         public List<Vitamine> Vitamines { get; set; }
-        public List<Consommation> Consommations { get; set; }
+        public List<Consommation> Consommation_journaliere { get; set; }
         public List<AlimentMinerau> AlimentMineraux { get; set; }
         public List<AlimentVitamine> AlimentVitamines { get; set; }
     }

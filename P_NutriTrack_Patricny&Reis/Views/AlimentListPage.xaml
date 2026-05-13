@@ -2,22 +2,39 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="P_NutriTrack_Patricny_Reis.Views.AlimentListPage"
-             Title="FoodTrack"
+             Title="NutriTrack"
              BackgroundColor="{StaticResource CouleurFond}">
+
+    <!-- logo dans le header -->
+    <Shell.TitleView>
+        <Image Source="logo_nutri_track.png"
+           HeightRequest="35"
+           Aspect="AspectFit"
+           HorizontalOptions="Start"
+           VerticalOptions="Center"/>
+    </Shell.TitleView>
+
+    <!-- Pour le logo home qui a ete mis en svg dans les ressources -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="home.svg"
+                     Clicked="OnHomeClicked"
+                     Order="Primary"
+                     Priority="0" />
+    </ContentPage.ToolbarItems>
 
     <Grid RowDefinitions="Auto, Auto, *, Auto" Padding="20" RowSpacing="12">
 
-        <!-- titre -->
-        <Label Grid.Row="0"
-               Text="FoodTrack"
+            <!-- titre fixe -->
+            <Label Grid.Row="0"
+               Text="Catégorie"
                FontSize="22"
                FontAttributes="Bold"
                TextColor="White"
                HorizontalOptions="Center"
                Margin="0,15,0,0"/>
 
-        <!-- nom catégorie -->
-        <Label Grid.Row="1"
+            <!-- nom de la catégorie qui est selectionnée -->
+            <Label Grid.Row="1"
                x:Name="TitreLabel"
                Text="Catégorie"
                FontSize="16"

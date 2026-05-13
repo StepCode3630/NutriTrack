@@ -2,20 +2,36 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="P_NutriTrack_Patricny_Reis.Views.AddEditAlimentPage"
-             Title="FoodTrack"
+             IconImageSource="logo_nutri_track.png"
+             Title="NutriTrack"
              BackgroundColor="{StaticResource CouleurFond}">
+
+    <Shell.TitleView>
+        <Image Source="logo_nutri_track.png"
+           HeightRequest="35"
+           Aspect="AspectFit"
+           HorizontalOptions="Start"
+           VerticalOptions="Center"/>
+    </Shell.TitleView>
+
+    <!-- Pour le logo home qui a ete mis en svg dans les ressources -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="home.svg"
+                     Clicked="OnHomeClicked"
+                     Order="Primary"
+                     Priority="0" />
+    </ContentPage.ToolbarItems>
 
     <Grid RowDefinitions="Auto, *, Auto" Padding="20,15">
 
         <!-- enTête -->
         <VerticalStackLayout Grid.Row="0" Spacing="3" Margin="0,5,0,20">
-            <Label Text="FoodTrack"
+            <Label Text="Ajouter un aliment"
                    FontSize="22"
                    FontAttributes="Bold"
                    TextColor="White"
                    HorizontalOptions="Center"/>
             <Label x:Name="TitreLabel"
-                   Text="Ajouter un aliment"
                    FontSize="15"
                    FontAttributes="Bold"
                    TextColor="White"
@@ -37,7 +53,7 @@
                         HeightRequest="42"
                         Padding="18,0">
                     <Entry x:Name="NomEntry"
-                           Placeholder="Ex. tomate"
+                           Placeholder="Entrez un nom..."
                            BackgroundColor="Transparent"
                            TextColor="{StaticResource CouleurTexte}"
                            PlaceholderColor="#7A8FA3"
@@ -181,6 +197,46 @@
                                VerticalOptions="Center"/>
                     </Border>
                 </Grid>
+
+                <!-- zone de saisie de texte pour les vitamines -->
+                <Label Text="Vitamines (séparées par des virgules)"
+                   FontSize="12"
+                   TextColor="White"
+                   Margin="10,15,0,0"/>     
+                <Border Stroke="Transparent"
+                    BackgroundColor="{StaticResource CouleurCarte}"
+                    StrokeShape="RoundRectangle 25"
+                    HeightRequest="42"
+                    Padding="18,0">
+                <Entry x:Name="VitaminesEntry"
+                   Placeholder="Ex. B12, Vitamine C, A"
+                   BackgroundColor="Transparent"
+                   TextColor="{StaticResource CouleurTexte}"
+                   PlaceholderColor="#7A8FA3"
+                   FontAttributes="Bold"
+                   FontSize="14"
+                   VerticalOptions="Center"/>
+                </Border>
+
+                <!-- zone pour saisir les minéraux -->
+                <Label Text="Minéraux (séparés par des virgules)"
+                   FontSize="12"
+                   TextColor="White"
+                   Margin="10,10,0,0"/>
+                <Border Stroke="Transparent"
+                    BackgroundColor="{StaticResource CouleurCarte}"
+                    StrokeShape="RoundRectangle 25"
+                    HeightRequest="42"
+                    Padding="18,0">
+                <Entry x:Name="MinerauxEntry"
+                   Placeholder="Ex. Fer, Calcium, Magnésium"
+                   BackgroundColor="Transparent"
+                   TextColor="{StaticResource CouleurTexte}"
+                   PlaceholderColor="#7A8FA3"
+                   FontAttributes="Bold"
+                   FontSize="14"
+                   VerticalOptions="Center"/>
+                </Border>
 
             </VerticalStackLayout>
         </ScrollView>

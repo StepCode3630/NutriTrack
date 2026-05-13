@@ -22,13 +22,20 @@ namespace P_NutriTrack_Patricny_Reis.Views;
 
 public partial class AlimentDetailPage : ContentPage
 {
+
+    // retour à la page d'accueil
+    private async void OnHomeClicked(object sender, EventArgs eventArgs)
+    {
+        await Navigation.PopToRootAsync();
+    }
+
     private DataService dataService;
-    // catégorie de l'aliment comme ca on peut modifier
+    // catégorie de l'aliment (pour pouvoir le modifier ensuite)
     private Category categorie;
     // l'aliment affiché
     private Aliment aliment;
 
-    // constructeur recoit catégorie et aliment à afficher
+    // constructeur reçoit la catégorie et l'aliment à afficher
     public AlimentDetailPage(Category categorieRecue, Aliment alimentRecu)
     {
         InitializeComponent();
@@ -40,15 +47,16 @@ public partial class AlimentDetailPage : ContentPage
         AfficherDetails();
     }
 
-    // refresh quand on revient sur la page apres qu on ait modifier
+    // refresh quand on revient sur la page après modification
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        // recharge données pour avoir les valeurs à jour
+
+        // recharge les données pour avoir les valeurs à jour
         await dataService.LoadData();
-        // refind l aliment pour avoir la version maj
-        List<Aliment> tousLesAliments = dataService.GetAliments();
-        Aliment? alimentMaj = tousLesAliments.FirstOrDefault(a => a.AlimentId == aliment.AlimentId);
+
+        // récupère la version à jour de l'aliment
+        Aliment? alimentMaj = dataService.GetAlimentById(aliment.AlimentId);
         if (alimentMaj != null)
         {
             aliment = alimentMaj;
@@ -56,7 +64,7 @@ public partial class AlimentDetailPage : ContentPage
         }
     }
 
-    // affiche les valeurs nutritionnelles de l aliment dans labels
+    // affiche les valeurs nutritionnelles dans les labels
     private void AfficherDetails()
     {
         NomLabel.Text = aliment.Name;
@@ -67,28 +75,25 @@ public partial class AlimentDetailPage : ContentPage
         FibresLabel.Text = aliment.Fibres_g.ToString();
     }
 
-    // btn modifier
+    // bouton modifier : ouvre la page d'édition
     private async void OnEditClicked(object sender, EventArgs eventArgs)
     {
-        // ouvre la page d edit avec l aliment en paramètre
         await Navigation.PushAsync(new AddEditAlimentPage(categorie, aliment));
     }
 
-    // bouton supprimer
+    // bouton supprimer : demande confirmation puis supprime
     private async void OnDeleteClicked(object sender, EventArgs eventArgs)
     {
-        // demande a l user de confirmer
         string message = $"Supprimer {aliment.Name} ?";
         bool confirmation = await DisplayAlert(
             "Supprimer",
             message,
             "Oui", "Non");
 
-        if (!confirmation)
-            return;
+        if (!confirmation) return;
 
-        // supprime en passant par le DataService
-        dataService.removeAliment(aliment.AlimentId);
+        // supprime via le DataService
+        await dataService.RemoveAliment(aliment.AlimentId);
 
         // retour à la page d'avant
         await Navigation.PopAsync();

@@ -4,9 +4,49 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:P_NutriTrack_Patricny_Reis.Views"
-    Title="P_NutriTrack_Patricny_Reis">
-    <ShellContent
-        Title="Catégories"
-        ContentTemplate="{DataTemplate views:CategoryPage}"
-        Route="CategoryPage" />
+    Title="NutriTrack"
+    FlyoutBehavior="Flyout"
+    FlyoutBackgroundColor="{StaticResource CouleurFond}">
+
+    <!-- menu burger avec logo -->
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="160"
+              BackgroundColor="{StaticResource CouleurFond}"
+              Padding="20">
+            <VerticalStackLayout VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Spacing="8">
+                <Image Source="logo_nutri_track.png"
+                       HeightRequest="70"
+                       HorizontalOptions="Center"/>
+                <Label Text="NutriTrack"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <!-- accueil = page des catégories -->
+    <FlyoutItem Title="Accueil"
+                Icon="home.svg">
+        <ShellContent ContentTemplate="{DataTemplate views:CategoryPage}"
+                      Route="CategoryPage" />
+    </FlyoutItem>
+
+    <!-- consommation du jour -->
+    <FlyoutItem Title="Consommation du jour"
+                Icon="logo_nutri_track.png">
+        <ShellContent ContentTemplate="{DataTemplate views:ConsommationJourPage}"
+                      Route="ConsommationJourPage" />
+    </FlyoutItem>
+
+    <!-- recherche d'aliment -->
+    <FlyoutItem Title="Rechercher un aliment"
+                Icon="logo_nutri_track.png">
+        <ShellContent ContentTemplate="{DataTemplate views:SelectionAlimentPage}"
+                      Route="SelectionAlimentPage" />
+    </FlyoutItem>
+
 </Shell>

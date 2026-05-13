@@ -1,107 +1,96 @@
-using P_NutriTrack_Patricny_Reis.DataModels;
-using P_NutriTrack_Patricny_Reis.Services;
-namespace P_NutriTrack_Patricny_Reis.Views;
-
 /******************************************************************************
-** PROGRAMME  *.cs                                                           **
+** PROGRAMME  AlimentListPage.xaml.cs                                        **
 **                                                                           **
 ** Lieu      : ETML - section informatique                                   **
 ** Auteur    : Camille Rais                                                  **
 ** Date      : 01.04.2026                                                    **
 **                                                                           **
-** Modifications                                                             **
-**   Auteur  :                                                               **
-**   Version :                                                               **
-**   Date    :                                                               **
-**   Raisons :                                                               **
-**                                                                           **
-**                                                                           **
 ******************************************************************************/
 
 /******************************************************************************
 ** DESCRIPTION                                                               **
-**                                                                           **     
 **                                                                           **
+** Page qui affiche la liste des aliments d'une catégorie                    **
+** Permet d'ajouter, modifier ou supprimer un aliment                        **
 **                                                                           **
 ******************************************************************************/
 
+using P_NutriTrack_Patricny_Reis.DataModels;
+using P_NutriTrack_Patricny_Reis.Services;
+
+namespace P_NutriTrack_Patricny_Reis.Views;
+
 public partial class AlimentListPage : ContentPage
 {
+
+    // retour à la page d'accueil
+    private async void OnHomeClicked(object sender, EventArgs eventArgs)
+    {
+        await Navigation.PopToRootAsync();
+    }
+
     private DataService dataService;
     private List<Aliment> aliments = null!;
-    // category recu de categoryPage
     private Category categorie;
-    // constructeur reçoit la catégorie à afficher
+
+    // constructeur qui reçoit la catégorie sélectionnée
     public AlimentListPage(Category categorieRecue)
     {
         InitializeComponent();
         categorie = categorieRecue;
         dataService = new DataService();
-        // met le nom de la catégorie en titre
         TitreLabel.Text = categorieRecue.Name;
     }
+
+    // refresh la liste à chaque retour sur la page
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        // charge les données
         await dataService.LoadData();
-        // récup directement les aliments de cette catégorie
-        aliments = dataService.GetAlimentsById(categorie.CategoryId);
-        // afficher liste
+        aliments = dataService.GetAlimentsByCategorie(categorie.CategoryId);
         AlimentListView.ItemsSource = aliments;
     }
+
+    // bouton ajouter un nouvel aliment
     private async void OnAddClicked(object sender, EventArgs eventArgs)
     {
-        // ouvre la page d ajout en passant la catégorie actuelle
         await Navigation.PushAsync(new AddEditAlimentPage(categorie));
     }
 
-    // bouton modifier sur une carte aliment
+    // bouton modifier un aliment
     private async void OnEditClicked(object sender, EventArgs eventArgs)
     {
-        // on récupère l aliment depuis le CommandParameter du bouton
         Button bouton = (Button)sender;
         Aliment alimentSelectionne = (Aliment)bouton.CommandParameter;
-
-        // ouvre la page de modification
         await Navigation.PushAsync(new AddEditAlimentPage(categorie, alimentSelectionne));
     }
 
-    // bouton supprimer sur une carte aliment
+    // bouton supprimer un aliment
     private async void OnDeleteClicked(object sender, EventArgs eventArgs)
     {
         Button bouton = (Button)sender;
         Aliment alimentASupprimer = (Aliment)bouton.CommandParameter;
 
-        // demande confirmation pour supprimer ou non
         string message = $"Supprimer {alimentASupprimer.Name} ?";
-        bool confirmation = await DisplayAlert(
-            "Supprimer",
-            message,
-            "Oui", "Non");
+        bool confirmation = await DisplayAlert("Supprimer", message, "Oui", "Non");
 
-        if (!confirmation)
-            return;
+        if (!confirmation) return;
 
-        // supprime via le DataService
-        dataService.removeAliment(alimentASupprimer.AlimentId);
+        await dataService.RemoveAliment(alimentASupprimer.AlimentId);
 
-        // rafraîchit la liste
-        aliments = dataService.GetAlimentsById(categorie.CategoryId);
+        // refresh la liste affichée
+        aliments = dataService.GetAlimentsByCategorie(categorie.CategoryId);
         AlimentListView.ItemsSource = aliments;
     }
-    // quand on clique sur un aliment de la liste
+
+    // clic sur un aliment dans la liste : ouvre la page de détail
     private async void OnAlimentSelected(object sender, SelectionChangedEventArgs eventArgs)
     {
-        // récup l'aliment cliqué
-        Aliment alimentSelectionne = (Aliment)eventArgs.CurrentSelection.FirstOrDefault();
-        if (alimentSelectionne == null)
-            return;
+        Aliment? alimentSelectionne = (Aliment?)eventArgs.CurrentSelection.FirstOrDefault();
+        if (alimentSelectionne == null) return;
 
-        // déselectionne pour pouvoir recliquer au retour
+        // déselectionne pour pouvoir recliquer dessus plus tard
         AlimentListView.SelectedItem = null;
-
-        // ouvre la page détail
         await Navigation.PushAsync(new AlimentDetailPage(categorie, alimentSelectionne));
     }
 }
