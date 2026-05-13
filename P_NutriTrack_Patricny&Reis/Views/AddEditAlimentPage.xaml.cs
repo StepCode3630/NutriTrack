@@ -79,9 +79,11 @@ public partial class AddEditAlimentPage : ContentPage
             Aliment nouvelAliment = new Aliment();
 
             // calcul d'un nouvel ID unique
+            // quand la liste est vide
             if (tousLesAliments.Count == 0)
                 nouvelAliment.AlimentId = 1;
             else
+                // prend id le plus grand et fait +1
                 nouvelAliment.AlimentId = tousLesAliments
                     .Max(item => item.AlimentId) + 1;
 
