@@ -23,7 +23,7 @@ namespace P_NutriTrack_Patricny_Reis.Views;
 public partial class ConsommationJourPage : ContentPage
 {
 
-    // retour à la page d'accueil
+    // retour à la page d'accueil depuis la maison
     private async void OnHomeClicked(object sender, EventArgs eventArgs)
     {
         await Navigation.PopToRootAsync();
