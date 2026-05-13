@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace P_NutriTrack_Patricny_Reis.DataModels
 {
     // ---------------- CATEGORY ----------------
     public class Category
     {
+        [Key]
         public int CategoryId { get; set; }
         public string Name { get; set; }
     }
@@ -16,6 +18,7 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
     // ---------------- ALIMENT ----------------
     public class Aliment
     {
+        [Key]
         public int AlimentId { get; set; }
         public string Name { get; set; }
 
@@ -36,6 +39,7 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
     // ---------------- MINERAU ----------------
     public class Minerau
     {
+        [Key]
         public int MinerauxId { get; set; }
         public string Name { get; set; }
 
@@ -45,6 +49,7 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
     // ---------------- VITAMINE ----------------
     public class Vitamine
     {
+        [Key]
         public int VitaminesId { get; set; }
         public string Name { get; set; }
 
@@ -54,6 +59,7 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
     // ---------------- CONSOMMATION ----------------
     public class Consommation
     {
+        [Key]
         public int AlimentId { get; set; }
         public double Quantite_g { get; set; }
 
@@ -72,6 +78,7 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
     // ---------------- RELATION ALIMENT - MINERAUX ----------------
     public class AlimentMinerau
     {
+        [Key]   
         public int AlimentFk { get; set; }
         public int MinerauxFk { get; set; }
 
@@ -85,6 +92,7 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
     // ---------------- RELATION ALIMENT - VITAMINES ----------------
     public class AlimentVitamine
     {
+        [Key]           
         public int AlimentFk { get; set; }
         public int VitaminesFk { get; set; }
 
@@ -98,6 +106,7 @@ namespace P_NutriTrack_Patricny_Reis.DataModels
     // ---------------- ROOT DATA pour JSON ----------------
     public class NutriData
     {
+        [Key]
         public List<Category> Categories { get; set; }
         public List<Aliment> Aliments { get; set; }
         public List<Minerau> Mineraux { get; set; }
