@@ -48,6 +48,12 @@ public partial class CategoryPage : ContentPage
         // Liste déroulante avec grille partage même source
         CategoryListView.ItemsSource = categories;
         CategoryGridView.ItemsSource = categories;
+        // affiche le bilan du jour sur page d accueil dans 4mini cartes
+        BilanJournalier bilan = dataService.GetBilanDuJour();
+        AccueilCaloriesLabel.Text = $"{bilan.TotalCalories:F0}";
+        AccueilProteinesLabel.Text = $"{bilan.TotalProteines:F1}";
+        AccueilGlucidesLabel.Text = $"{bilan.TotalGlucides:F1}";
+        AccueilLipidesLabel.Text = $"{bilan.TotalLipides:F1}";
     }
 
     // clique  sur une catégorie depuis liste ou depuis grille
