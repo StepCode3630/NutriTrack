@@ -209,7 +209,7 @@
                     HeightRequest="42"
                     Padding="18,0">
                 <Entry x:Name="VitaminesEntry"
-                   Placeholder="Ex. B12, Vitamine C, A"
+                   Placeholder="Ex: B12, Vitamine C, A"
                    BackgroundColor="Transparent"
                    TextColor="{StaticResource CouleurTexte}"
                    PlaceholderColor="#7A8FA3"

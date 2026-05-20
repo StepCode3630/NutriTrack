@@ -16,8 +16,7 @@
 
 
     <ScrollView>
-        <Grid RowDefinitions="Auto, Auto, Auto, Auto, *" Padding="20" RowSpacing="15">
-
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, *" Padding="20" RowSpacing="15">
             <!-- titre -->
             <Label Grid.Row="0"
                    Text="NutriTrack"
@@ -77,7 +76,7 @@
 
             <!-- Carte consommation journalière -->
             <Border Grid.Row="3"
-                    BackgroundColor="WhiteSmoke"
+                        BackgroundColor="LightSteelBlue"
                     StrokeShape="RoundRectangle 20"
                     Stroke="Transparent"
                     Padding="20"
@@ -93,8 +92,85 @@
                        VerticalOptions="Center"/>
             </Border>
 
+            <!-- info bilan du jour affiché sur page accueil -->
+            <Grid Grid.Row="4"
+                  RowDefinitions="*,*"
+                  ColumnDefinitions="*,*"
+                  RowSpacing="8"
+                  ColumnSpacing="8">
+
+                <Border Grid.Row="0" Grid.Column="0"
+                        BackgroundColor="LightSteelBlue"
+                        StrokeShape="RoundRectangle 12"
+                        Stroke="Transparent"
+                        Padding="8"
+                        HeightRequest="55">
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label x:Name="AccueilCaloriesLabel" Text="0"
+                               FontSize="16" FontAttributes="Bold"
+                               TextColor="{StaticResource CouleurTexte}"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Kcal" FontSize="10"
+                               TextColor="{StaticResource CouleurTexteSecondaire}"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1"
+                        BackgroundColor="LightSteelBlue"
+                        StrokeShape="RoundRectangle 12"
+                        Stroke="Transparent"
+                        Padding="8"
+                        HeightRequest="55">
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label x:Name="AccueilProteinesLabel" Text="0"
+                               FontSize="16" FontAttributes="Bold"
+                               TextColor="{StaticResource CouleurTexte}"
+                               HorizontalOptions="Center"/>
+                        <Label Text="g protéines" FontSize="10"
+                               TextColor="{StaticResource CouleurTexteSecondaire}"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0"
+                        BackgroundColor="LightSteelBlue"
+                        StrokeShape="RoundRectangle 12"
+                        Stroke="Transparent"
+                        Padding="8"
+                        HeightRequest="55">
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label x:Name="AccueilGlucidesLabel" Text="0"
+                               FontSize="16" FontAttributes="Bold"
+                               TextColor="{StaticResource CouleurTexte}"
+                               HorizontalOptions="Center"/>
+                        <Label Text="g glucides" FontSize="10"
+                               TextColor="{StaticResource CouleurTexteSecondaire}"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="1"
+                        BackgroundColor="LightSteelBlue"
+                        StrokeShape="RoundRectangle 12"
+                        Stroke="Transparent"
+                        Padding="8"
+                        HeightRequest="55">
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label x:Name="AccueilLipidesLabel" Text="0"
+                               FontSize="16" FontAttributes="Bold"
+                               TextColor="{StaticResource CouleurTexte}"
+                               HorizontalOptions="Center"/>
+                        <Label Text="g lipides" FontSize="10"
+                               TextColor="{StaticResource CouleurTexteSecondaire}"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+            </Grid>
+
             <!-- grille des catégories afficher sur page d acceuil : en 2 colonne-->
-            <CollectionView Grid.Row="4"
+            <CollectionView Grid.Row="5"
                             x:Name="CategoryGridView"
                             SelectionMode="Single"
                             SelectionChanged="OnCategorySelected">

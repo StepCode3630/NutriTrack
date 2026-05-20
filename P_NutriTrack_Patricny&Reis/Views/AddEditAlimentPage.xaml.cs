@@ -48,15 +48,22 @@ public partial class AddEditAlimentPage : ContentPage
     public AddEditAlimentPage(Category categorieRecue, Aliment alimentRecu)
     {
         InitializeComponent();
-
-
         // pres-remplit le formulaire avec les valeurs de la bdd
+        categorie = categorieRecue;
+        dataService = new DataService();
+        alimentAModifier = alimentRecu;
+        TitreLabel.Text = "Modifier un aliment";
         NomEntry.Text = alimentRecu.Name;
         CaloriesEntry.Text = alimentRecu.Calories.ToString();
         ProteinesEntry.Text = alimentRecu.Proteines_g.ToString();
         GlucidesEntry.Text = alimentRecu.Glucides_g.ToString();
         LipidesEntry.Text = alimentRecu.Lipides_g.ToString();
         FibresEntry.Text = alimentRecu.Fibres_g.ToString();
+        // pré remplit les vitamines et minéraux de liste joint par virgules
+        if (alimentRecu.Vitamines != null)
+            VitaminesEntry.Text = string.Join(", ", alimentRecu.Vitamines);
+        if (alimentRecu.Mineraux != null)
+            MinerauxEntry.Text = string.Join(", ", alimentRecu.Mineraux);
     }
 
     // bouton enregistrer : valide et sauvegarde
@@ -79,9 +86,11 @@ public partial class AddEditAlimentPage : ContentPage
             Aliment nouvelAliment = new Aliment();
 
             // calcul d'un nouvel ID unique
+            // quand la liste est vide
             if (tousLesAliments.Count == 0)
                 nouvelAliment.AlimentId = 1;
             else
+                // prend id le plus grand et fait +1
                 nouvelAliment.AlimentId = tousLesAliments
                     .Max(item => item.AlimentId) + 1;
 
@@ -93,6 +102,9 @@ public partial class AddEditAlimentPage : ContentPage
             nouvelAliment.Lipides_g = ConvertirEnDouble(LipidesEntry.Text);
             nouvelAliment.Fibres_g = ConvertirEnDouble(FibresEntry.Text);
             nouvelAliment.CategoryFk = categorie.CategoryId;
+            // pour le texte saisi par l user
+            nouvelAliment.Vitamines = ConvertirEnListe(VitaminesEntry.Text);
+            nouvelAliment.Mineraux = ConvertirEnListe(MinerauxEntry.Text);
 
             await dataService.AddAliment(nouvelAliment);
         }
@@ -108,6 +120,9 @@ public partial class AddEditAlimentPage : ContentPage
             alimentModifie.Lipides_g = ConvertirEnDouble(LipidesEntry.Text);
             alimentModifie.Fibres_g = ConvertirEnDouble(FibresEntry.Text);
             alimentModifie.CategoryFk = categorie.CategoryId;
+            // pour le texte saisi par l user
+            alimentModifie.Vitamines = ConvertirEnListe(VitaminesEntry.Text);
+            alimentModifie.Mineraux = ConvertirEnListe(MinerauxEntry.Text);
 
             await dataService.UpdateAliment(alimentModifie);
         }
@@ -130,5 +145,17 @@ public partial class AddEditAlimentPage : ContentPage
         if (double.TryParse(texte, out double resultat))
             return resultat;
         return 0;
+    }
+
+    // transforme le texte saisi par l'user  quand il ajoute un aliment en liste
+    private List<string> ConvertirEnListe(string? texte)
+    {
+        if (string.IsNullOrWhiteSpace(texte))
+            return new List<string>();
+
+        return texte.Split(',')
+                    .Select(element => element.Trim())
+                    .Where(element => element.Length > 0)
+                    .ToList();
     }
 }
