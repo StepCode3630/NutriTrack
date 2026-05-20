@@ -10,7 +10,7 @@ namespace P_NutriTrack_Patricny_Reis.Data
 {
     public class AppDbContext : DbContext
     {
-        private string _databasePath;
+        private  string _databasePath;
 
         public AppDbContext(string databasePath)
         { _databasePath = databasePath; }
@@ -19,7 +19,8 @@ namespace P_NutriTrack_Patricny_Reis.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite();
+            optionsBuilder.UseSqlite(
+                $"Filename={_databasePath}");
         }
     }
 }
