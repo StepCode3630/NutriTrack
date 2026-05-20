@@ -268,15 +268,15 @@
   "Consommation_journaliere": [
     {
       "AlimentId": 101,
-      "Quantite_g": 100,
+      "Quantite_g": 100
     },
     {
       "AlimentId": 201,
-      "Quantite_g": 150,
+      "Quantite_g": 150
     },
     {
       "AlimentId": 301,
-      "Quantite_g": 100,
+      "Quantite_g": 100
     }
   ]
 }
