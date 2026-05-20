@@ -23,115 +23,100 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using P_NutriTrack_Patricny_Reis.Data;
 
 namespace P_NutriTrack_Patricny_Reis.Services
 {
     public class DataService
     {
-        // données globales chargées depuis le JSON
-        private NutriData donnees;
+        // Instance statique directement créée
+        private static DataService? _instance;
 
-        // CHARGEMENT & SAUVEGARDE DU JSON
-
-        // charge le JSON depuis le stockage local sinon le copie depuis l app package
-        public async Task LoadData()
+        public static DataService Instance
         {
-            string chemin = Path.Combine(FileSystem.AppDataDirectory, "db.json");
-
-            // 1ere utilisation alors on copie le JSON inclus dans l'app
-            if (!File.Exists(chemin))
+            get
             {
-                using Stream stream = await FileSystem.OpenAppPackageFileAsync("db.json");
-                using StreamReader reader = new StreamReader(stream);
-                string jsonInitial = await reader.ReadToEndAsync();
-                await File.WriteAllTextAsync(chemin, jsonInitial);
-            }
+                if (_instance == null)
+                    _instance = new DataService();
 
-            // lit le contenu du JSON puis le désérialise
-            string jsonFinal = await File.ReadAllTextAsync(chemin);
-            donnees = JsonSerializer.Deserialize<NutriData>(jsonFinal);
-
-            // au cas où certaines listes seraient null on les initialise vides
-            if (donnees != null)
-            {
-                donnees.Categories ??= new List<Category>();
-                donnees.Aliments ??= new List<Aliment>();
-                donnees.Consommation_journaliere ??= new List<Consommation>();
-                donnees.Mineraux ??= new List<Minerau>();
-                donnees.Vitamines ??= new List<Vitamine>();
-                donnees.AlimentMineraux ??= new List<AlimentMinerau>();
-                donnees.AlimentVitamines ??= new List<AlimentVitamine>();
+                return _instance;
             }
         }
 
-        // sauvegarde toutes les données dans le fichier JSON
-        private async Task SaveData()
+        // CONTEXTE SQLITE
+        private readonly AppDbContext _db;
+
+        // CONSTRUCTEUR
+        private DataService()
         {
-            string chemin = Path.Combine(FileSystem.AppDataDirectory, "db.json");
+            string dbPath = Path.Combine(
+                FileSystem.AppDataDirectory,
+                "nutri.db");
 
-            JsonSerializerOptions options = new JsonSerializerOptions
-            {
-                WriteIndented = true
-            };
+            _db = new AppDbContext(dbPath);
 
-            string json = JsonSerializer.Serialize(donnees, options);
-            await File.WriteAllTextAsync(chemin, json);
+            // crée automatiquement la DB et les tables
+            _db.Database.EnsureCreated();
         }
 
         // CATEGORIES
 
         // retourne toutes les catégories
-        public List<Category> GetCategories()
+        public async Task<List<Category>> GetCategories()
         {
-            return donnees.Categories;
+            return await _db.Categories.ToListAsync();
         }
 
         // ALIMENTS
 
         // retourne tous les aliments
-        public List<Aliment> GetAliments()
+        public async Task<List<Aliment>> GetAliments()
         {
-            return donnees.Aliments;
+            return await _db.Aliments.ToListAsync();
         }
 
         // retourne les aliments d'une catégorie
-        public List<Aliment> GetAlimentsByCategorie(int categorieId)
+        public async Task<List<Aliment>> GetAlimentsByCategorie(int categorieId)
         {
-            return donnees.Aliments
+            return await _db.Aliments
                 .Where(aliment => aliment.CategoryFk == categorieId)
-                .ToList();
+                .ToListAsync();
         }
 
         // retourne un aliment par son ID
-        public Aliment? GetAlimentById(int alimentId)
+        public async Task<Aliment?> GetAlimentById(int alimentId)
         {
-            return donnees.Aliments.FirstOrDefault(aliment => aliment.AlimentId == alimentId);
+            return await _db.Aliments
+                .FirstOrDefaultAsync(aliment => aliment.AlimentId == alimentId);
         }
 
         // ajoute un nouvel aliment
         public async Task AddAliment(Aliment nouvelAliment)
         {
-            donnees.Aliments.Add(nouvelAliment);
-            await SaveData();
+            _db.Aliments.Add(nouvelAliment);
+
+            await _db.SaveChangesAsync();
         }
 
-        // supprime un aliment par son ID
+        // supprime un aliment
         public async Task RemoveAliment(int alimentId)
         {
-            Aliment? aliment = donnees.Aliments
-                .FirstOrDefault(item => item.AlimentId == alimentId);
+            Aliment? aliment = await _db.Aliments
+                .FirstOrDefaultAsync(item => item.AlimentId == alimentId);
 
             if (aliment != null)
-                donnees.Aliments.Remove(aliment);
+            {
+                _db.Aliments.Remove(aliment);
 
-            await SaveData();
+                await _db.SaveChangesAsync();
+            }
         }
 
-        // met à jour un aliment existant
+        // met à jour un aliment
         public async Task UpdateAliment(Aliment alimentModifie)
         {
-            Aliment? aliment = donnees.Aliments
-                .FirstOrDefault(item => item.AlimentId == alimentModifie.AlimentId);
+            Aliment? aliment = await _db.Aliments
+                .FirstOrDefaultAsync(item => item.AlimentId == alimentModifie.AlimentId);
 
             if (aliment != null)
             {
@@ -143,78 +128,77 @@ namespace P_NutriTrack_Patricny_Reis.Services
                 aliment.Fibres_g = alimentModifie.Fibres_g;
                 aliment.Vitamines = alimentModifie.Vitamines;
                 aliment.Mineraux = alimentModifie.Mineraux;
-            }
 
-            await SaveData();
+                await _db.SaveChangesAsync();
+            }
         }
 
         // CONSOMMATIONS JOURNALIERES
-        
 
         // retourne toutes les consommations du jour
-        public List<Consommation> GetConsommationsDuJour()
+        public async Task<List<Consommation>> GetConsommationsDuJour()
         {
             DateTime aujourdhui = DateTime.Today;
-            return donnees.Consommation_journaliere
+
+            return await _db.Consommations
                 .Where(conso => conso.DateConsommation.Date == aujourdhui)
-                .ToList();
+                .ToListAsync();
         }
 
-        // ajoute une nouvelle consommation pour la journée
+        // ajoute une consommation
         public async Task AddConso(Consommation nouvelleConso)
         {
-            // calcul d'un nouvel ID unique
-            if (donnees.Consommation_journaliere.Count == 0)
-                nouvelleConso.ConsommationId = 1;
-            else
-                nouvelleConso.ConsommationId = donnees.Consommation_journaliere
-                    .Max(conso => conso.ConsommationId) + 1;
+            _db.Consommations.Add(nouvelleConso);
 
-            donnees.Consommation_journaliere.Add(nouvelleConso);
-            await SaveData();
+            await _db.SaveChangesAsync();
         }
 
-        // met à jour une consommation existante (modification de la quantité)
+        // met à jour une consommation
         public async Task UpdateConso(Consommation consoModifiee)
         {
-            Consommation? consoExistante = donnees.Consommation_journaliere
-                .FirstOrDefault(conso => conso.ConsommationId == consoModifiee.ConsommationId);
+            Consommation? consoExistante = await _db.Consommations
+                .FirstOrDefaultAsync(conso =>
+                    conso.ConsommationId == consoModifiee.ConsommationId);
 
             if (consoExistante != null)
             {
                 consoExistante.Quantite_g = consoModifiee.Quantite_g;
-            }
 
-            await SaveData();
+                await _db.SaveChangesAsync();
+            }
         }
 
-        // supprime une consommation par son ID
+        // supprime une consommation
         public async Task RemoveConso(int consommationId)
         {
-            Consommation? consoASupprimer = donnees.Consommation_journaliere
-                .FirstOrDefault(conso => conso.ConsommationId == consommationId);
+            Consommation? consoASupprimer = await _db.Consommations
+                .FirstOrDefaultAsync(conso =>
+                    conso.ConsommationId == consommationId);
 
             if (consoASupprimer != null)
-                donnees.Consommation_journaliere.Remove(consoASupprimer);
+            {
+                _db.Consommations.Remove(consoASupprimer);
 
-            await SaveData();
+                await _db.SaveChangesAsync();
+            }
         }
 
         // BILAN JOURNALIER
 
         // calcule le bilan nutritionnel total de la journée
-        // utile pour afficher les totaux en haut de page conso jour
-        public BilanJournalier GetBilanDuJour()
+        public async Task<BilanJournalier> GetBilanDuJour()
         {
             BilanJournalier bilan = new BilanJournalier();
-            List<Consommation> consoDuJour = GetConsommationsDuJour();
+
+            List<Consommation> consoDuJour = await GetConsommationsDuJour();
 
             foreach (Consommation conso in consoDuJour)
             {
-                Aliment? aliment = GetAlimentById(conso.AlimentId);
-                if (aliment == null) continue;
+                Aliment? aliment = await GetAlimentById(conso.AlimentId);
 
-                // les valeurs nutritionnelles sont pour 100g
+                if (aliment == null)
+                    continue;
+
                 double facteur = conso.Quantite_g / 100.0;
 
                 bilan.TotalCalories += aliment.Calories * facteur;
@@ -228,7 +212,7 @@ namespace P_NutriTrack_Patricny_Reis.Services
         }
     }
 
-    // classe simple pour transporter les totaux du jour
+    // classe pour transporter les totaux du jour
     public class BilanJournalier
     {
         public double TotalCalories { get; set; }
