@@ -16,6 +16,10 @@ namespace P_NutriTrack_Patricny_Reis.Data
         { _databasePath = databasePath; }
 
         public DbSet<Aliment> Aliments { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Consommation> Consommations { get; set; }
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
