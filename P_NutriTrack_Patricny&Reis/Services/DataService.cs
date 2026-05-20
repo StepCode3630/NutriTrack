@@ -24,6 +24,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using P_NutriTrack_Patricny_Reis.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace P_NutriTrack_Patricny_Reis.Services
 {
