@@ -39,7 +39,8 @@ public partial class AjoutConsoPage : ContentPage
     public AjoutConsoPage(Aliment alimentRecu)
     {
         InitializeComponent();
-        dataService = new DataService();
+        //Sqlite
+        dataService = DataService.Instance;
         alimentChoisi = alimentRecu;
         consoExistante = null;
 
@@ -50,7 +51,8 @@ public partial class AjoutConsoPage : ContentPage
     public AjoutConsoPage(Aliment alimentRecu, Consommation consoAModifier)
     {
         InitializeComponent();
-        dataService = new DataService();
+        //Sqlite
+        dataService = DataService.Instance;
         alimentChoisi = alimentRecu;
         consoExistante = consoAModifier;
 
@@ -82,7 +84,6 @@ public partial class AjoutConsoPage : ContentPage
             return;
         }
 
-        await dataService.LoadData();
 
         if (consoExistante == null)
         {

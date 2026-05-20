@@ -34,7 +34,8 @@ public partial class CategoryPage : ContentPage
     public CategoryPage()
     {
         InitializeComponent();
-        dataService = new DataService();
+        //Sqlite
+        dataService = DataService.Instance;
     }
 
     protected override async void OnAppearing()
@@ -42,8 +43,7 @@ public partial class CategoryPage : ContentPage
         base.OnAppearing();
 
         // charge données depuis JSON
-        await dataService.LoadData();
-        categories = dataService.GetCategories();
+        categories = await dataService.GetCategories();
 
         // Liste déroulante avec grille partage même source
         CategoryListView.ItemsSource = categories;

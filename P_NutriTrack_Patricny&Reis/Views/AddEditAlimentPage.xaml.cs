@@ -33,7 +33,8 @@ public partial class AddEditAlimentPage : ContentPage
     {
         InitializeComponent();
         categorie = categorieRecue;
-        dataService = new DataService();
+        //Sqlite
+        dataService = DataService.Instance;
         alimentAModifier = null;
         TitreLabel.Text = "Ajouter un aliment";
     }
@@ -70,8 +71,7 @@ public partial class AddEditAlimentPage : ContentPage
         }
 
         // charge les données
-        await dataService.LoadData();
-        List<Aliment> tousLesAliments = dataService.GetAliments();
+        List<Aliment> tousLesAliments = await dataService.GetAliments();
 
         if (alimentAModifier == null)
         {

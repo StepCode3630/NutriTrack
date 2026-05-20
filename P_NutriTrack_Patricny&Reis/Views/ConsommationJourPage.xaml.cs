@@ -37,7 +37,8 @@ public partial class ConsommationJourPage : ContentPage
     public ConsommationJourPage()
     {
         InitializeComponent();
-        dataService = new DataService();
+        //Sqlite
+        dataService = DataService.Instance;
         DateLabel.Text = DateTime.Today.ToString("dddd dd MMMM");
     }
 
@@ -45,20 +46,19 @@ public partial class ConsommationJourPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await dataService.LoadData();
         AfficherConsommations();
     }
 
     // construit la liste affichée et calcule les totaux du jour
-    private void AfficherConsommations()
+    private async void AfficherConsommations()
     {
-        List<Consommation> consoDuJour = dataService.GetConsommationsDuJour();
+        List<Consommation> consoDuJour = await dataService.GetConsommationsDuJour();
 
         consoAffichees = new List<ConsoAffichage>();
 
         foreach (Consommation conso in consoDuJour)
         {
-            Aliment? aliment = dataService.GetAlimentById(conso.AlimentId);
+            Aliment? aliment = await dataService.GetAlimentById(conso.AlimentId);
             if (aliment == null) continue;
 
             // calcul nutritionnel selon la quantité (valeurs JSON pour 100g)
@@ -76,7 +76,7 @@ public partial class ConsommationJourPage : ContentPage
         ConsoListView.ItemsSource = consoAffichees;
 
         // récupère le bilan global du jour calculé par le DataService
-        BilanJournalier bilan = dataService.GetBilanDuJour();
+        BilanJournalier bilan = await dataService.GetBilanDuJour();
         TotalCaloriesLabel.Text = $"{bilan.TotalCalories:F0}";
         TotalProteinesLabel.Text = $"{bilan.TotalProteines:F1}";
         TotalGlucidesLabel.Text = $"{bilan.TotalGlucides:F1}";
@@ -96,11 +96,16 @@ public partial class ConsommationJourPage : ContentPage
         int consoId = (int)bouton.CommandParameter;
 
         // retrouve la conso et l'aliment correspondant
-        Consommation? conso = dataService.GetConsommationsDuJour()
-            .FirstOrDefault(item => item.ConsommationId == consoId);
-        if (conso == null) return;
+        List<Consommation> consommations =
+            await dataService.GetConsommationsDuJour();
 
-        Aliment? aliment = dataService.GetAlimentById(conso.AlimentId);
+        Consommation? conso = consommations
+            .FirstOrDefault(item => item.ConsommationId == consoId);
+
+        if (conso == null)
+            return;
+
+        Aliment? aliment = await dataService.GetAlimentById(conso.AlimentId);
         if (aliment == null) return;
 
         // ouvre la page d'ajout en mode édition

@@ -38,7 +38,8 @@ public partial class AlimentListPage : ContentPage
     {
         InitializeComponent();
         categorie = categorieRecue;
-        dataService = new DataService();
+        //Sqlite
+        dataService = DataService.Instance;
         TitreLabel.Text = categorieRecue.Name;
     }
 
@@ -46,8 +47,7 @@ public partial class AlimentListPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await dataService.LoadData();
-        aliments = dataService.GetAlimentsByCategorie(categorie.CategoryId);
+        aliments = await dataService.GetAlimentsByCategorie(categorie.CategoryId);
         AlimentListView.ItemsSource = aliments;
     }
 
@@ -79,7 +79,7 @@ public partial class AlimentListPage : ContentPage
         await dataService.RemoveAliment(alimentASupprimer.AlimentId);
 
         // refresh la liste affichée
-        aliments = dataService.GetAlimentsByCategorie(categorie.CategoryId);
+        aliments = await dataService.GetAlimentsByCategorie(categorie.CategoryId);
         AlimentListView.ItemsSource = aliments;
     }
 

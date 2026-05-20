@@ -18,14 +18,14 @@ public partial class SelectionAlimentPage : ContentPage
     public SelectionAlimentPage()
     {
         InitializeComponent();
-        dataService = new DataService();
+        //Sqlite
+        dataService = DataService.Instance;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await dataService.LoadData();
-        tousLesAliments = dataService.GetAliments();
+        tousLesAliments = await dataService.GetAliments();
         AlimentListView.ItemsSource = tousLesAliments;
     }
 

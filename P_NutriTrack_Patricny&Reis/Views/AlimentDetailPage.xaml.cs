@@ -41,7 +41,8 @@ public partial class AlimentDetailPage : ContentPage
         InitializeComponent();
         categorie = categorieRecue;
         aliment = alimentRecu;
-        dataService = new DataService();
+        //Sqlite
+        dataService = DataService.Instance;
 
         // remplit les labels avec les valeurs de l'aliment
         AfficherDetails();
@@ -52,11 +53,9 @@ public partial class AlimentDetailPage : ContentPage
     {
         base.OnAppearing();
 
-        // recharge les données pour avoir les valeurs à jour
-        await dataService.LoadData();
 
         // récupère la version à jour de l'aliment
-        Aliment? alimentMaj = dataService.GetAlimentById(aliment.AlimentId);
+        Aliment? alimentMaj = await dataService.GetAlimentById(aliment.AlimentId);
         if (alimentMaj != null)
         {
             aliment = alimentMaj;
