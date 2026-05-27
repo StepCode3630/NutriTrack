@@ -12,6 +12,8 @@
 **                                                                           **
 ** Page qui affiche le détail nutritionnel d'un aliment                      **
 ** Permet de modifier ou supprimer l'aliment                                 **
+** Sensor Capte la secousse du téléphone                                     **
+** Sensor vibration : confirme qu'il a entendu la secousse                   **
 **                                                                           **
 ******************************************************************************/
 
