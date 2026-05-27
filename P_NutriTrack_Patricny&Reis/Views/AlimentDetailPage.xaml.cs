@@ -17,6 +17,11 @@
 
 using P_NutriTrack_Patricny_Reis.DataModels;
 using P_NutriTrack_Patricny_Reis.Services;
+// pour utiliser le capteur
+// accélérometre
+using Microsoft.Maui.Devices.Sensors;
+// vibration
+using Microsoft.Maui.Devices;
 
 namespace P_NutriTrack_Patricny_Reis.Views;
 
@@ -62,6 +67,25 @@ public partial class AlimentDetailPage : ContentPage
             aliment = alimentMaj;
             AfficherDetails();
         }
+
+        // démarre pour écouter le capteur pour détecter si on le secoue
+        if (Accelerometer.Default.IsSupported && !Accelerometer.Default.IsMonitoring)
+        {
+            Accelerometer.Default.ShakeDetected += OnShakeDetected;
+            Accelerometer.Default.Start(SensorSpeed.UI);
+        }
+    }
+
+    // arrête l écoute du capteur quand on quitte la page ou il est implémenté
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        if (Accelerometer.Default.IsMonitoring)
+        {
+            Accelerometer.Default.Stop();
+            Accelerometer.Default.ShakeDetected -= OnShakeDetected;
+        }
     }
 
     // affiche les valeurs nutritionnelles dans les labels
@@ -73,6 +97,18 @@ public partial class AlimentDetailPage : ContentPage
         GlucidesLabel.Text = aliment.Glucides_g.ToString();
         LipidesLabel.Text = aliment.Lipides_g.ToString();
         FibresLabel.Text = aliment.Fibres_g.ToString();
+
+        // affiche vitamines qui viennent de la saisie de txt
+        if (aliment.Vitamines != null && aliment.Vitamines.Count > 0)
+            VitaminesLabel.Text = string.Join(", ", aliment.Vitamines);
+        else
+            VitaminesLabel.Text = "-";
+
+        // affiche minéraux
+        if (aliment.Mineraux != null && aliment.Mineraux.Count > 0)
+            MinerauxLabel.Text = string.Join(", ", aliment.Mineraux);
+        else
+            MinerauxLabel.Text = "-";
     }
 
     // bouton modifier : ouvre la page d'édition
@@ -97,5 +133,22 @@ public partial class AlimentDetailPage : ContentPage
 
         // retour à la page d'avant
         await Navigation.PopAsync();
+    }
+
+    // se declanche quand le téléphone est secoué
+    private async void OnShakeDetected(object? sender, EventArgs eventArgs)
+    {
+        // vibre pour confirmer qu il entend la secousse
+        try
+        {
+            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(300));
+        }
+        catch (FeatureNotSupportedException)
+        {
+            // try/catch car certain émulateur ne supportent pas la vibration donc ça évite que l'app crash
+        }
+
+        // retour à l'accueil
+        await Navigation.PopToRootAsync();
     }
 }

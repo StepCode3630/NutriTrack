@@ -170,6 +170,51 @@
                 </Grid>
             </Border>
 
+            <!-- minéraux / vitamines de la zone de saisie de txt d'ajout aliment -->
+            <!-- vitamines -->
+            <Border Stroke="Transparent"
+                BackgroundColor="{StaticResource CouleurCarte}"
+                StrokeShape="RoundRectangle 20"
+                Padding="20,8">
+                <Grid ColumnDefinitions="Auto, *" ColumnSpacing="10">
+                    <Label Grid.Column="0"
+                       Text="vitamines"
+                       FontSize="13"
+                       TextColor="{StaticResource CouleurTexte}"
+                       VerticalOptions="Center"/>
+                    <Label Grid.Column="1"
+                       x:Name="VitaminesLabel"
+                       Text="-"
+                       FontSize="13"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource CouleurTexte}"
+                       HorizontalTextAlignment="End"
+                       VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- minéraux -->
+            <Border Stroke="Transparent"
+                BackgroundColor="{StaticResource CouleurCarte}"
+                StrokeShape="RoundRectangle 20"
+                Padding="20,8">
+                <Grid ColumnDefinitions="Auto, *" ColumnSpacing="10">
+                    <Label Grid.Column="0"
+                       Text="minéraux"
+                       FontSize="13"
+                       TextColor="{StaticResource CouleurTexte}"
+                       VerticalOptions="Center"/>
+                    <Label Grid.Column="1"
+                       x:Name="MinerauxLabel"
+                       Text="-"
+                       FontSize="13"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource CouleurTexte}"
+                       HorizontalTextAlignment="End"
+                       VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
         </VerticalStackLayout>
 
         <!-- btn bas pour supprimer + modif -->

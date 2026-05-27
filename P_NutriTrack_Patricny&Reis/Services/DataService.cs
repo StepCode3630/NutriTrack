@@ -62,6 +62,15 @@ namespace P_NutriTrack_Patricny_Reis.Services
                 donnees.AlimentMineraux ??= new List<AlimentMinerau>();
                 donnees.AlimentVitamines ??= new List<AlimentVitamine>();
             }
+
+            // si une conso n'a pas de date, on lui met la date d'aujourd'hui comme ca les données s'affichent
+            foreach (Consommation conso in donnees.Consommation_journaliere)
+            {
+                if (conso.DateConsommation == DateTime.MinValue)
+                {
+                    conso.DateConsommation = DateTime.Today;
+                }
+            }
         }
 
         // sauvegarde toutes les données dans le fichier JSON
