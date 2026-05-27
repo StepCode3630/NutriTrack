@@ -23,7 +23,11 @@ namespace P_NutriTrack_Patricny_Reis.Views;
 public partial class AlimentListPage : ContentPage
 {
 
-    // retour à la page d'accueil
+    /// <summary>
+    /// retour à la page d'accueil
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnHomeClicked(object sender, EventArgs eventArgs)
     {
         await Navigation.PopToRootAsync();
@@ -33,7 +37,10 @@ public partial class AlimentListPage : ContentPage
     private List<Aliment> aliments = null!;
     private Category categorie;
 
-    // constructeur qui reçoit la catégorie sélectionnée
+    /// <summary>
+    /// constructeur qui reçoit la catégorie sélectionnée
+    /// </summary>
+    /// <param name="categorieRecue"></param>
     public AlimentListPage(Category categorieRecue)
     {
         InitializeComponent();
@@ -42,7 +49,9 @@ public partial class AlimentListPage : ContentPage
         TitreLabel.Text = categorieRecue.Name;
     }
 
-    // refresh la liste à chaque retour sur la page
+    /// <summary>
+    /// refresh la liste à chaque retour sur la page
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -51,13 +60,21 @@ public partial class AlimentListPage : ContentPage
         AlimentListView.ItemsSource = aliments;
     }
 
-    // bouton ajouter un nouvel aliment
+    /// <summary>
+    /// bouton ajouter un nouvel aliment
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnAddClicked(object sender, EventArgs eventArgs)
     {
         await Navigation.PushAsync(new AddEditAlimentPage(categorie));
     }
 
-    // bouton modifier un aliment
+    /// <summary>
+    /// bouton modifier un aliment
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnEditClicked(object sender, EventArgs eventArgs)
     {
         Button bouton = (Button)sender;
@@ -65,7 +82,11 @@ public partial class AlimentListPage : ContentPage
         await Navigation.PushAsync(new AddEditAlimentPage(categorie, alimentSelectionne));
     }
 
-    // bouton supprimer un aliment
+    /// <summary>
+    /// bouton supprimer un aliment
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnDeleteClicked(object sender, EventArgs eventArgs)
     {
         Button bouton = (Button)sender;
@@ -83,7 +104,11 @@ public partial class AlimentListPage : ContentPage
         AlimentListView.ItemsSource = aliments;
     }
 
-    // clic sur un aliment dans la liste : ouvre la page de détail
+    /// <summary>
+    /// clic sur un aliment dans la liste : ouvre la page de détail
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnAlimentSelected(object sender, SelectionChangedEventArgs eventArgs)
     {
         Aliment? alimentSelectionne = (Aliment?)eventArgs.CurrentSelection.FirstOrDefault();

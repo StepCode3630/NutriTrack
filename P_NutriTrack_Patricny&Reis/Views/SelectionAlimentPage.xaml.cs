@@ -6,7 +6,11 @@ namespace P_NutriTrack_Patricny_Reis.Views;
 public partial class SelectionAlimentPage : ContentPage
 {
 
-    // retour à la page d'accueil avec logo home
+    /// <summary>
+    ///  retour à la page d'accueil avec logo home
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnHomeClicked(object sender, EventArgs eventArgs)
     {
         await Navigation.PopToRootAsync();
@@ -21,6 +25,9 @@ public partial class SelectionAlimentPage : ContentPage
         dataService = new DataService();
     }
 
+    /// <summary>
+    /// Recup les données du json via loadData()
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -29,7 +36,11 @@ public partial class SelectionAlimentPage : ContentPage
         AlimentListView.ItemsSource = tousLesAliments;
     }
 
-    // Filtre la liste à chaque frappe
+    /// <summary>
+    ///  Filtre la liste à chaque frappe
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnRechercheChanged(object sender, TextChangedEventArgs e)
     {
         string recherche = (e.NewTextValue ?? "").Trim().ToLower();
@@ -47,6 +58,11 @@ public partial class SelectionAlimentPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Si aliment clic alors dirige vers sa page
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnAlimentSelected(object sender, SelectionChangedEventArgs e)
     {
         Aliment? alimentChoisi = (Aliment?)e.CurrentSelection.FirstOrDefault();

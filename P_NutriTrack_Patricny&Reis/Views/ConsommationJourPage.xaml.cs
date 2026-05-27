@@ -23,7 +23,11 @@ namespace P_NutriTrack_Patricny_Reis.Views;
 public partial class ConsommationJourPage : ContentPage
 {
 
-    // retour à la page d'accueil depuis la maison
+    /// <summary>
+    ///  kretour à la page d'accueil depuis la maison
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnHomeClicked(object sender, EventArgs eventArgs)
     {
         await Navigation.PopToRootAsync();
@@ -31,7 +35,9 @@ public partial class ConsommationJourPage : ContentPage
 
 
     private DataService dataService;
-    // liste affichée à l'écran avec les infos enrichies
+    /// <summary>
+    /// liste affichée à l'écran avec les infos enrichies
+    /// </summary>
     private List<ConsoAffichage> consoAffichees = null!;
 
     public ConsommationJourPage()
@@ -41,7 +47,9 @@ public partial class ConsommationJourPage : ContentPage
         DateLabel.Text = DateTime.Today.ToString("dddd dd MMMM");
     }
 
-    // refresh les données à chaque retour sur la page
+    /// <summary>
+    /// refresh les données à chaque retour sur la page
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -49,7 +57,9 @@ public partial class ConsommationJourPage : ContentPage
         AfficherConsommations();
     }
 
-    // construit la liste affichée et calcule les totaux du jour
+    /// <summary>
+    /// construit la liste affichée et calcule les totaux du jour
+    /// </summary>
     private void AfficherConsommations()
     {
         List<Consommation> consoDuJour = dataService.GetConsommationsDuJour();
@@ -83,13 +93,21 @@ public partial class ConsommationJourPage : ContentPage
         TotalLipidesLabel.Text = $"{bilan.TotalLipides:F1}";
     }
 
-    // bouton ajouter une consommation
+    /// <summary>
+    ///  bouton ajouter une consommation
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnAddClicked(object sender, EventArgs eventArgs)
     {
         await Navigation.PushAsync(new SelectionAlimentPage());
     }
 
-    // bouton modifier une consommation existante
+    /// <summary>
+    ///  bouton modifier une consommation existante
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnEditClicked(object sender, EventArgs eventArgs)
     {
         Button bouton = (Button)sender;
@@ -107,7 +125,11 @@ public partial class ConsommationJourPage : ContentPage
         await Navigation.PushAsync(new AjoutConsoPage(aliment, conso));
     }
 
-    // bouton supprimer une consommation
+    /// <summary>
+    /// bouton supprimer une consommation
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnDeleteClicked(object sender, EventArgs eventArgs)
     {
         Button bouton = (Button)sender;
@@ -125,7 +147,9 @@ public partial class ConsommationJourPage : ContentPage
     }
 }
 
-// classe utilitaire pour l'affichage de la liste
+/// <summary>
+/// classe utilitaire pour l'affichage de la liste
+/// </summary>
 public class ConsoAffichage
 {
     public int ConsommationId { get; set; }

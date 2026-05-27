@@ -37,6 +37,9 @@ public partial class CategoryPage : ContentPage
         dataService = new DataService();
     }
 
+    /// <summary>
+    /// Recup ce qu'il y a dans le json et calcule la consomation
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -56,7 +59,11 @@ public partial class CategoryPage : ContentPage
         AccueilLipidesLabel.Text = $"{bilan.TotalLipides:F1}";
     }
 
-    // clique  sur une catégorie depuis liste ou depuis grille
+    /// <summary>
+    /// clique  sur une catégorie depuis liste ou depuis grille
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnCategorySelected(object sender, SelectionChangedEventArgs eventArgs)
     {
         Category? categorieSelectionnee = (Category?)eventArgs.CurrentSelection.FirstOrDefault();
@@ -77,14 +84,22 @@ public partial class CategoryPage : ContentPage
         await Navigation.PushAsync(new AlimentListPage(categorieSelectionnee));
     }
 
-    // Clic sur Category list cela replie ou déplie la liste
+    /// <summary>
+    /// Clic sur Category list cela replie ou déplie la liste
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private void OnToggleListClicked(object sender, TappedEventArgs eventArgs)
     {
         CategoryListView.IsVisible = !CategoryListView.IsVisible;
         FlecheLabel.Text = CategoryListView.IsVisible ? "↑" : "↓";
     }
 
-    // Clic sur la carte "Consommation journalière" (action à définir plus tard)
+    /// <summary>
+    /// Clic sur la carte "Consommation journalière" (action à définir plus tard)
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnConsommationClicked(object sender, TappedEventArgs eventArgs)
     {
         await Navigation.PushAsync(new ConsommationJourPage());
