@@ -72,7 +72,7 @@ public partial class AlimentDetailPage : ContentPage
         if (Accelerometer.Default.IsSupported && !Accelerometer.Default.IsMonitoring)
         {
             Accelerometer.Default.ShakeDetected += OnShakeDetected;
-            Accelerometer.Default.Start(SensorSpeed.Game);
+            Accelerometer.Default.Start(SensorSpeed.UI);
         }
     }
 
