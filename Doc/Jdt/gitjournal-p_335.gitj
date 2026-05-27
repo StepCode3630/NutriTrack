@@ -74,6 +74,46 @@
       "duration": 50,
       "status": "DONE",
       "author": "StepCode3630"
+    },
+    {
+      "id": "a449d49f-e3ba-40d6-a6bb-28eabdcb7e99",
+      "type": "commitless",
+      "name": "feat: avancer sur sqlite",
+      "description": "https://github.com/StepCode3630/NutriTrack/commits/sqlite/?since=2026-05-01&until=2026-05-01",
+      "date": "2026-05-01T13:49:00.000Z",
+      "duration": 0,
+      "status": "DONE",
+      "author": "StepCode3630"
+    },
+    {
+      "id": "8b154edb-00b6-45e5-beb2-18df96097e7a",
+      "type": "commitless",
+      "name": "feat: avancer sur sqlite",
+      "description": "https://github.com/StepCode3630/NutriTrack/commits/sqlite/?since=2026-05-06&until=2026-05-06",
+      "date": "2026-05-06T13:52:00.000Z",
+      "duration": 0,
+      "status": "DONE",
+      "author": "StepCode3630"
+    },
+    {
+      "id": "f78d7b5c-d497-4b14-baee-a143d36a820c",
+      "type": "commitless",
+      "name": "feat: avancer sur sqlite 2",
+      "description": "https://github.com/StepCode3630/NutriTrack/commits/sqlitev2?since=2026-05-13&until=2026-05-13",
+      "date": "2026-05-13T13:58:00.000Z",
+      "duration": 0,
+      "status": "DONE",
+      "author": "StepCode3630"
+    },
+    {
+      "id": "191274b3-c1f9-45bf-883b-96af735c9022",
+      "type": "commitless",
+      "name": "feat: avancer sur sqlite 2",
+      "description": "https://github.com/StepCode3630/NutriTrack/commits/sqlitev2?since=2026-05-20&until=2026-05-20",
+      "date": "2026-05-20T13:59:00.000Z",
+      "duration": 0,
+      "status": "DONE",
+      "author": "StepCode3630"
     }
   ]
 }
