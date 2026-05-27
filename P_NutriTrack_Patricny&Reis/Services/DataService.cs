@@ -26,6 +26,9 @@ using System.Threading.Tasks;
 
 namespace P_NutriTrack_Patricny_Reis.Services
 {
+    /// <summary>
+    /// class pour crud des données
+    /// </summary>
     public class DataService
     {
         // données globales chargées depuis le JSON
@@ -33,7 +36,10 @@ namespace P_NutriTrack_Patricny_Reis.Services
 
         // CHARGEMENT & SAUVEGARDE DU JSON
 
-        // charge le JSON depuis le stockage local sinon le copie depuis l app package
+        /// <summary>
+        /// charge le JSON depuis le stockage local sinon le copie depuis l app package
+        /// </summary>
+        /// <returns></returns>
         public async Task LoadData()
         {
             string chemin = Path.Combine(FileSystem.AppDataDirectory, "db.json");
@@ -73,7 +79,10 @@ namespace P_NutriTrack_Patricny_Reis.Services
             }
         }
 
+        /// <summary>
         // sauvegarde toutes les données dans le fichier JSON
+        /// </summary>
+        /// <returns></returns>
         private async Task SaveData()
         {
             string chemin = Path.Combine(FileSystem.AppDataDirectory, "db.json");
@@ -89,7 +98,10 @@ namespace P_NutriTrack_Patricny_Reis.Services
 
         // CATEGORIES
 
-        // retourne toutes les catégories
+        /// <summary>
+        /// retourne toutes les catégories
+        /// </summary>
+        /// <returns></returns>
         public List<Category> GetCategories()
         {
             return donnees.Categories;
@@ -97,13 +109,20 @@ namespace P_NutriTrack_Patricny_Reis.Services
 
         // ALIMENTS
 
-        // retourne tous les aliments
+        /// <summary>
+        /// retourne tous les aliments
+        /// </summary>
+        /// <returns></returns>
         public List<Aliment> GetAliments()
         {
             return donnees.Aliments;
         }
 
-        // retourne les aliments d'une catégorie
+        /// <summary>
+        /// retourne les aliments d'une catégorie
+        /// </summary>
+        /// <param name="categorieId"></param>
+        /// <returns></returns>
         public List<Aliment> GetAlimentsByCategorie(int categorieId)
         {
             return donnees.Aliments
@@ -111,20 +130,32 @@ namespace P_NutriTrack_Patricny_Reis.Services
                 .ToList();
         }
 
-        // retourne un aliment par son ID
+        /// <summary>
+        /// retourne un aliment par son ID
+        /// </summary>
+        /// <param name="alimentId"></param>
+        /// <returns></returns>
         public Aliment? GetAlimentById(int alimentId)
         {
             return donnees.Aliments.FirstOrDefault(aliment => aliment.AlimentId == alimentId);
         }
 
-        // ajoute un nouvel aliment
+        /// <summary>
+        /// ajoute un nouvel aliment
+        /// </summary>
+        /// <param name="nouvelAliment"></param>
+        /// <returns></returns>
         public async Task AddAliment(Aliment nouvelAliment)
         {
             donnees.Aliments.Add(nouvelAliment);
             await SaveData();
         }
 
-        // supprime un aliment par son ID
+        /// <summary>
+        /// supprime un aliment par son ID
+        /// </summary>
+        /// <param name="alimentId"></param>
+        /// <returns></returns>
         public async Task RemoveAliment(int alimentId)
         {
             Aliment? aliment = donnees.Aliments
@@ -136,7 +167,11 @@ namespace P_NutriTrack_Patricny_Reis.Services
             await SaveData();
         }
 
-        // met à jour un aliment existant
+        /// <summary>
+        /// met à jour un aliment existant
+        /// </summary>
+        /// <param name="alimentModifie"></param>
+        /// <returns></returns>
         public async Task UpdateAliment(Aliment alimentModifie)
         {
             Aliment? aliment = donnees.Aliments
@@ -158,9 +193,12 @@ namespace P_NutriTrack_Patricny_Reis.Services
         }
 
         // CONSOMMATIONS JOURNALIERES
-        
 
-        // retourne toutes les consommations du jour
+
+        /// <summary>
+        /// retourne toutes les consommations du jour
+        /// </summary>
+        /// <returns>La liste de la consommation du jour</returns>
         public List<Consommation> GetConsommationsDuJour()
         {
             DateTime aujourdhui = DateTime.Today;
@@ -169,7 +207,11 @@ namespace P_NutriTrack_Patricny_Reis.Services
                 .ToList();
         }
 
-        // ajoute une nouvelle consommation pour la journée
+        /// <summary>
+        /// ajoute une nouvelle consommation pour la journée
+        /// </summary>
+        /// <param name="nouvelleConso"></param>
+        /// <returns>nouvel aliment</returns>
         public async Task AddConso(Consommation nouvelleConso)
         {
             // calcul d'un nouvel ID unique
@@ -183,7 +225,11 @@ namespace P_NutriTrack_Patricny_Reis.Services
             await SaveData();
         }
 
-        // met à jour une consommation existante (modification de la quantité)
+        /// <summary>
+        /// met à jour une consommation existante (modification de la quantité)
+        /// </summary>
+        /// <param name="consoModifiee"></param>
+        /// <returns>maj une consommation</returns>
         public async Task UpdateConso(Consommation consoModifiee)
         {
             Consommation? consoExistante = donnees.Consommation_journaliere
@@ -197,7 +243,11 @@ namespace P_NutriTrack_Patricny_Reis.Services
             await SaveData();
         }
 
-        // supprime une consommation par son ID
+        /// <summary>
+        /// supprime une consommation par son ID
+        /// </summary>
+        /// <param name="consommationId"></param>
+        /// <returns>Supprime aliment de la consomation Journalière</returns>
         public async Task RemoveConso(int consommationId)
         {
             Consommation? consoASupprimer = donnees.Consommation_journaliere
@@ -211,8 +261,11 @@ namespace P_NutriTrack_Patricny_Reis.Services
 
         // BILAN JOURNALIER
 
-        // calcule le bilan nutritionnel total de la journée
-        // utile pour afficher les totaux en haut de page conso jour
+        /// <summary>
+        /// calcule le bilan nutritionnel total de la journée
+        /// utile pour afficher les totaux en haut de page conso jour
+        /// </summary>
+        /// <returns>objet bilan</returns>
         public BilanJournalier GetBilanDuJour()
         {
             BilanJournalier bilan = new BilanJournalier();
@@ -237,7 +290,9 @@ namespace P_NutriTrack_Patricny_Reis.Services
         }
     }
 
-    // classe simple pour transporter les totaux du jour
+    /// <summary>
+    /// classe simple pour transporter les totaux du jour
+    /// </summary>
     public class BilanJournalier
     {
         public double TotalCalories { get; set; }
