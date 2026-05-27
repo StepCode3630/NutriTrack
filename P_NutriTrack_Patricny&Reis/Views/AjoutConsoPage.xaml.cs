@@ -23,7 +23,11 @@ namespace P_NutriTrack_Patricny_Reis.Views;
 public partial class AjoutConsoPage : ContentPage
 {
 
-    // retour à la page d'accueil
+    /// <summary>
+    /// retour à la page d'accueil
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnHomeClicked(object sender, EventArgs eventArgs)
     {
         await Navigation.PopToRootAsync();
@@ -35,7 +39,10 @@ public partial class AjoutConsoPage : ContentPage
     // si != null alors on est en mode modification
     private Consommation? consoExistante;
 
-    // constructeur pour ajout
+    /// <summary>
+    /// constructeur pour ajout
+    /// </summary>
+    /// <param name="alimentRecu"></param>
     public AjoutConsoPage(Aliment alimentRecu)
     {
         InitializeComponent();
@@ -46,7 +53,11 @@ public partial class AjoutConsoPage : ContentPage
         NomAlimentLabel.Text = alimentChoisi.Name;
     }
 
-    // constructeur pour modification
+    /// <summary>
+    /// constructeur pour modification
+    /// </summary>
+    /// <param name="alimentRecu"></param>
+    /// <param name="consoAModifier"></param>
     public AjoutConsoPage(Aliment alimentRecu, Consommation consoAModifier)
     {
         InitializeComponent();
@@ -59,7 +70,11 @@ public partial class AjoutConsoPage : ContentPage
         // le TextChanged se déclenche tout seul et fait les calculs
     }
 
-    // calcule en temps réel les valeurs nutritionnelles selon la quantité saisie
+    /// <summary>
+    /// calcule en temps réel les valeurs nutritionnelles selon la quantité saisie
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private void OnQuantiteChanged(object sender, TextChangedEventArgs eventArgs)
     {
         double quantite = ConvertirEnDouble(eventArgs.NewTextValue);
@@ -71,7 +86,11 @@ public partial class AjoutConsoPage : ContentPage
         GlucCalcLabel.Text = $"{alimentChoisi.Glucides_g * facteur:F2}";
     }
 
-    // valide et enregistre la consommation
+    /// <summary>
+    /// valide et enregistre la consommation
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnAjouterClicked(object sender, EventArgs eventArgs)
     {
         double quantite = ConvertirEnDouble(QuantiteEntry.Text);
@@ -113,13 +132,21 @@ public partial class AjoutConsoPage : ContentPage
         await Navigation.PopAsync();
     }
 
-    // bouton annuler
+    /// <summary>
+    /// bouton annuler
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnAnnulerClicked(object sender, EventArgs eventArgs)
     {
         await Navigation.PopAsync();
     }
 
-    // méthode utilitaire pour convertir un texte en nombre
+    /// <summary>
+    /// méthode utilitaire pour convertir un texte en nombre
+    /// </summary>
+    /// <param name="texte"></param>
+    /// <returns>double</returns>
     private double ConvertirEnDouble(string? texte)
     {
         if (double.TryParse(texte, out double resultat))

@@ -30,7 +30,11 @@ namespace P_NutriTrack_Patricny_Reis.Views;
 public partial class AlimentDetailPage : ContentPage
 {
 
-    // retour à la page d'accueil
+    /// <summary>
+    /// retour à la page d'accueil
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnHomeClicked(object sender, EventArgs eventArgs)
     {
         await Navigation.PopToRootAsync();
@@ -42,7 +46,11 @@ public partial class AlimentDetailPage : ContentPage
     // l'aliment affiché
     private Aliment aliment;
 
-    // constructeur reçoit la catégorie et l'aliment à afficher
+    /// <summary>
+    /// constructeur reçoit la catégorie et l'aliment à afficher
+    /// </summary>
+    /// <param name="categorieRecue"></param>
+    /// <param name="alimentRecu"></param>
     public AlimentDetailPage(Category categorieRecue, Aliment alimentRecu)
     {
         InitializeComponent();
@@ -54,7 +62,9 @@ public partial class AlimentDetailPage : ContentPage
         AfficherDetails();
     }
 
-    // refresh quand on revient sur la page après modification
+    /// <summary>
+    /// refresh quand on revient sur la page après modification
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -78,7 +88,9 @@ public partial class AlimentDetailPage : ContentPage
         }
     }
 
-    // arrête l écoute du capteur quand on quitte la page ou il est implémenté
+    /// <summary>
+    /// arrête l écoute du capteur quand on quitte la page ou il est implémenté
+    /// </summary>
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
@@ -90,7 +102,9 @@ public partial class AlimentDetailPage : ContentPage
         }
     }
 
-    // affiche les valeurs nutritionnelles dans les labels
+    /// <summary>
+    /// affiche les valeurs nutritionnelles dans les labels
+    /// </summary>
     private void AfficherDetails()
     {
         NomLabel.Text = aliment.Name;
@@ -113,13 +127,21 @@ public partial class AlimentDetailPage : ContentPage
             MinerauxLabel.Text = "-";
     }
 
-    // bouton modifier : ouvre la page d'édition
+    /// <summary>
+    /// bouton modifier : ouvre la page d'édition
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnEditClicked(object sender, EventArgs eventArgs)
     {
         await Navigation.PushAsync(new AddEditAlimentPage(categorie, aliment));
     }
 
-    // bouton supprimer : demande confirmation puis supprime
+    /// <summary>
+    /// bouton supprimer : demande confirmation puis supprime
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnDeleteClicked(object sender, EventArgs eventArgs)
     {
         string message = $"Supprimer {aliment.Name} ?";
@@ -137,7 +159,11 @@ public partial class AlimentDetailPage : ContentPage
         await Navigation.PopAsync();
     }
 
-    // se declanche quand le téléphone est secoué
+    /// <summary>
+    /// se declanche quand le téléphone est secoué
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnShakeDetected(object? sender, EventArgs eventArgs)
     {
         // vibre pour confirmer qu il entend la secousse

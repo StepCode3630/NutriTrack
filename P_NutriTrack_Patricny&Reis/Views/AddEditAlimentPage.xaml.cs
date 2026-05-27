@@ -28,7 +28,10 @@ public partial class AddEditAlimentPage : ContentPage
     // aliment à modifier - reste null si on est en mode ajout
     private Aliment? alimentAModifier;
 
-    // constructeur pour ajout d'un nouvel aliment
+    /// <summary>
+    /// constructeur pour ajout d'un nouvel aliment
+    /// </summary>
+    /// <param name="categorieRecue"></param>
     public AddEditAlimentPage(Category categorieRecue)
     {
         InitializeComponent();
@@ -38,13 +41,21 @@ public partial class AddEditAlimentPage : ContentPage
         TitreLabel.Text = "Ajouter un aliment";
     }
 
-    // retour à la page d'accueil
+    /// <summary>
+    /// retour à la page d'accueil
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnHomeClicked(object sender, EventArgs eventArgs)
     {
         await Navigation.PopToRootAsync();
     }
 
-    // constructeur pour modification d'un aliment existant
+    /// <summary>
+    /// constructeur pour modification d'un aliment existant
+    /// </summary>
+    /// <param name="categorieRecue"></param>
+    /// <param name="alimentRecu"></param>
     public AddEditAlimentPage(Category categorieRecue, Aliment alimentRecu)
     {
         InitializeComponent();
@@ -66,7 +77,11 @@ public partial class AddEditAlimentPage : ContentPage
             MinerauxEntry.Text = string.Join(", ", alimentRecu.Mineraux);
     }
 
-    // bouton enregistrer : valide et sauvegarde
+    /// <summary>
+    /// bouton enregistrer : valide et sauvegarde
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     private async void OnSaveClicked(object sender, EventArgs eventArgs)
     {
         // vérifie que le nom n'est pas vide
@@ -131,7 +146,11 @@ public partial class AddEditAlimentPage : ContentPage
         await Navigation.PopAsync();
     }
 
-    // méthode utilitaire pour convertir un texte en int
+    /// <summary>
+    /// méthode utilitaire pour convertir un texte en int
+    /// </summary>
+    /// <param name="texte"></param>
+    /// <returns></returns>
     private int ConvertirEnInt(string texte)
     {
         if (int.TryParse(texte, out int resultat))
@@ -139,7 +158,11 @@ public partial class AddEditAlimentPage : ContentPage
         return 0;
     }
 
-    // méthode utilitaire pour convertir un texte en double
+    /// <summary>
+    /// méthode utilitaire pour convertir un texte en double
+    /// </summary>
+    /// <param name="texte"></param>
+    /// <returns></returns>
     private double ConvertirEnDouble(string texte)
     {
         if (double.TryParse(texte, out double resultat))
@@ -147,7 +170,11 @@ public partial class AddEditAlimentPage : ContentPage
         return 0;
     }
 
-    // transforme le texte saisi par l'user  quand il ajoute un aliment en liste
+    /// <summary>
+    /// transforme le texte saisi par l'user  quand il ajoute un aliment en liste
+    /// </summary>
+    /// <param name="texte"></param>
+    /// <returns></returns>
     private List<string> ConvertirEnListe(string? texte)
     {
         if (string.IsNullOrWhiteSpace(texte))
